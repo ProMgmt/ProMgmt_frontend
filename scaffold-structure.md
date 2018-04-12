@@ -32,7 +32,7 @@
       <ProjectForm />       // renderIf(adding) form to add project to org
 
     <MyTasks />             // holds list of task previews
-      <Task Preview />      // brief summary of tasks
+      <TaskPreview />      // brief summary of tasks
                             // has create new tasks button which will toggle
                             // view of the <TaskForm /> component
       <TaskForm />          // renderIf(adding) form to add task to project
