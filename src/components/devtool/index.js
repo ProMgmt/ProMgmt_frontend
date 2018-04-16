@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import OrgForm from '../org/orgform';
+import OrgItem from '../org/orgitem';
 // import ProjectForm from '../project/projectform';
 // import TaskForm from '../task/taskform';
 import {userOrgEtAllSetRequest, orgCreateRequest, orgUpdateRequest} from '../../action/org-actions.js';
@@ -31,11 +32,9 @@ class DevTool extends React.Component{
           buttonText='Create Org'
         />
         {this.props.org.map(org => 
-          <OrgForm
+          <OrgItem
             key={org._id}
             org={org}
-            buttonText='Update Org'
-            onComplete={this.props.orgUpdate}
           />
         )}
         {/* <ProjectForm />
