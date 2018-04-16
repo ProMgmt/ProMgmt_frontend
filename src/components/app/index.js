@@ -1,20 +1,31 @@
 'use strict';
 
-import React from 'react';
-import OrgForm from '../org/orgform/index.js';
+import React, {Component} from 'react';
 import {Provider} from 'react-redux';
-import {Link, BrowserRouter, Route} from 'react-router-dom';
-import appCreateStore from '../../lib/app-create-store.js';
-import NavBar from '../navigation';
 import Auth from '../auth';
-import Dashboard from '../dashboard';
+import {BrowserRouter, Route, Link} from 'react-router-dom';
+import appCreateStore from './../../lib/app-create-store';
+import {tokenSet} from './../../action/auth-actions.js';
+import Dashboard from './../dashboard';
+import OrgForm from '../org/orgform/index.js';
+import Navbar from '../navigation';
 import MyOrgs from '../org/myorgs';
 import MyProjects from '../project/myprojects';
 import MyTasks from '../task/mytasks';
+import ProfileForm from './../profile/profileform';
+import * as util from './../../lib/util.js';
 
-const store = appCreateStore();
+let store = appCreateStore();
 
-class App extends React.Component{
+class App extends Component{
+
+  componentDidMount() {
+    let token = util.readCookie('X-Promgmt-Token');
+    if(token) {
+      this.props.tokenSet(token);
+    }
+  }
+
   render() {
     return(
       <Provider store={store}>
@@ -22,18 +33,31 @@ class App extends React.Component{
           
           {/* <Auth /> */}
           <BrowserRouter>
-            <div>
+          <section>
+              <header>
               <h1><Link to='/'>Pro_Mgmt</Link></h1>
-              <NavBar />
-              {/* <Route exact path='/logout' component={Auth} /> */}
-              {/* <Route exact path='/dashboard' component={Dashboard} /> */}
+                <nav>
+                  <ul>
+                    <li><Link to='/welcome/signup'>signup</Link></li>
+                    <li><Link to='/welcome/signin'>signin</Link></li>
+                    <li><Link to='/settings'>settings</Link></li>
+                  </ul>
+                </nav>
+                 <NavBar />
+              </header>
+              <Route path='/welcome/:auth' component={Dashboard} />
+              <Route exact path='/settings' component={ProfileForm} />
+              <Route exact path='/dashboard' component={Dashboard} />
               <Route exact path='/myorgs' component={MyOrgs} />
-              {/* <Route exact path='/myprojects' component={MyProjects} /> */}
-              {/* <Route exact path='/mytasks' component={MyTasks} />  */}
-            </div>
+              <Route exact path='/myprojects' component={MyProjects} />
+              <Route exact path='/mytasks' component={MyTasks} /> 
+
+            </section>
           </BrowserRouter>
-        </main>
-      </Provider>
+
+      </main>
+     </Provider>
+
     )
   }
 }
