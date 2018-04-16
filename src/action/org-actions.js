@@ -32,12 +32,35 @@ export const userOrgEtAllSetRequest = () => (dispatch, getState) => {
 
 export const orgCreateRequest = org => (dispatch, getState) => {
   let {auth} = getState();
+  console.log('org@action', org);
   return superagent.post(`${__API_URL__}/api/org`)
     .set('Authorization', `Bearer ${auth}`)
     // need to pull in auth???
     .send(org)
     .then(res => {
       dispatch(orgCreate(org));
+      return res;
+    })
+}
+
+export const orgUpdateRequest = org => (dispatch, getState) => {
+  let {auth} = getState();
+  return superagent.put(`${__API_URL__}/api/org/${org._id}`)
+    .set('Authorization', `Bearer ${auth}`)
+    .send(org)
+    .then(res => {
+      dispatch(orgUpdate(org));
+      return res;
+    })
+}
+
+export const orgDeleteRequest = org => (dispatch, getState) => {
+  let {auth} = getState();
+  return superagent.delete(`${__API_URL__}/api/org/${org._id}`)
+    .set('Authorization', `Bearer ${auth}`)
+    .send(org)
+    .then(res => {
+      dispatch(orgDelete(org));
       return res;
     })
 }

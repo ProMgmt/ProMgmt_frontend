@@ -4,7 +4,7 @@ export default (state=[], action) => {
     case 'USER_ORG_ET_ALL_SET':
       return payload;
     case 'ORG_CREATE':
-      return {...state, org: [...org, payload]};
+      return {...state, payload};
     default:
       return state;
   }

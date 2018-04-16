@@ -93,7 +93,6 @@ class OrgForm extends React.Component {
   }
 
   render() {
-    const mapList = this.state.adminNames.map((admin, i) => <li key={i}>{admin}</li>)
     return(
       <form className='org-form' onSubmit={this.handleSubmit}>
         <h3>Name</h3>
@@ -125,7 +124,7 @@ class OrgForm extends React.Component {
           <p className='error'>{this.state.adminError}</p>
         )}
         <ul>
-          {mapList}
+          {/* {mapList} */}
             {/* TODO: add remove admin functionality */}
         </ul>
         <h3>Add Members</h3>
