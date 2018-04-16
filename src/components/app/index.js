@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import OrgForm from '../org/orgform/index.js';
 import {Provider} from 'react-redux';
 import {BrowserRouter, Route} from 'react-router-dom';
 import appStoreCreate from '../../lib/app-create-store.js';
@@ -16,6 +17,7 @@ class App extends React.Component{
       <Provider store={store}>
         <main className='app-container'>
           <h1>Pro_Mgmt</h1>
+          <OrgForm />
           <BrowserRouter>
             <div>
               <Route path='*' component={Navbar} />
