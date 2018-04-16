@@ -48,8 +48,8 @@
       <ProjectForm />       // renderIf(editing / user / admin) form to edit project
       <TaskForm />          // renderIf(user / admin) form to add tasks to project (toggle view or nah?)
       <TaskPreview />       // renderIf(user / admin) renders previews of all tasks belonging to projectot
+      <Gant />              // shows gant chart
 
     <TaskItem />            // Detailed view of one task
                             // contains summary, admin, members, etc
       <TaskForm />          // renderIf(editing / user / admin) form to edit task
-      <Gant />              // shows gant chart
