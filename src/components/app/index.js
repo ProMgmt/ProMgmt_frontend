@@ -14,6 +14,7 @@ import MyOrgs from '../org/myorgs';
 import MyProjects from '../project/myprojects';
 import MyTasks from '../task/mytasks';
 import ProfileForm from './../profile/profileform';
+import DevTool from '../devtool';
 import * as util from './../../lib/util.js';
 
 let store = appCreateStore();
@@ -44,6 +45,7 @@ class App extends Component{
                     <li><Link to='/welcome/signup'>signup</Link></li>
                     <li><Link to='/welcome/signin'>signin</Link></li>
                     <li><Link to='/settings'>settings</Link></li>
+                    <li><Link to='/devtool'>dev tool</Link></li>
                   </ul>
                 </nav>
                  <NavBar />
@@ -54,6 +56,7 @@ class App extends Component{
               <Route exact path='/myorgs' component={MyOrgs} />
               {/* <Route exact path='/myprojects' component={MyProjects} />
               <Route exact path='/mytasks' component={MyTasks} />  */}
+              <Route exact path='/devtool' component={DevTool} />
 
             </section>
           </BrowserRouter>
