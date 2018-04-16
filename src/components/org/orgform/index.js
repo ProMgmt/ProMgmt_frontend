@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import superagent from 'superagent';
 import * as util from '../../../lib/util.js';
 
@@ -34,8 +35,6 @@ class OrgForm extends React.Component {
   }
 
   handleChange(e) {
-    console.log('this.state.adminNames', this.state.adminNames);
-
     let { name, value } = e.target;
     this.setState({ [name]: value, adminError: '', userError: '' });
   }
@@ -52,11 +51,10 @@ class OrgForm extends React.Component {
     let name = this.state.admin.split(' ');
     let firstName = name[0];
     let lastName = name[name.length - 1];
-    // TODO:
-    // let {auth} = this.setState();
+    // TODO: FIX ERROR USER NOT AUTHORIZED
 
     superagent.get(`${__API_URL__}/api/profile/${firstName}/${lastName}`)
-      // .set({Authorization: `Bearer: ${auth}`})
+      .set({Authorization: `Bearer: ${this.props.auth}`})
       .then(profile => {
         let fullName = `${profile.firstName} ${profile.lastName}`;
         this.setState(prevState => {
@@ -77,12 +75,9 @@ class OrgForm extends React.Component {
     let name = this.state.user.split(' ');
     let firstName= name[0];
     let lastName = name[name.length - 1];
-    console.log(name);
-    // TODO:
-    // let {auth} = this.setState();
 
     superagent.get(`${__API_URL__}/api/profile/${firstName}/${lastName}`)
-      // .set({Authorization: `Bearer: ${auth}`})
+      .set({Authorization: `Bearer: ${this.props.auth}`})
       .then(profile => {
         let fullName = `${profile.firstName} ${profile.lastName}`;
         this.setState(prevState => {
@@ -98,16 +93,17 @@ class OrgForm extends React.Component {
   }
 
   render() {
-    console.log('adminNames', this.state.adminNames);
     const mapList = this.state.adminNames.map((admin, i) => <li key={i}>{admin}</li>)
     return(
       <form className='org-form' onSubmit={this.handleSubmit}>
+        <h3>Name</h3>
         <input name='name'
           value={this.state.name}
           type='text'
           placeholder='Name of Organization'
           onChange={this.handleChange}
           required /> * required
+        <h3>Description</h3>
         <textarea 
           rows='10'
           columns='50'
@@ -117,6 +113,7 @@ class OrgForm extends React.Component {
           placeholder='Description of Organization'
           onChange={this.handleChange} 
           required /> * required
+        <h3>Add Admins</h3>
         <input name='admin'
           type='text'
           placeholder='Add an Admin' 
@@ -131,6 +128,7 @@ class OrgForm extends React.Component {
           {mapList}
             {/* TODO: add remove admin functionality */}
         </ul>
+        <h3>Add Members</h3>
         <input name='user'
           type='text'
           placeholder='Add a Member' 
@@ -154,4 +152,10 @@ class OrgForm extends React.Component {
   }
 }
 
-export default OrgForm;
+const mapStateToProps = state => {
+  return {
+    auth: state.auth,
+  }
+}
+
+export default connect(mapStateToProps, null)(OrgForm);
