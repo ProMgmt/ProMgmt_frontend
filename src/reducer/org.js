@@ -4,7 +4,9 @@ export default (state=[], action) => {
     case 'USER_ORG_ET_ALL_SET':
       return payload;
     case 'ORG_CREATE':
-      return {...state, org: [...org, payload]};
+      return [...state, payload];
+    case 'ORG_UPDATE':
+      return state.map(org => org._id === payload._id ? payload : org);
     default:
       return state;
   }

@@ -1,8 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import * as orgActions from '../../../action/org';
+import * as orgActions from '../../../action/org-actions.js';
 import * as util from '../../../lib/util.js';
-import OrgForm from '../orgform/index.js';
 
 class OrgPreview extends React.Component {
   constructor(props) {
@@ -19,6 +17,7 @@ class OrgPreview extends React.Component {
 
   componentWillReceiveProps(props) {
     if(this.props.org) {
+      console.log('component received props');
       this.setState(this.props.org);
     }
   }
@@ -33,3 +32,5 @@ class OrgPreview extends React.Component {
     )
   }
 }
+
+export default OrgPreview;

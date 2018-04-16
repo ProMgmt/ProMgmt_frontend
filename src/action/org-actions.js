@@ -41,3 +41,22 @@ export const orgCreateRequest = org => (dispatch, getState) => {
       return res;
     })
 }
+
+export const orgUpdateRequest = org => (dispatch, getState) => {
+  let {auth} = getState();
+
+  for (let key in org) {
+    if (!org[key]) {
+      delete org[key];
+    }
+  }
+
+  let id = org._id;
+  return superagent.put(`${__API_URL__}/api/org/${id}`)
+    .set('Authorization', `Bearer ${auth}`)
+    .send(org)
+    .then(res => {
+      dispatch(orgUpdate(org));
+      return res;
+    })
+}
