@@ -10,11 +10,11 @@ const UglifyPlugin = require('uglifyjs-webpack-plugin');
 const ExtractPlugin = require('extract-text-webpack-plugin');
 
 let plugins = [
-  new EnvironmentPlugin(['NODE_ENV']), //shorthand for DefinePlugin on process.env keys
+  new EnvironmentPlugin(['NODE_ENV']), 
   new ExtractPlugin('bundle-[hash].css'),
   new HtmlPlugin({ template: `${__dirname}/src/index.html` }),
   new DefinePlugin({
-    __DEBUG__: JSON.stringify(!production), //webpack constant we can use in our app, this will eventually help us turn our logs on/off with switching this variable out
+    __DEBUG__: JSON.stringify(!production),
     __API_URL__: JSON.stringify(process.env.API_URL),
     
   })

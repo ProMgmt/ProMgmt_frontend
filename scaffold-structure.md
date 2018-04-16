@@ -32,7 +32,7 @@
       <ProjectForm />       // renderIf(adding) form to add project to org
 
     <MyTasks />             // holds list of task previews
-      <Task Preview />      // brief summary of tasks
+      <TaskPreview />      // brief summary of tasks
                             // has create new tasks button which will toggle
                             // view of the <TaskForm /> component
       <TaskForm />          // renderIf(adding) form to add task to project
@@ -48,8 +48,8 @@
       <ProjectForm />       // renderIf(editing / user / admin) form to edit project
       <TaskForm />          // renderIf(user / admin) form to add tasks to project (toggle view or nah?)
       <TaskPreview />       // renderIf(user / admin) renders previews of all tasks belonging to projectot
+      <Gant />              // shows gant chart
 
     <TaskItem />            // Detailed view of one task
                             // contains summary, admin, members, etc
       <TaskForm />          // renderIf(editing / user / admin) form to edit task
-      <Gant />              // shows gant chart
