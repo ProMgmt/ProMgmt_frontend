@@ -1,5 +1,6 @@
 'use strict';
 
+import GoogleOAuth from '../google-oauth';
 import React, {Component} from 'react';
 import {Provider} from 'react-redux';
 import Auth from '../auth';
@@ -36,6 +37,8 @@ class App extends Component{
           <section>
               <header>
               <h1><Link to='/'>Pro_Mgmt</Link></h1>
+                <GoogleOAuth />
+
                 <nav>
                   <ul>
                     <li><Link to='/welcome/signup'>signup</Link></li>

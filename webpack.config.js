@@ -16,6 +16,7 @@ let plugins = [
   new DefinePlugin({
     __DEBUG__: JSON.stringify(!production),
     __API_URL__: JSON.stringify(process.env.API_URL),
+    
   })
 ]
 
