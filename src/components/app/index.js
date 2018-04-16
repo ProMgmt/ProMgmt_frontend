@@ -9,7 +9,7 @@ import appCreateStore from './../../lib/app-create-store';
 import {tokenSet} from './../../action/auth-actions.js';
 import Dashboard from './../dashboard';
 import OrgForm from '../org/orgform/index.js';
-import Navbar from '../navigation';
+import NavBar from '../navigation';
 import MyOrgs from '../org/myorgs';
 import MyProjects from '../project/myprojects';
 import MyTasks from '../task/mytasks';
@@ -52,8 +52,8 @@ class App extends Component{
               <Route exact path='/settings' component={ProfileForm} />
               <Route exact path='/dashboard' component={Dashboard} />
               <Route exact path='/myorgs' component={MyOrgs} />
-              <Route exact path='/myprojects' component={MyProjects} />
-              <Route exact path='/mytasks' component={MyTasks} /> 
+              {/* <Route exact path='/myprojects' component={MyProjects} />
+              <Route exact path='/mytasks' component={MyTasks} />  */}
 
             </section>
           </BrowserRouter>
