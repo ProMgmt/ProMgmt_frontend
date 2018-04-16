@@ -35,8 +35,6 @@ class OrgForm extends React.Component {
   }
 
   handleChange(e) {
-    console.log('this.props.auth', this.props.auth);
-
     let { name, value } = e.target;
     this.setState({ [name]: value, adminError: '', userError: '' });
   }
@@ -77,7 +75,6 @@ class OrgForm extends React.Component {
     let name = this.state.user.split(' ');
     let firstName= name[0];
     let lastName = name[name.length - 1];
-    console.log(name);
 
     superagent.get(`${__API_URL__}/api/profile/${firstName}/${lastName}`)
       .set({Authorization: `Bearer: ${this.props.auth}`})
@@ -96,7 +93,6 @@ class OrgForm extends React.Component {
   }
 
   render() {
-    console.log('adminNames', this.state.adminNames);
     const mapList = this.state.adminNames.map((admin, i) => <li key={i}>{admin}</li>)
     return(
       <form className='org-form' onSubmit={this.handleSubmit}>
