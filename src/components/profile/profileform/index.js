@@ -15,8 +15,8 @@ class ProfileForm extends Component {
   }
 
   componentWillReceiveProps(props) {
-    if(props.profile) {
-      this.setState(props.profile);
+    if (props.profile) {
+      this.setState({...props.profile});
     }
   }
 

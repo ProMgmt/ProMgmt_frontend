@@ -2,6 +2,7 @@
 
 import React, {Component} from 'react';
 import {Provider} from 'react-redux';
+import Auth from '../auth';
 import {BrowserRouter, Route, Link} from 'react-router-dom';
 import appCreateStore from './../../lib/app-create-store';
 import {tokenSet} from './../../action/auth-actions.js';
@@ -29,11 +30,12 @@ class App extends Component{
     return(
       <Provider store={store}>
         <main className='app-container'>
-          <OrgForm />
+          
+          {/* <Auth /> */}
           <BrowserRouter>
           <section>
               <header>
-                <h1>Pro_Mgmt</h1>
+              <h1><Link to='/'>Pro_Mgmt</Link></h1>
                 <nav>
                   <ul>
                     <li><Link to='/welcome/signup'>signup</Link></li>
@@ -41,6 +43,7 @@ class App extends Component{
                     <li><Link to='/settings'>settings</Link></li>
                   </ul>
                 </nav>
+                 <NavBar />
               </header>
               <Route path='/welcome/:auth' component={Dashboard} />
               <Route exact path='/settings' component={ProfileForm} />
