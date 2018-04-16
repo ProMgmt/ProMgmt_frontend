@@ -16,6 +16,7 @@ let plugins = [
   new DefinePlugin({
     __DEBUG__: JSON.stringify(!production), //webpack constant we can use in our app, this will eventually help us turn our logs on/off with switching this variable out
     __API_URL__: JSON.stringify(process.env.API_URL),
+    
   })
 ]
 
