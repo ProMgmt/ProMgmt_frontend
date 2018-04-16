@@ -63,6 +63,7 @@ class AuthForm extends Component {
               value={this.state.email}
               onChange={this.handleChange}
             />
+      )}
             
             <input
               type='text'
@@ -81,11 +82,11 @@ class AuthForm extends Component {
             />
 
             <button type='submit'>{this.props.auth}</button>
-          )}
+          
         </form>
       )
     }
   }
-}
+
 
 export default AuthForm;

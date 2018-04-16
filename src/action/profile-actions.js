@@ -8,7 +8,7 @@ export const profileCreate = (profile) => ({
 })
 
 export const profileUpdate = (profile) => ({
-  type: 'PROFILE_TYPE',
+  type: 'PROFILE_UPDATE',
   payload: profile,
 })
 
@@ -17,7 +17,14 @@ export const profileDelete = (profile) => ({
   payload: profile, 
 })
 
-export const profileCreateRequest = (profile) => (dispatch, getState) => {
+export const profileCreateRequest = (profile, userId) => (dispatch, getState) => {
   let { auth } = getState();
-  return call.post(`${__API_URL__}`)
+  return call.post(`${__API_URL__}/api/users/${userId}/profile`)
+  .set('Authoriztion', `Bearer ${auth}`)
+  .field('desc', profile.desc)
+  .attach('avatarURL', profile.avatarURL)
+  .then( res => {
+    dispatch(profileCreate(res.body));
+    return res;
+  })
 }
