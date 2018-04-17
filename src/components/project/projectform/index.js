@@ -3,7 +3,14 @@ import React from 'react';
 class ProjectForm extends React.Component{
   constructor(props){
     super(props);
-    this.state = this.props.project ? {...props.project} : {orgId: undefined, projectName: '', desc: '', startDate: '', dueDate: ''};
+    this.state = this.props.project ? {...props.project} : { 
+      _id: undefined,
+      orgId: undefined, 
+      projectName: '',
+      desc: '', 
+      startDate: '', 
+      dueDate: ''
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);

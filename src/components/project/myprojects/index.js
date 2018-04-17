@@ -9,22 +9,11 @@ import * as projectActions from '../../../action/project-actions.js';
 class MyProjects extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      editing: false,
-    }
-
-    this.toggleEdit = this.toggleEdit.bind(this);
   }
 
   componentWillMount() {
     this.props.userOrgSet();
-  }
-
-  toggleEdit() {
-    this.setState(state => {
-      return {add: !state.add};
-    })
+    console.log(this.props);
   }
 
   render() {
@@ -41,15 +30,16 @@ class MyProjects extends React.Component {
 
 const mapStateToProps = state => {
   return {
+    orgs: state.org,
     projects: state.project
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   userOrgSet: () => dispatch(orgActions.userOrgEtAllSetRequest()),
-  projectUpdateRequest: () => dispatch(projectActions.projectUpdateRequest()),
-  projectCreateRequest: () => dispatch(projectActions.projectCreateRequest()),
-  projectDeleteRequest: () => dispatch(projectActions.projectDelete()),
+  projectUpdateRequest: (project) => dispatch(projectActions.projectUpdateRequest(project)),
+  projectCreateRequest: (project) => dispatch(projectActions.projectCreateRequest(project)),
+  projectDeleteRequest: (project) => dispatch(projectActions.projectDelete(project)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyProjects);
