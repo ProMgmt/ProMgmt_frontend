@@ -4,17 +4,17 @@ import { runInThisContext } from 'vm';
 class TaskForm extends React.Component{
   constructor(props){
     super(props);
-    let projId = this.props.proj._id;
-    let {orgId} = this.props.proj;
-    this.state = this.props.task ? {...props.project} : {projId, orgId, desc: '', startDate: '', dueDate: '', endDate: '', expectedDuration: '', actualDuration: '', status: '', isDependency: false, dependentTasks: ''};
+    let projectId = this.props.project._id;
+    let {orgId} = this.props.project;
+    this.state = this.props.task ? {...props.project} : {projectId, orgId};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentWillReceiveProps(props){
-    if(props.proj){
-      this.setState(props.proj);
+    if(props.project){
+      this.setState(props.project);
     }
     if(props.task){
       this.setState(props.task);
@@ -22,7 +22,11 @@ class TaskForm extends React.Component{
   }
 
   handleChange(e){
-    this.setState({[e.target.name]: e.target.value});
+    if(e.target.type === 'number'){
+      this.setState({[e.target.name]: +e.target.value});
+    } else {
+      this.setState({[e.target.name]: e.target.value});
+    }
   }
 
   handleSubmit(e){

@@ -4,6 +4,7 @@ import {projectUpdateRequest, projectDeleteRequest} from '../../../action/projec
 import ProjectForm from '../projectform';
 import TaskForm from '../../task/taskform';
 import {taskCreateRequest} from '../../../action/task-actions.js';
+import TaskItem from '../../task/taskitem';
 
 class ProjectItem extends React.Component{
   render(){
@@ -28,9 +29,17 @@ class ProjectItem extends React.Component{
           <TaskForm
             buttonText='New Task'
             org={org}
-            proj={project}
+            project={project}
             onComplete={taskCreate} />
         </div>
+        {this.props.task[this.props.project._id].map(item =>
+          <TaskItem
+            key={item._id}
+            org={org}
+            project={project}
+            task={item}
+          />
+        )}
       </section>
     )
   }
@@ -46,4 +55,4 @@ let mapDispatchToProps = dispatch => ({
   taskCreate: task => dispatch(taskCreateRequest(task)),
 })
 
-export default connect(null, mapDispatchToProps)(ProjectItem);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectItem);
