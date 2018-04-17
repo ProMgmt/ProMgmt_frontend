@@ -25,7 +25,6 @@ class DevTool extends React.Component{
   // }
 
   render(){
-    console.log('this.props.org', this.props.org);
     return(
       <section className='devtool'>
         <OrgForm
@@ -38,8 +37,6 @@ class DevTool extends React.Component{
             org={org}
           />
         )}
-        {/* <ProjectForm />
-        <TaskForm /> */}
       </section>
     )
   }

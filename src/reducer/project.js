@@ -14,8 +14,6 @@ export default (state=[], action) => {
       return {...state};
     case 'PROJECT_CREATE':
       let orgProject = [...state[payload.orgId], payload];
-      console.log('payload.orgId', payload.orgId);
-      console.log('orgProject', orgProject);
       return {...state, [payload.orgId]: [...orgProject]};
     case 'PROJECT_UPDATE':
       let orgProjectUpdate = state[payload.orgId].map(proj => proj._id === payload._id ? payload : proj);
