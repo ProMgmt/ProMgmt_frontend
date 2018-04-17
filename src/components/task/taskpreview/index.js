@@ -3,7 +3,9 @@
 import React from 'react';
 import TaskForm from '../taskform';
 
-this.state = props.tasks ?
+class TaskPreview extends React.Component {
+  constructor(props) {
+    this.state = props.tasks ?
       {...props.tasks, editing: false } :
       {
         _id: undefined,
@@ -11,9 +13,9 @@ this.state = props.tasks ?
         desc: '',
         editing: false,
       }
-
-    this.toggleEdit = this.toggleEdit.bind(this);
-  }
+      this.toggleEdit = this.toggleEdit.bind(this);
+    }
+  
 
   toggleEdit() {
     this.setState(state => {
