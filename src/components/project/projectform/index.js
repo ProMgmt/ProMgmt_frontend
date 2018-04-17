@@ -25,7 +25,6 @@ class ProjectForm extends React.Component{
 
   handleSubmit(e){
     e.preventDefault();
-    console.log('this.state', ...this.state);
     this.props.onComplete({...this.state});
     if(!this.props.project){
       this.setState({projectName: '', desc: '', startDate: '', dueDate: ''});

@@ -37,8 +37,6 @@ export const orgCreateRequest = org => (dispatch, getState) => {
     // need to pull in auth???
     .send(org)
     .then(res => {
-      console.log('org', org);
-      console.log('res', res);
       dispatch(orgCreate(JSON.parse(res.text)));
       return res;
     })
