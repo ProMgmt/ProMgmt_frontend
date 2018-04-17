@@ -2,10 +2,9 @@
 
 import GoogleOAuth from '../google-oauth';
 import React, {Component} from 'react';
-import {Provider} from 'react-redux';
+import {connect} from 'react-redux';
 import Auth from '../auth';
 import {BrowserRouter, Route, Link} from 'react-router-dom';
-import appCreateStore from './../../lib/app-create-store';
 import {tokenSet} from './../../action/auth-actions.js';
 import Dashboard from './../dashboard';
 import OrgForm from '../org/orgform/index.js';
@@ -17,55 +16,60 @@ import ProfileForm from './../profile/profileform';
 import DevTool from '../devtool';
 import * as util from './../../lib/util.js';
 
-let store = appCreateStore();
 
 class App extends Component{
 
   componentDidMount() {
-    let token = util.readCookie('X-Promgmt-Token');
+    let token = util.readCookie('X-ProMgmt-Token');
+    console.log('token??????')
     if(token) {
       this.props.tokenSet(token);
+      console.log('TOKENNNNNN')
     }
   }
 
   render() {
     return(
-      <Provider store={store}>
-        <main className='app-container'>
-          
-          {/* <Auth /> */}
-          <BrowserRouter>
+      <main className='app-container'>
+        
+        {/* <Auth /> */}
+        <BrowserRouter>
           <section>
-              <header>
-              <h1><Link to='/'>Pro_Mgmt</Link></h1>
-                <GoogleOAuth />
+            <header>
+            <h1><Link to='/'>Pro_Mgmt</Link></h1>
+              <GoogleOAuth />
+      
+              <nav>
+                <ul>
+                  <li><Link to='/welcome/signup'>signup</Link></li>
+                  <li><Link to='/welcome/signin'>signin</Link></li>
+                  <li><Link to='/settings'>settings</Link></li>
+                  <li><Link to='/devtool'>dev tool</Link></li>
+                </ul>
+              </nav>
+                <NavBar />
+            </header>
+            <Route path='/welcome/:auth' component={Dashboard} />
+            <Route exact path='/settings' component={ProfileForm} />
+            <Route exact path='/dashboard' component={Dashboard} />
+            <Route exact path='/myorgs' component={MyOrgs} />
+            {/* <Route exact path='/myprojects' component={MyProjects} />
+            <Route exact path='/mytasks' component={MyTasks} />  */}
+            <Route exact path='/devtool' component={DevTool} />
 
-                <nav>
-                  <ul>
-                    <li><Link to='/welcome/signup'>signup</Link></li>
-                    <li><Link to='/welcome/signin'>signin</Link></li>
-                    <li><Link to='/settings'>settings</Link></li>
-                    <li><Link to='/devtool'>dev tool</Link></li>
-                  </ul>
-                </nav>
-                 <NavBar />
-              </header>
-              <Route path='/welcome/:auth' component={Dashboard} />
-              <Route exact path='/settings' component={ProfileForm} />
-              <Route exact path='/dashboard' component={Dashboard} />
-              <Route exact path='/myorgs' component={MyOrgs} />
-              {/* <Route exact path='/myprojects' component={MyProjects} />
-              <Route exact path='/mytasks' component={MyTasks} />  */}
-              <Route exact path='/devtool' component={DevTool} />
-
-            </section>
-          </BrowserRouter>
+          </section>
+        </BrowserRouter>
 
       </main>
-     </Provider>
-
     )
   }
 }
 
-export default App;
+let mapDispatchToProps = dispatch => {
+  return {
+    tokenSet: token => dispatch(tokenSet(token)),
+    // fetchProfileStuff
+  }
+}
+
+export default connect(null, mapDispatchToProps)(App);
