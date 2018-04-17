@@ -26,9 +26,7 @@ class MyOrgs extends React.Component {
     })
   }
   
-  render() {
-    console.log(':::this.props.org:::', this.props.org);
-    
+  render() {    
     return (
       <div className='my-orgs'>
         <h1>My Orgs</h1>
@@ -39,7 +37,7 @@ class MyOrgs extends React.Component {
         }
 
         <div className='org-previews'>
-          <OrgPreview org={this.props.org} delete={this.props.orgDeleteRequest} update={this.props.orgUpdateRequest} />
+          <OrgPreview orgs={this.props.orgs} delete={this.props.orgDeleteRequest} update={this.props.orgUpdateRequest} />
         </div>
       </div>
     )
@@ -48,7 +46,7 @@ class MyOrgs extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    org: state.org,
+    orgs: state.orgs,
   }
 }
 

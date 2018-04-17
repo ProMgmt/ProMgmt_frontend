@@ -7,8 +7,8 @@ class OrgPreview extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = props.org ? 
-      {...props.org, editing: false} :
+    this.state = props.orgs ? 
+      {...props.orgs, editing: false} :
       {
         _id: undefined,
         name: '',
@@ -26,9 +26,9 @@ class OrgPreview extends React.Component {
   }
 
   componentWillReceiveProps(props) {
-    if(this.props.org) {
+    if(this.props.orgs) {
       console.log('component received props');
-      this.setState(this.props.org);
+      this.setState(this.props.orgs);
     }
   }
 
@@ -36,8 +36,8 @@ class OrgPreview extends React.Component {
     console.log(this.state);
     return (
       <div className='org-previews'>
-        {(this.props.org.length !== 0) ? 
-          this.props.org.map(_org => 
+        {(this.props.orgs.length !== 0) ? 
+          this.props.orgs.map(_org => 
             <div key={_org._id}>
             <h3>{_org.name}</h3>
             <p>{_org.desc}</p>
