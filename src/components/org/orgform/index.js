@@ -41,12 +41,10 @@ class OrgForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log('can we toggle?', this.props.canToggle)
 
     if(this.props.canToggle) {
       this.props.toggle();
     }
-
 
     this.props.onComplete({...this.state});
   }
@@ -101,7 +99,10 @@ class OrgForm extends React.Component {
   }
 
   render() {
+    console.log('::::this.state::::', this.state);
+
     return(
+      
       <form className='org-form' onSubmit={this.handleSubmit}>
         <h3>Name</h3>
         <input name='name'

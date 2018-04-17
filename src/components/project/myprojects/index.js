@@ -11,17 +11,17 @@ class MyProjects extends React.Component {
     super(props);
 
     this.state = {
-      add: false,
+      editing: false,
     }
 
-    this.toggleAdd = this.toggleAdd.bind(this);
+    this.toggleEdit = this.toggleEdit.bind(this);
   }
 
   componentWillMount() {
     this.props.userOrgSet();
   }
 
-  toggleAdd() {
+  toggleEdit() {
     this.setState(state => {
       return {add: !state.add};
     })
@@ -32,11 +32,6 @@ class MyProjects extends React.Component {
     return(
       <div className='my-projects'>
         <h1>My Projects</h1>
-        {this.state.add ?
-          <ProjectForm canToggle={true} toggle={this.toggleAdd} onComplete={this.props.projectCreateRequest} buttonText='Save' />
-          : 
-          <button onClick={this.toggleAdd}>Create a Project</button>
-        }
 
         <ProjectPreview projects={this.props.projects} delete={this.props.projectDeleteRequest} update={this.props.projectUpdateRequest} />
       </div>

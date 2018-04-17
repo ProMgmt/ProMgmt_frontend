@@ -37,7 +37,6 @@ class ProjectPreview extends React.Component {
         allProjectsArray.push(allProjects[key][i]);
       }
     }
-    console.log(allProjectsArray);
 
     return (
       <div className='project-previews'>

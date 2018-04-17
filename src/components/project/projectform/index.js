@@ -3,19 +3,15 @@ import React from 'react';
 class ProjectForm extends React.Component{
   constructor(props){
     super(props);
-    let orgId = this.props.org._id;
-    this.state = this.props.project ? {...props.project} : {orgId, projectName: '', desc: '', startDate: '', dueDate: ''};
+    this.state = this.props.project ? {...props.project} : {orgId: undefined, projectName: '', desc: '', startDate: '', dueDate: ''};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentWillReceiveProps(props){
-    if(props.org){
-      this.setState(props.org)
-    }
-    if(props.project){
-      this.setState(props.project)
+    if (props.project){
+      this.setState(props.project);
     }
   }
 
@@ -25,13 +21,17 @@ class ProjectForm extends React.Component{
 
   handleSubmit(e){
     e.preventDefault();
-    this.props.onComplete({...this.state});
-    if(!this.props.project){
-      this.setState({projectName: '', desc: '', startDate: '', dueDate: ''});
+
+    if(this.props.canToggle) {
+      this.props.toggle();
     }
+    
+    this.props.onComplete({...this.state});
   }
 
   render(){
+    console.log('::::this.state::::', this.state);
+
     return(
       <form className='project-form' onSubmit={this.handleSubmit}>
         <input 
