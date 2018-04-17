@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
 import auth from './auth.js';
-import org from './org.js';
+import orgs from './orgs.js';
 import profile from './profile.js';
 import project from './project.js';
 import task from './task.js';
 
-export default combineReducers({auth, org, profile, project, task});
+export default combineReducers({auth, orgs, profile, project, task});

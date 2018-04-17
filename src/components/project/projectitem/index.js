@@ -13,6 +13,7 @@ class ProjectItem extends React.Component{
           <p>{project.desc}</p>
           <p>Start Date: {project.startDate}</p>
           <p>Due Date: {project.dueDate}</p>
+          <button onClick={() => projectDelete(project)}>X</button>
         </div>
         <div className='edit'>
           <ProjectForm 

@@ -25,13 +25,14 @@ class DevTool extends React.Component{
   // }
 
   render(){
+    console.log('this.props.org', this.props.org);
     return(
       <section className='devtool'>
         <OrgForm
           onComplete={this.props.orgCreate}
           buttonText='Create Org'
         />
-        {this.props.org.map(org => 
+        {this.props.orgs.map(org => 
           <OrgItem
             key={org._id}
             org={org}
@@ -45,7 +46,7 @@ class DevTool extends React.Component{
 }
 
 let mapStateToProps = state => ({
-  org: state.org,
+  orgs: state.orgs,
 })
 
 let mapDispatchToProps = dispatch => ({

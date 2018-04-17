@@ -42,7 +42,6 @@ class OrgItem extends React.Component{
 }
 
 const mapStateToProps = state => ({
-  org: state.org,
   project: state.project,
 });
 

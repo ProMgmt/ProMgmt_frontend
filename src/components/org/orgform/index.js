@@ -112,14 +112,14 @@ class OrgForm extends React.Component {
           placeholder='Description of Organization'
           onChange={this.handleChange} 
           required /> * required
-        <h3>Add Admins</h3>
+        {/* <h3>Add Admins</h3>
         <input name='admin'
           type='text'
           placeholder='Add an Admin' 
           onChange={this.handleChange}/>
         <button className='tiny-plus'
           type='submit'
-          onClick={this.handleAdminSubmit}>+</button>
+          onClick={this.handleAdminSubmit}>+</button> */}
         {util.renderIf(this.state.adminError, 
           <p className='error'>{this.state.adminError}</p>
         )}
@@ -127,24 +127,24 @@ class OrgForm extends React.Component {
           {/* {mapList} */}
             {/* TODO: add remove admin functionality */}
         </ul>
-        <h3>Add Members</h3>
+        {/* <h3>Add Members</h3>
         <input name='user'
           type='text'
           placeholder='Add a Member' 
           onChange={this.handleChange}/>
         <button className='tiny-plus'
           type='submit'
-          onClick={this.handleUserSubmit}>+</button>
+          onClick={this.handleUserSubmit}>+</button> */}
         {util.renderIf(this.state.userError, 
           <p className='error'>{this.state.userError}</p>
         )}
-        <ul>
+        {/* <ul>
           {this.state.userNames.map((user, i) => {
             <span>
               <li key={i}>{user}</li> <button className='delete'>x</button>
             </span>          
           })}
-        </ul>
+        </ul> */}
         <button className='submit-button' type='submit'>{this.props.buttonText}</button>
       </form>
     )

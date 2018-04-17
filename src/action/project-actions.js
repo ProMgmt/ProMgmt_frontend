@@ -15,12 +15,14 @@ export const projectDelete = project => ({
   payload: project,
 })
 
-export const projectCreateRequest = (orgId, project) => (dispatch, getState) => {
+export const projectCreateRequest = project => (dispatch, getState) => {
   let {auth} = getState();
-  return superagent.post(`${__API_URL__}/api/org/${orgjId}/project`)
+  console.log('project', project);
+  return superagent.post(`${__API_URL__}/api/org/${project.orgId}/project`)
     .set('Authorization', `Bearer ${auth}`)
+    .send(project)
     .then(res => {
-      dispatch(projectCreate(project));
+      dispatch(projectCreate(res.body));
       return res;
     })
 }

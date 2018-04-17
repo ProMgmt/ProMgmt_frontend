@@ -32,13 +32,14 @@ export const userOrgEtAllSetRequest = () => (dispatch, getState) => {
 
 export const orgCreateRequest = org => (dispatch, getState) => {
   let {auth} = getState();
-  console.log('org@action', org);
   return superagent.post(`${__API_URL__}/api/org`)
     .set('Authorization', `Bearer ${auth}`)
     // need to pull in auth???
     .send(org)
     .then(res => {
-      dispatch(orgCreate(org));
+      console.log('org', org);
+      console.log('res', res);
+      dispatch(orgCreate(JSON.parse(res.text)));
       return res;
     })
 }
