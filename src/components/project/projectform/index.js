@@ -64,4 +64,4 @@ class ProjectForm extends React.Component{
   }
 }
 
-export default ProjectForm
+export default ProjectForm;

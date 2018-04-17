@@ -54,8 +54,8 @@ class App extends Component{
               <Route exact path='/settings' component={ProfileForm} />
               <Route exact path='/dashboard' component={Dashboard} />
               <Route exact path='/myorgs' component={MyOrgs} />
-              {/* <Route exact path='/myprojects' component={MyProjects} />
-              <Route exact path='/mytasks' component={MyTasks} />  */}
+              <Route exact path='/myprojects' component={MyProjects} />
+              {/* <Route exact path='/mytasks' component={MyTasks} />  */}
               <Route exact path='/devtool' component={DevTool} />
 
             </section>
