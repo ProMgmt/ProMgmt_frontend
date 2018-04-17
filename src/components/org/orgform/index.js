@@ -41,6 +41,12 @@ class OrgForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    console.log('can we toggle?', this.props.canToggle)
+
+    if(this.props.canToggle) {
+      this.props.toggle();
+    }
+
 
     this.props.onComplete({...this.state});
   }
@@ -72,9 +78,11 @@ class OrgForm extends React.Component {
   handleUserSubmit(e) {
     e.preventDefault();
 
+
     let name = this.state.user.split(' ');
     let firstName= name[0];
     let lastName = name[name.length - 1];
+    console.log(':::auth in user submit:::', this.props.auth);
 
     superagent.get(`${__API_URL__}/api/profile/${firstName}/${lastName}`)
       .set({Authorization: `Bearer: ${this.props.auth}`})
@@ -93,7 +101,6 @@ class OrgForm extends React.Component {
   }
 
   render() {
-    const mapList = this.state.adminNames.map((admin, i) => <li key={i}>{admin}</li>)
     return(
       <form className='org-form' onSubmit={this.handleSubmit}>
         <h3>Name</h3>
@@ -124,10 +131,15 @@ class OrgForm extends React.Component {
         {util.renderIf(this.state.adminError, 
           <p className='error'>{this.state.adminError}</p>
         )}
-        <ul>
-          {mapList}
-            {/* TODO: add remove admin functionality */}
-        </ul>
+        {(this.state.adminNames !== undefined) ?
+          <ul>
+            {this.state.adminNames.map((admin, i) => 
+              <li key={i}>{admin}</li>
+            )}
+              {/* TODO: add remove admin functionality */}
+          </ul>
+          : null
+        }
         <h3>Add Members</h3>
         <input name='user'
           type='text'
@@ -139,13 +151,16 @@ class OrgForm extends React.Component {
         {util.renderIf(this.state.userError, 
           <p className='error'>{this.state.userError}</p>
         )}
-        <ul>
-          {this.state.userNames.map((user, i) => {
-            <span>
-              <li key={i}>{user}</li> <button className='delete'>x</button>
-            </span>          
-          })}
-        </ul>
+        {this.state.userNames !== undefined ?
+          <ul>
+            {this.state.userNames.map((user, i) => 
+                <div>
+                  <li key={i}>{user}</li> <button className='delete'>x</button>
+                </div>
+            )}
+          </ul>
+          : null
+        }
         <button className='submit-button' type='submit'>{this.props.buttonText}</button>
       </form>
     )

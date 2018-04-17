@@ -6,8 +6,24 @@ import OrgPreview from '../orgpreview/index.js';
 import OrgForm from '../orgform/index.js';
 
 class MyOrgs extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      add: false,
+    }
+
+    this.toggleAdd = this.toggleAdd.bind(this);
+  }
+
   componentWillMount() {
     this.props.userOrgSet();
+  }
+
+  toggleAdd() {
+    this.setState(state => {
+      return {add: !state.add};
+    })
   }
   
   render() {
@@ -16,17 +32,15 @@ class MyOrgs extends React.Component {
     return (
       <div className='my-orgs'>
         <h1>My Orgs</h1>
+        {this.state.add ?
+          <OrgForm canToggle={true} toggle={this.toggleAdd} onComplete={this.props.orgCreateRequest} buttonText='Save'/>
+          : 
+          <button onClick={this.toggleAdd}>Create an Org</button>
+        }
+
         <div className='org-previews'>
-          {this.props.org.map(org => 
-              <div>
-                <p>hi</p>
-                <OrgPreview key={org._id} org={org}/>
-              </div>
-            )
-          }
+          <OrgPreview org={this.props.org} delete={this.props.orgDeleteRequest} update={this.props.orgUpdateRequest} />
         </div>
-        {/* TODO: add a 'CREATE NEW ORG' button which toggles view of OrgForm component */}
-        <OrgForm onComplete={this.props.orgCreateRequest} buttonText='Create An Org'/>
       </div>
     )
   }

@@ -37,7 +37,7 @@ export const orgCreateRequest = org => (dispatch, getState) => {
     // need to pull in auth???
     .send(org)
     .then(res => {
-      dispatch(orgCreate(org));
+      dispatch(orgCreate(res.body));
       return res;
     })
 }
@@ -56,7 +56,20 @@ export const orgUpdateRequest = org => (dispatch, getState) => {
     .set('Authorization', `Bearer ${auth}`)
     .send(org)
     .then(res => {
-      dispatch(orgUpdate(org));
+      dispatch(orgUpdate(res.body));
+      return res;
+    })
+}
+
+export const orgDeleteRequest = org => (dispatch, getState) => {
+  let {auth} = getState();
+  let id = org._id;
+  console.log('ORG IN ORG DELETE REQUEST', org);
+
+  return superagent.delete(`${__API_URL__}/api/org/${id}`)
+    .set('Authorization', `Bearer ${auth}`)
+    .then(res => {
+      dispatch(orgDelete(org));
       return res;
     })
 }
