@@ -7,7 +7,6 @@ import OrgForm from '../orgform/index.js';
 class MyOrgs extends React.Component {
   componentWillMount() {
     this.props.userOrgSet();
-    console.log('orgs in myOrgs', this.props.orgs);
   }
   
   render() {
@@ -21,7 +20,7 @@ class MyOrgs extends React.Component {
           : null
         }
         {/* TODO: add a 'CREATE NEW ORG' button which toggles view of OrgForm component */}
-        <OrgForm buttonText='Create An Org'/>
+        <OrgForm onComplete={this.props.orgCreateRequest} buttonText='Create An Org'/>
       </div>
     )
   }
@@ -35,6 +34,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   userOrgSet: () => dispatch(orgActions.userOrgEtAllSetRequest()),
+  orgCreateRequest: (org) => dispatch(orgActions.orgCreateRequest(org)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyOrgs);
