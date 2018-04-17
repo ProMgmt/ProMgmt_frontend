@@ -63,11 +63,9 @@ export const orgUpdateRequest = org => (dispatch, getState) => {
 
 export const orgDeleteRequest = org => (dispatch, getState) => {
   let {auth} = getState();
-  let id = org._id;
-  console.log('ORG IN ORG DELETE REQUEST', org);
-
-  return superagent.delete(`${__API_URL__}/api/org/${id}`)
+  return superagent.delete(`${__API_URL__}/api/org/${org._id}`)
     .set('Authorization', `Bearer ${auth}`)
+    .send(org)
     .then(res => {
       dispatch(orgDelete(org));
       return res;
