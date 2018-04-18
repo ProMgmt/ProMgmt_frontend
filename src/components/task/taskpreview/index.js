@@ -5,6 +5,7 @@ import TaskForm from '../taskform';
 
 class TaskPreview extends React.Component {
   constructor(props) {
+    super(props);
     this.state = props.tasks ?
       {...props.tasks, editing: false } :
       {
