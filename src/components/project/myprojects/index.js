@@ -13,7 +13,7 @@ class MyProjects extends React.Component {
 
   componentWillMount() {
     this.props.userOrgSet();
-    console.log(this.props);
+    console.log(this.props.state);
   }
 
   render() {
@@ -30,6 +30,7 @@ class MyProjects extends React.Component {
 
 const mapStateToProps = state => {
   return {
+    state: state,
     orgs: state.org,
     projects: state.project
   }
