@@ -6,8 +6,8 @@ import TaskForm from '../taskform';
 class TaskPreview extends React.Component {
   constructor(props) {
     super(props);
-    this.state = props.tasks ?
-      {...props.tasks, editing: false } :
+    this.state = props.task ?
+      {...props.task, editing: false } :
       {
         _id: undefined,
         name: '',
@@ -25,8 +25,8 @@ class TaskPreview extends React.Component {
   }
 
   componentWillReceiveProps(props) {
-    if (this.props.tasks) {
-      this.setState(this.props.tasks);
+    if (this.props.task) {
+      this.setState(this.props.task);
     }
   }
 
