@@ -5,13 +5,15 @@ import IconButton from 'material-ui/IconButton';
 import AccountCircle from 'material-ui/svg-icons/action/account-circle';
 import {Link} from 'react-router-dom';
 
+import './_profile-menu.scss';
+
 
 class ProfileMenu extends React.Component {
   render(){
     return(
       <div>
         <IconMenu
-          iconButtonElement={<IconButton><AccountCircle /></IconButton>}
+          iconButtonElement={<IconButton ><AccountCircle className='profile-button'/></IconButton>}
           anchorOrigin={{horizontal: 'left', vertical: 'top'}}
           targetOrigin={{horizontal: 'left', vertical: 'top'}}
         >

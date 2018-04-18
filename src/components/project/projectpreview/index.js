@@ -1,5 +1,8 @@
 import React from 'react';
 import ProjectForm from '../projectform';
+import { Card, CardText, CardHeader } from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
+import Clear from 'material-ui/svg-icons/content/clear';
 
 class ProjectPreview extends React.Component {
   constructor(props) {
@@ -42,6 +45,7 @@ class ProjectPreview extends React.Component {
         <button onClick={() => { this.props.delete(_project) }}>x</button> <button onClick={() => {this.toggleEdit()}}>{updateButtonText}</button>
         {this.state.editing ? 
           <ProjectForm canToggle={true} toggle={this.toggleEdit} buttonText='Save' onComplete={this.props.update} project={_project} />
+
           :
           null
         }

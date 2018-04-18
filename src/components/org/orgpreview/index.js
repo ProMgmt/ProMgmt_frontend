@@ -1,6 +1,11 @@
 import React from 'react';
 import OrgForm from '../orgform/index.js';
+
 import {connect} from 'react-redux';
+import {Card, CardHeader, CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
+import Create from 'material-ui/svg-icons/content/create';
+import Clear from 'material-ui/svg-icons/content/clear';
 
 class OrgPreview extends React.Component {
   constructor(props) {
@@ -51,6 +56,7 @@ class OrgPreview extends React.Component {
           {isAdmin ?
             <div className='edit-org'>
               <button onClick={() => {this.props.delete(org)}}>x</button> <button onClick={() => this.toggleEdit()}>{updateButtonText}</button>
+
               {this.state.editing ?
                 <OrgForm canToggle={true} toggle={this.toggleEdit} buttonText='Save' onComplete={this.props.update} org={org} />
                 :
@@ -63,6 +69,7 @@ class OrgPreview extends React.Component {
           }
 
         </div>
+
       </div>
     )
   }
