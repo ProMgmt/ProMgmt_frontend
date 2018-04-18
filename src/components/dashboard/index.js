@@ -20,12 +20,12 @@ class Dashboard extends Component{
     return (
       <section>
 
-        <GoogleOAuth />
 
         <AuthForm
           auth={params.auth}
           onComplete={handleComplete}
         />
+        <GoogleOAuth />
       </section>
 
     )
