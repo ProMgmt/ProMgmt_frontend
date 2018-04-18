@@ -34,7 +34,7 @@ class TaskPreview extends React.Component {
     let _task = this.props.task;
     let updateButtonText;
     this.state.editing ? updateButtonText = 'Hide' : updateButtonText = 'Update';
-
+    console.log('TASK ITEM', _task);
     return (
       <div className='task-previews' key={_task._id}>
         <h3>{_task.taskName}</h3>
