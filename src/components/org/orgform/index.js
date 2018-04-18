@@ -63,8 +63,6 @@ class OrgForm extends React.Component {
         let fullName = `${profile.firstName} ${profile.lastName}`;
         this.setState(prevState => {
           return {admins: [...prevState.admins, profile.userId], adminNames: [...prevState.adminNames, fullName]}
-        }, () => {
-          console.log(this.state);
         });
       })
       .catch(err => {
@@ -80,7 +78,6 @@ class OrgForm extends React.Component {
     let name = this.state.user.split(' ');
     let firstName= name[0];
     let lastName = name[name.length - 1];
-    console.log(':::auth in user submit:::', this.props.auth);
 
     superagent.get(`${__API_URL__}/api/profile/${firstName}/${lastName}`)
       .set({Authorization: `Bearer: ${this.props.auth}`})
@@ -88,8 +85,6 @@ class OrgForm extends React.Component {
         let fullName = `${profile.firstName} ${profile.lastName}`;
         this.setState(prevState => {
           return {users: [...prevState.users, profile.userId], userNames: [...prevState.userNames, fullName]}
-        }, () => {
-          console.log(this.state);
         });
       })
       .catch(err => {
@@ -99,7 +94,6 @@ class OrgForm extends React.Component {
   }
 
   render() {
-    console.log('::::this.state::::', this.state);
 
     return(
       <form className='org-form' onSubmit={this.handleSubmit}>

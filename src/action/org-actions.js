@@ -25,7 +25,6 @@ export const userOrgEtAllSetRequest = () => (dispatch, getState) => {
   return superagent.get(`${__API_URL__}/api/org/user/me`)
     .set('Authorization', `Bearer ${auth}`)
     .then(res => {
-      console.log('RES.BODY', res.body);
       dispatch(userOrgEtAllSet(res.body));
       return res;
     })

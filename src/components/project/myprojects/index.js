@@ -13,11 +13,9 @@ class MyProjects extends React.Component {
 
   componentWillMount() {
     this.props.userOrgSet();
-    console.log(this.props.state);
   }
 
   render() {
-    console.log('THIS.PROPS.PROJECTS', this.props.projects);
     return(
       <div className='my-projects'>
         <h1>My Projects</h1>

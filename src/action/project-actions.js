@@ -17,7 +17,6 @@ export const projectDelete = project => ({
 
 export const projectCreateRequest = project => (dispatch, getState) => {
   let {auth} = getState();
-  console.log('project', project);
   return superagent.post(`${__API_URL__}/api/org/${project.orgId}/project`)
     .set('Authorization', `Bearer ${auth}`)
     .send(project)
@@ -29,7 +28,6 @@ export const projectCreateRequest = project => (dispatch, getState) => {
 
 export const projectUpdateRequest = project => (dispatch, getState) => {
   let {auth} = getState();
-  console.log('::::project:::::', project)
   return superagent.put(`${__API_URL__}/api/project/${project._id}`)
     .set('Authorization', `Bearer ${auth}`)
     .send(project)
