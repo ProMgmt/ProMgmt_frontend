@@ -6,18 +6,9 @@ import AppBar from 'material-ui/AppBar';
 import MenuItem from 'material-ui/MenuItem';
 import ProfileMenu from './../profile/profile-menu';
 
-// class NavBar extends React.Component {
-//   render() {
-//     return (
-//       <List>
-//         <Link to='/myorgs'>My Orgs</Link>
-//         <Link to='/myprojects'>My Projects</Link>
-//         <Link to='/mytasks'>My Tasks</Link>
-//         <Link to='/logout'>Log Out</Link>
-//       </List>
-//     )
-//   }
-// }
+import './_nav.scss';
+
+
 
 class NavBar extends React.Component {
   constructor(props){
@@ -37,11 +28,11 @@ class NavBar extends React.Component {
   
   render() {
     return (
-      <div>
+      <div className='nav-container'>
         <AppBar
           title="Pro_Mgmt"
           onLeftIconButtonClick={this.handleToggle}
-          //iconElementRight={<IconButton><AccountCircle /></IconButton>}
+         
         >
 
           <ProfileMenu />
