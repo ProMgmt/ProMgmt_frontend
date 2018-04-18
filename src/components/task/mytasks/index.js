@@ -18,11 +18,26 @@ class MyTasks extends React.Component {
   }
 
   render() {
+    let allTasks = this.props.tasks;
+    let allTasksArray = [];
+    for(let key in allTasks) {
+      for(let i in allTasks[key]) {
+        allTasksArray.push(allTasks[key][i]);
+      }
+    }
+
+    console.log(':::allTasksArray:::', allTasksArray);
+
     return (
       <div className='my-tasks'>
         <h1>My Tasks</h1>
-        <TaskPreview tasks ={this.props.tasks} delete={this.props.taskDeleteRequest} update={this.props.taskUpdateRequest} />
-
+        {allTasksArray.length !== 0 ?
+          allTasksArray.map(_task => 
+            <TaskPreview task={_task} delete={this.props.taskDeleteRequest} update={this.props.taskUpdateRequest} />
+          )
+          :
+          <p>You currently have no tasks! Navigate to your MyOrgs page to add a task to a specific organization.</p>
+        }
       </div>
     )
   }

@@ -31,30 +31,20 @@ class TaskPreview extends React.Component {
   }
 
   render() {
-    let allTasks = this.props.tasks;
-    let allTasksArray = [];
-    for(let key in allTasks) {
-      for(let i in allTasks[key]) {
-        allTasksArray.push(allTasks[key][i]);
-      }
-    }
+    let _task = this.props.task;
+    let updateButtonText;
+    this.state.editing ? updateButtonText = 'Hide' : updateButtonText = 'Update';
 
     return (
-      <div className='task-previews'>
-        {allTasksArray.length !== 0 ?
-          allTasksArray.map(_task => 
-            <div key={_task._id}>
-              <h3>{_task.taskName}</h3>
-              {/* TODO: hyperlink this to the TaskItem page */}
-              <p>{_task.desc}</p>
-              <button onClick={() => { this.props.delete(_task) }}>x</button>
-              <TaskForm canToggle={true} toggle={this.toggleEdit} buttonText='Save' onComplete={this.props.update} task={_task} />
-              }
-            </div>
-          )
-          :
-          <p>You currently have no tasks! Navigate to your MyOrgs page to add a task to a specific organization.</p>
-        }      
+      <div className='task-previews' key={_task._id}>
+        <h3>{_task.taskName}</h3>
+        {/* TODO: hyperlink this to the TaskItem page */}
+        <p>{_task.desc}</p>
+        <button onClick={() => { this.props.delete(_task) }}>x</button> <button onClick={() => {this.toggleEdit()}}>{updateButtonText}</button>
+        {this.state.editing ?
+          <TaskForm canToggle={true} toggle={this.toggleEdit} buttonText='Save' onComplete={this.props.update} task={_task} />
+          : null
+        }
       </div>
     )
   }
