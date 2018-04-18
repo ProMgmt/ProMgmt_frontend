@@ -48,14 +48,20 @@ class OrgPreview extends React.Component {
 
     return (
       <div className='org-previews'>
-        <div key={org._id}>
-          <h3>{org.name}</h3>
+        <Card key={org._id}>
+          <CardHeader 
+            title={org.name}
+            actAsExpander={true}
+            showExpandableButton={true}
+          />
+          <CardText expandable={true}>
+          
           <p>{org.desc}</p>
           {/* TODO: add a link to the OrgItem page for each Org created */}
 
           {isAdmin ?
             <div className='edit-org'>
-              <button onClick={() => {this.props.delete(org)}}>x</button> <button onClick={() => this.toggleEdit()}>{updateButtonText}</button>
+              <FlatButton onClick={() => {this.props.delete(org)}} icon={<Clear />}/> <FlatButton onClick={() => this.toggleEdit()} icon={<Create />}/>
 
               {this.state.editing ?
                 <OrgForm canToggle={true} toggle={this.toggleEdit} buttonText='Save' onComplete={this.props.update} org={org} />
@@ -67,8 +73,8 @@ class OrgPreview extends React.Component {
             :
             null
           }
-
-        </div>
+          </CardText>
+        </Card>
 
       </div>
     )
