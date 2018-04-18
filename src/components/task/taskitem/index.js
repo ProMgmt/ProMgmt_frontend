@@ -30,7 +30,6 @@ class TaskItem extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  task: state.task, 
   project: state.project, 
   org: state.org
 })
