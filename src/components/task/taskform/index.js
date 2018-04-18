@@ -6,16 +6,13 @@ class TaskForm extends React.Component{
     super(props);
     let projectId = this.props.project._id;
     let {orgId} = this.props.project;
-    this.state = this.props.task ? {...props.project} : {projectId, orgId};
+    this.state = this.props.task ? {...props.task} : {projectId, orgId};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentWillReceiveProps(props){
-    if(props.project){
-      this.setState(props.project);
-    }
     if(props.task){
       this.setState(props.task);
     }
