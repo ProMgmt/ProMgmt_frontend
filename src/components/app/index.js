@@ -12,6 +12,7 @@ import OrgForm from '../org/orgform/index.js';
 import NavBar from '../navigation';
 import MyOrgs from '../org/myorgs';
 import MyProjects from '../project/myprojects';
+import MyProfile from '../profile/myprofile';
 import MyTasks from '../task/mytasks';
 import ProfileForm from './../profile/profileform';
 import DevTool from '../devtool';
@@ -78,7 +79,7 @@ class App extends Component{
                  
                 
                 <Route path='/welcome/:auth' component={Dashboard} />
-                <Route exact path='/myprofile' component={ProfileForm} />
+                <Route exact path='/myprofile' component={MyProfile} />
                 <Route exact path='/dashboard' component={Dashboard} />
                 <Route exact path='/myorgs' component={MyOrgs} />
                 <Route exact path='/myprojects' component={MyProjects} />
