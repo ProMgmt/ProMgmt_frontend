@@ -8,7 +8,7 @@ export const tokenSet = (token) => ({
 })
 
 export const tokenDelete = () => ({
-  type: 'TOKE_DELETE',
+  type: 'TOKEN_DELETE',
 })
 
 export const signupRequest = (user) => (dispatch) => {
@@ -34,13 +34,4 @@ export const signinRequest = (user) => (dispatch) => {
     dispatch(tokenSet(res.text))
     return;
   })
-}
-
-export const logoutRequest = user => dispatch => {
-  return call.get(`${__API_URL__}/api/logout`)
-    .withCredentials(false)
-    .then( res => {
-      dispatch(tokenDelete())
-      return;
-    })
 }

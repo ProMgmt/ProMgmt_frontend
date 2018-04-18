@@ -4,9 +4,23 @@ import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import AccountCircle from 'material-ui/svg-icons/action/account-circle';
 import {Link} from 'react-router-dom';
+import { tokenDelete } from '../../../action/auth-actions';
+import { connect } from 'react-redux';
+import { deleteCookie } from '../../../lib/util';
 
 
 class ProfileMenu extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleSignout = this.handleSignout.bind(this);
+  }
+
+  handleSignout() {
+    this.props.signout();
+    deleteCookie();
+  }
+
   render(){
     return(
       <div>
@@ -19,14 +33,18 @@ class ProfileMenu extends React.Component {
           <MenuItem><Link to='/welcome/signin'>signin</Link></MenuItem>
           <MenuItem primaryText="Settings" />
           <MenuItem primaryText="Help" />
-          <MenuItem><Link to='logout'>sign out</Link></MenuItem>
+          <MenuItem><Link to='/' onClick={this.handleSignout}>sign out</Link></MenuItem>
         </IconMenu>
       </div>
     )
   }
 }
 
-export default ProfileMenu;
+const mapDispatchToProps = dispatch => ({
+  signout: user => dispatch(tokenDelete(user)),
+})
+
+export default connect(null, mapDispatchToProps)(ProfileMenu);
 
 {/* <nav>
 <ul>
