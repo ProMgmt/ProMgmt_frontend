@@ -53,7 +53,7 @@ class TaskPreview extends React.Component {
             </div>
           )
           :
-          <p>You currently have no tasks! Navigate to your MyOrgs page to add a task to a specific organization.</p>
+          <p>You currently have no tasks! Navigate to your MyProjects page to add a task to a specific project.</p>
         }      
       </div>
     )
