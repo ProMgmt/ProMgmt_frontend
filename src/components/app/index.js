@@ -15,7 +15,6 @@ import MyProjects from '../project/myprojects';
 import MyTasks from '../task/mytasks';
 import ProfileForm from './../profile/profileform';
 import DevTool from '../devtool';
-import LogoutView from '../logout-view';
 import * as util from './../../lib/util.js';
 import {grey800} from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -85,7 +84,6 @@ class App extends Component{
                 <Route exact path='/myprojects' component={MyProjects} />
                 <Route exact path='/mytasks' component={MyTasks} /> 
                 <Route exact path='/devtool' component={DevTool} />
-                <Route exact path ='/logout' component={LogoutView} />
 
 
               </section>
