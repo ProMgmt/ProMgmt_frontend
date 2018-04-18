@@ -30,25 +30,23 @@ class OrgPreview extends React.Component {
   }
 
   render() {
-     return (
+    let updateButtonText;
+    this.state.editing ? updateButtonText = 'Hide' : updateButtonText = 'Update';
+    let org = this.props.org;
+
+    return (
       <div className='org-previews'>
-        {(this.props.orgs.length !== 0) ? 
-          this.props.orgs.map(_org => 
-            <div key={_org._id}>
-              <h3>{_org.name}</h3>
-              <p>{_org.desc}</p>
-              {/* TODO: add a link to the OrgItem page for each Org created */}
-              <button onClick={() => {this.props.delete(_org)}}>x</button>
-              {this.state.editing ?
-                <OrgForm canToggle={true} toggle={this.toggleEdit} buttonText='Save' onComplete={this.props.update} org={_org} />
-                :
-                <button onClick={() => this.toggleEdit()}>Update</button>
-              }
-            </div>
-          )
-          :
-          <p>You currently have no organizations, would you like to create one?</p>
-        }
+        <div key={org._id}>
+          <h3>{org.name}</h3>
+          <p>{org.desc}</p>
+          {/* TODO: add a link to the OrgItem page for each Org created */}
+          <button onClick={() => {this.props.delete(org)}}>x</button> <button onClick={() => this.toggleEdit()}>{updateButtonText}</button>
+          {this.state.editing ?
+            <OrgForm canToggle={true} toggle={this.toggleEdit} buttonText='Save' onComplete={this.props.update} org={org} />
+            :
+            null
+          }
+        </div>
       </div>
     )
   }
