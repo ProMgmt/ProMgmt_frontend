@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import ProjectForm from '../projectform';
 import { Card, CardText, CardHeader } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
@@ -33,18 +34,23 @@ class ProjectPreview extends React.Component {
   }
 
   render() {
-    let _project = this.props.project;
+    let project = this.props.project;
     let updateButtonText;
     this.state.editing ? updateButtonText = 'Hide' : updateButtonText = 'Update';
+    let isAdmin = false;
+    project.admins.forEach(adminObj => {
+      if(this.props.user._id === adminObj._id || this.props.user._id === adminObj) isAdmin = true;
+    })
+
 
     return (
-      <div className='project-previews' key={_project._id}>
-        <h3>{_project.projectName}</h3>
+      <div className='project-previews' key={project._id}>
+        <h3>{project.projectName}</h3>
         {/* TODO: hyperlink this to the ProjectItem page */}
-        <p>{_project.desc}</p>
-        <button onClick={() => { this.props.delete(_project) }}>x</button> <button onClick={() => {this.toggleEdit()}}>{updateButtonText}</button>
+        <p>{project.desc}</p>
+        <button onClick={() => { this.props.delete(project) }}>x</button> <button onClick={() => {this.toggleEdit()}}>{updateButtonText}</button>
         {this.state.editing ? 
-          <ProjectForm canToggle={true} toggle={this.toggleEdit} buttonText='Save' onComplete={this.props.update} project={_project} />
+          <ProjectForm canToggle={true} toggle={this.toggleEdit} buttonText='Save' onComplete={this.props.update} project={project} />
 
           :
           null
@@ -54,4 +60,11 @@ class ProjectPreview extends React.Component {
   }
 }
 
-export default ProjectPreview;
+
+export const mapStateToProps = state => {
+  return {
+    user: state.user,
+  }
+}
+
+export default connect(mapStateToProps, null)(ProjectPreview);
