@@ -19,7 +19,7 @@ class ProfileMenu extends React.Component {
           <MenuItem><Link to='/welcome/signin'>signin</Link></MenuItem>
           <MenuItem primaryText="Settings" />
           <MenuItem primaryText="Help" />
-          <MenuItem primaryText="Sign out" />
+          <MenuItem><Link to='logout'>sign out</Link></MenuItem>
         </IconMenu>
       </div>
     )

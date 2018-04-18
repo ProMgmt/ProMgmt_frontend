@@ -35,3 +35,12 @@ export const signinRequest = (user) => (dispatch) => {
     return;
   })
 }
+
+export const logoutRequest = user => dispatch => {
+  return call.get(`${__API_URL__}/api/logout`)
+    .withCredentials(false)
+    .then( res => {
+      dispatch(tokenDelete())
+      return;
+    })
+}
