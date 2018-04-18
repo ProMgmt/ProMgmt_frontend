@@ -6,12 +6,12 @@ export default (state=[], action) => {
         acc.push(org.projects);
         return acc;
       }, []);
-      console.log('newProjects', newProjects);
       let newTasks = newProjects.reduce((acc, proj) => {
-        acc[proj[0]._id] = proj[0].tasks;
+        proj.forEach(project => {
+          acc[project._id] = project.tasks;
+        })
         return acc;
       },{});
-      console.log('newTasks', newTasks);
       return newTasks;
     case 'PROJECT_CREATE':
       return {...state, [payload._id]: []};
@@ -19,14 +19,14 @@ export default (state=[], action) => {
       delete state[payload._id];
       return {...state};
     case 'TASK_CREATE':
-      let projTasks = [...state[payload.projId], payload];
-      return {...state, [payload.projId]: [...projTasks]};
+      let projTasks = [...state[payload.projectId], payload];
+      return {...state, [payload.projectId]: [...projTasks]};
     case 'TASK_UPDATE':
-      let projTaskUpdate = state[payload.projId].map(task => task._id === payload._id ? payload : task);
-      return {...state, [payload.projId]: [...projTaskUpdate]};
+      let projTaskUpdate = state[payload.projectId].map(task => task._id === payload._id ? payload : task);
+      return {...state, [payload.projectId]: [...projTaskUpdate]};
     case 'TASK_DELETE':
-      let projTaskDelete = state[payload.projId].filter(task => task._id !== payload._id);
-      return {...state, [payload.projId]: [...projTaskDelete]};
+      let projTaskDelete = state[payload.projectId].filter(task => task._id !== payload._id);
+      return {...state, [payload.projectId]: [...projTaskDelete]};
     default:
       return state;
   }

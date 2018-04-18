@@ -8,6 +8,8 @@ export default (state=null, action) => {
       return payload;
     case 'PROFILE_UPDATE':
       return {...state, ...payload};
+    case 'PROFILE_FETCH':
+      return {...state, ...payload};
     case 'LOGOUT':
       return null;
     default:
