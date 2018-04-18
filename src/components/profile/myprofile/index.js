@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import ProfileForm from '../profileform';
 
 class MyProfile extends React.Component {
@@ -19,4 +20,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default MyProfile;
+export default connect(mapStateToProps, null)(MyProfile);
