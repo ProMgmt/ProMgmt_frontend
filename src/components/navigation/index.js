@@ -40,10 +40,10 @@ class NavBar extends React.Component {
          </AppBar>
                   
         <Drawer
-         open={this.state.open}
-         docked={false}
-         width={250}
-         onRequestChange={(open) => this.setState({open})}
+          open={this.state.open}
+          docked={false}
+          width={250}
+          onRequestChange={(open) => this.setState({open})}
 
         >
           <MenuItem onClick={this.handleClose}><Link to='/myorgs'>My Orgs</Link></MenuItem>

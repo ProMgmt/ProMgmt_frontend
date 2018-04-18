@@ -98,24 +98,25 @@ class OrgForm extends React.Component {
 
     return(
       <form className='org-form' onSubmit={this.handleSubmit}>
-        <h3>Name</h3>
+        
         <TextField 
           name='name'
           value={this.state.name}
           type='text'
-          hintText='Name of Organization'
+          floatingLabelText='Name of Organization'
           onChange={this.handleChange}
-          required /> * required
-        <h3>Description</h3>
+          required /> 
+          
+        
         <TextField
-          rows='10'
-          columns='50'
+          multiLine={true}
+          rows={2}
           name='desc'
           value={this.state.desc}
           type='text'
-          hintText='Description of Organization'
+          floatingLabelText='Description of Organization'
           onChange={this.handleChange} 
-          required /> * required
+          required /> 
         {/* <h3>Add Admins</h3>
         <input name='admin'
           type='text'
@@ -140,7 +141,7 @@ class OrgForm extends React.Component {
         <TextField 
           name='user'
           type='text'
-          hintText='Add a Member' 
+          floatingLabelText='Add a Member' 
           onChange={this.handleChange}/>
         <button className='tiny-plus'
           type='submit'
