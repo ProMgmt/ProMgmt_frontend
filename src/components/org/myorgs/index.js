@@ -4,6 +4,7 @@ import * as orgActions from '../../../action/org-actions.js';
 import * as util from '../../../lib/util.js';
 import OrgPreview from '../orgpreview/index.js';
 import OrgForm from '../orgform/index.js';
+import FlatButton from 'material-ui/FlatButton';
 
 class MyOrgs extends React.Component {
   constructor(props) {
@@ -33,7 +34,7 @@ class MyOrgs extends React.Component {
         {this.state.add ?
           <OrgForm canToggle={true} toggle={this.toggleAdd} onComplete={this.props.orgCreateRequest} buttonText='Save'/>
           : 
-          <button onClick={this.toggleAdd}>Create an Org</button>
+          <FlatButton onClick={this.toggleAdd} label='Create an Org' />
         }
 
         <OrgPreview orgs={this.props.orgs} delete={this.props.orgDeleteRequest} update={this.props.orgUpdateRequest} />
