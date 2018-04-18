@@ -17,7 +17,6 @@ export const projectDelete = project => ({
 
 export const projectCreateRequest = project => (dispatch, getState) => {
   let {auth} = getState();
-  console.log('project', project);
   return superagent.post(`${__API_URL__}/api/org/${project.orgId}/project`)
     .set('Authorization', `Bearer ${auth}`)
     .send(project)

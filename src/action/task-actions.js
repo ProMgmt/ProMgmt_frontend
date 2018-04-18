@@ -17,7 +17,6 @@ export const taskDelete = task => ({
 
 export const taskCreateRequest = task => (dispatch, getState) => {
   let {auth} = getState();
-
   for(let key in task){
     if(!task[key]){
       delete task[key];
