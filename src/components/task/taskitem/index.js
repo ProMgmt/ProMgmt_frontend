@@ -29,14 +29,9 @@ class TaskItem extends React.Component {
   } 
 }
 
-const mapStateToProps = state => ({
-  project: state.project, 
-  org: state.org
-})
-
 const mapDispatchToProps = dispatch => ({
   taskUpdate: task => dispatch(taskUpdateRequest(task)), 
   taskDelete: task => dispatch(taskDeleteRequest(task)), 
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(TaskItem);
+export default connect(null, mapDispatchToProps)(TaskItem);
