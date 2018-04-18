@@ -28,3 +28,8 @@ export const profileCreateRequest = (profile, userId) => (dispatch, getState) =>
     return res;
   })
 }
+
+export const profileFetch = profile => ({
+  type: 'PROFILE_FETCH', 
+  payload: profile
+})

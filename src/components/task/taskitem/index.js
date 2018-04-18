@@ -1,21 +1,23 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {taskUpdateRequest, taskDeleteRequest} from '../../../action/task-actions.js';
-import TaskForm from '../taskform';
+import { connect } from 'react-redux';
+import TaskForm from '../../task/taskform';
+import { taskUpdateRequest, taskDeleteRequest } from '../../../action/task-actions.js';
+import ProjectForm from '../../project/projectform';
 
-class TaskItem extends React.Component{
-  render(){
-    let {org, project, task, taskUpdate, taskDelete} = this.props;
+class TaskItem extends React.Component {
+  render() {
+    let { org, project, task, taskUpdate, taskDelete, taskCreate } = this.props;
     return(
       <section className='task-item'>
         <div className='content'>
-          <h6>{task.desc}</h6>
+          <h4>{task.taskName}</h4>
+          <p>{task.desc}</p>
           <p>Start Date: {task.startDate}</p>
-          <p>{task.status}% Complete</p>
+          <p>Due Date: {task.dueDate} </p>
           <button onClick={() => taskDelete(task)}>X</button>
         </div>
         <div className='edit'>
-          <TaskForm
+          <TaskForm  
             buttonText='Update Task'
             org={org}
             project={project}
@@ -24,12 +26,18 @@ class TaskItem extends React.Component{
         </div>
       </section>
     )
-  }
+  } 
 }
 
-let mapDispatchToProps = dispatch => ({
-  taskUpdate: task => dispatch(taskUpdateRequest(task)),
-  taskDelete: task => dispatch(taskDeleteRequest(task)),
+const mapStateToProps = state => ({
+  task: state.task, 
+  project: state.project, 
+  org: state.org
 })
 
-export default connect(null, mapDispatchToProps)(TaskItem);
+const mapDispatchToProps = dispatch => ({
+  taskUpdate: task => dispatch(taskUpdateRequest(task)), 
+  taskDelete: task => dispatch(taskDeleteRequest(task)), 
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskItem);
