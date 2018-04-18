@@ -16,11 +16,24 @@ class MyProjects extends React.Component {
   }
 
   render() {
+    let allProjects = this.props.projects;
+    let allProjectsArray = [];
+    for (let key in allProjects) {
+      for (let i in allProjects[key]) {
+        allProjectsArray.push(allProjects[key][i]);
+      }
+    }
+
     return(
       <div className='my-projects'>
         <h1>My Projects</h1>
-
-        <ProjectPreview projects={this.props.projects} delete={this.props.projectDeleteRequest} update={this.props.projectUpdateRequest} />
+        {allProjectsArray.length !== 0 ?
+          allProjectsArray.map(_project => 
+            <ProjectPreview project={_project} delete={this.props.projectDeleteRequest} update={this.props.projectUpdateRequest} />
+          )
+          :
+          <p>You currently have no projects! Navigate to your MyOrgs page to add a project to a specific organization.</p>
+        }
       </div>
     )
   }

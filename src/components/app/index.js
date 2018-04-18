@@ -58,6 +58,7 @@ class App extends Component{
 
   render() {
     return(
+
       <MuiThemeProvider muiTheme={muiTheme}>
         {/* <Provider store={store}> */}
           <main className='app-container'>
@@ -83,6 +84,7 @@ class App extends Component{
                 <Route exact path='/myprojects' component={MyProjects} />
                 <Route exact path='/mytasks' component={MyTasks} /> 
                 <Route exact path='/devtool' component={DevTool} />
+
 
               </section>
             </BrowserRouter>
