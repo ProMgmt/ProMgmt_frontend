@@ -1,5 +1,8 @@
 import React from 'react';
 import ProjectForm from '../projectform';
+import { Card, CardText, CardHeader } from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
+import Clear from 'material-ui/svg-icons/content/clear';
 
 class ProjectPreview extends React.Component {
   constructor(props) {
@@ -42,14 +45,23 @@ class ProjectPreview extends React.Component {
       <div className='project-previews'>
         {allProjectsArray.length !== 0 ?
           allProjectsArray.map(_project => 
-            <div key={_project._id}>
-              <h3>{_project.projectName}</h3>
-              {/* TODO: hyperlink this to the ProjectItem page */}
-              <p>{_project.desc}</p>
-              <button onClick={() => { this.props.delete(_project) }}>x</button>
-              <ProjectForm canToggle={true} toggle={this.toggleEdit} buttonText='Save' onComplete={this.props.update} project={_project} />
-              }
-            </div>
+            <Card key={_project._id}>
+              <CardHeader
+                title={_project.projectName}
+                actAsExpander={true}
+                showExpandableButton={true}
+              />
+              <CardText>
+                {/* TODO: hyperlink this to the ProjectItem page */}
+                <p>{_project.desc}</p>
+                <FlatButton 
+                  onClick={() => { this.props.delete(_project) }}
+                  icon={<Clear />}
+                />
+                <ProjectForm canToggle={true} toggle={this.toggleEdit} buttonText='Save' onComplete={this.props.update} project={_project} />
+              </CardText>
+              
+            </Card>
           )
           :
           <p>You currently have no projects! Navigate to your MyOrgs page to add a project to a specific organization.</p>

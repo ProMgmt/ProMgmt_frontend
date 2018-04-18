@@ -5,17 +5,22 @@ import {projectCreateRequest} from '../../../action/project-actions.js';
 import OrgForm from '../orgform';
 import ProjectForm from '../../project/projectform';
 import ProjectItem from '../../project/projectitem';
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 
 class OrgItem extends React.Component{
   render(){
     let {org, orgDelete, orgUpdate, projectCreate} = this.props;
     return(
       <section className='org-item'>
-        <div className='content'>
-          <h2>{org.name}</h2>
-          <p>{org.desc}</p>
+        <Card className='content'>
+          <CardHeader
+            title={org.name}
+            actAsExpander={true}
+            showExpandableButton={true}
+          />
+          <CardText expandable={true}>{org.desc}</CardText>
           <button onClick={() => orgDelete(org)}>X</button>
-        </div>
+        </Card>
         <div className='edit'>
           <OrgForm
             buttonText='Update Org'

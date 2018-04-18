@@ -1,5 +1,9 @@
 import React from 'react';
 import OrgForm from '../orgform/index.js';
+import {Card, CardHeader, CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
+import Create from 'material-ui/svg-icons/content/create';
+import Clear from 'material-ui/svg-icons/content/clear';
 
 class OrgPreview extends React.Component {
   constructor(props) {
@@ -34,17 +38,29 @@ class OrgPreview extends React.Component {
       <div className='org-previews'>
         {(this.props.orgs.length !== 0) ? 
           this.props.orgs.map(_org => 
-            <div key={_org._id}>
-              <h3>{_org.name}</h3>
+            <Card key={_org._id}>
+              <CardHeader
+                title={_org.name}
+                actAsExpander={true}
+                showExpandableButton={true}
+              />
+              <CardText expandable={true}>
               <p>{_org.desc}</p>
               {/* TODO: add a link to the OrgItem page for each Org created */}
-              <button onClick={() => {this.props.delete(_org)}}>x</button>
+              <FlatButton 
+                onClick={() => {this.props.delete(_org)}}
+                icon={<Clear />}
+              />
               {this.state.editing ?
                 <OrgForm canToggle={true} toggle={this.toggleEdit} buttonText='Save' onComplete={this.props.update} org={_org} />
                 :
-                <button onClick={() => this.toggleEdit()}>Update</button>
+                <FlatButton
+                  onClick={() => this.toggleEdit()}
+                  icon={<Create />}
+                />
               }
-            </div>
+              </CardText>
+            </Card>
           )
           :
           <p>You currently have no organizations, would you like to create one?</p>
