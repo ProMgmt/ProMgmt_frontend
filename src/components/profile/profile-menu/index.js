@@ -17,9 +17,9 @@ class ProfileMenu extends React.Component {
           anchorOrigin={{horizontal: 'left', vertical: 'top'}}
           targetOrigin={{horizontal: 'left', vertical: 'top'}}
         >
-          <MenuItem><Link to='/welcome/signup'>signup</Link></MenuItem>
-          <MenuItem><Link to='/welcome/signin'>signin</Link></MenuItem>
-          <MenuItem primaryText="Settings" />
+          <MenuItem><Link to='/welcome/signup'>Sign Up</Link></MenuItem>
+          <MenuItem><Link to='/welcome/signin'>Sign In</Link></MenuItem>
+          <MenuItem primaryText="Settings"><Link to='/myprofile'>Profile Settings</Link></MenuItem>
           <MenuItem><Link to='/devtool'>dev tool</Link></MenuItem>
           <MenuItem primaryText="Sign out" />
         </IconMenu>
@@ -34,7 +34,7 @@ export default ProfileMenu;
 <ul>
   <li><Link to='/welcome/signup'>signup</Link></li>
   <li><Link to='/welcome/signin'>signin</Link></li>
-  <li><Link to='/settings'>settings</Link></li>
+  <li><Link to='/myprofile'>settings</Link></li>
   <li><Link to='/devtool'>dev tool</Link></li>
 </ul>
 </nav> */}
