@@ -78,7 +78,7 @@ class App extends Component{
                  
                 
                 <Route path='/welcome/:auth' component={Dashboard} />
-                <Route exact path='/settings' component={ProfileForm} />
+                <Route exact path='/myprofile' component={ProfileForm} />
                 <Route exact path='/dashboard' component={Dashboard} />
                 <Route exact path='/myorgs' component={MyOrgs} />
                 <Route exact path='/myprojects' component={MyProjects} />
