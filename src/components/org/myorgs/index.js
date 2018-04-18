@@ -36,8 +36,12 @@ class MyOrgs extends React.Component {
           : 
           <FlatButton onClick={this.toggleAdd} label='Create an Org' />
         }
-
-        <OrgPreview orgs={this.props.orgs} delete={this.props.orgDeleteRequest} update={this.props.orgUpdateRequest} />
+        {(this.props.orgs.length !== 0) ? 
+          this.props.orgs.map(_org =>
+            <OrgPreview org={_org} delete={this.props.orgDeleteRequest} update={this.props.orgUpdateRequest} />
+          )
+          : <p>You currently have no organizations, would you like to create one?</p>
+        }
       </div>
     )
   }

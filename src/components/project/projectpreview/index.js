@@ -8,8 +8,8 @@ class ProjectPreview extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = props.projects ?
-      {...props.projects, editing: false } :
+    this.state = props.project ?
+      { ...props.project, editing: false } :
       {
         _id: undefined,
         name: '',
@@ -27,45 +27,28 @@ class ProjectPreview extends React.Component {
   }
 
   componentWillReceiveProps(props) {
-    if (this.props.projects) {
-      this.setState(this.props.projects);
+    if (this.props.project) {
+      this.setState(this.props.project);
     }
   }
 
   render() {
-    let allProjects = this.props.projects;
-    let allProjectsArray = [];
-    for(let key in allProjects) {
-      for(let i in allProjects[key]) {
-        allProjectsArray.push(allProjects[key][i]);
-      }
-    }
+    let _project = this.props.project;
+    let updateButtonText;
+    this.state.editing ? updateButtonText = 'Hide' : updateButtonText = 'Update';
 
     return (
-      <div className='project-previews'>
-        {allProjectsArray.length !== 0 ?
-          allProjectsArray.map(_project => 
-            <Card key={_project._id}>
-              <CardHeader
-                title={_project.projectName}
-                actAsExpander={true}
-                showExpandableButton={true}
-              />
-              <CardText>
-                {/* TODO: hyperlink this to the ProjectItem page */}
-                <p>{_project.desc}</p>
-                <FlatButton 
-                  onClick={() => { this.props.delete(_project) }}
-                  icon={<Clear />}
-                />
-                <ProjectForm canToggle={true} toggle={this.toggleEdit} buttonText='Save' onComplete={this.props.update} project={_project} />
-              </CardText>
-              
-            </Card>
-          )
+      <div className='project-previews' key={_project._id}>
+        <h3>{_project.projectName}</h3>
+        {/* TODO: hyperlink this to the ProjectItem page */}
+        <p>{_project.desc}</p>
+        <button onClick={() => { this.props.delete(_project) }}>x</button> <button onClick={() => {this.toggleEdit()}}>{updateButtonText}</button>
+        {this.state.editing ? 
+          <ProjectForm canToggle={true} toggle={this.toggleEdit} buttonText='Save' onComplete={this.props.update} project={_project} />
+
           :
-          <p>You currently have no projects! Navigate to your MyOrgs page to add a project to a specific organization.</p>
-        }      
+          null
+        }
       </div>
     )
   }

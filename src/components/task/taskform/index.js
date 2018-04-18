@@ -4,9 +4,9 @@ import { runInThisContext } from 'vm';
 class TaskForm extends React.Component{
   constructor(props){
     super(props);
-    let projectId = this.props.project._id;
-    let {orgId} = this.props.project;
-    this.state = this.props.task ? {...props.task} : {projectId, orgId};
+    // let projectId = this.props.project._id;
+    // let {orgId} = this.props.project;
+    this.state = this.props.task ? {...props.task} : {projectId: this.props.project._id, orgId: this.props.project.orgId};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
