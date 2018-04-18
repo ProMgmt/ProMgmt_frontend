@@ -107,13 +107,13 @@ class OrgForm extends React.Component {
           onChange={this.handleChange}
           required /> * required
         <h3>Description</h3>
-        <TextField
+        <textarea
           rows='10'
           columns='50'
           name='desc'
           value={this.state.desc}
           type='text'
-          hintText='Description of Organization'
+          placeholder='Description of Organization'
           onChange={this.handleChange} 
           required /> * required
         {/* <h3>Add Admins</h3>
