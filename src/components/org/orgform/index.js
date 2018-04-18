@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import superagent from 'superagent';
 import * as util from '../../../lib/util.js';
+import TextField from 'material-ui/TextField';
 
 class OrgForm extends React.Component {
   constructor(props) {
@@ -98,20 +99,21 @@ class OrgForm extends React.Component {
     return(
       <form className='org-form' onSubmit={this.handleSubmit}>
         <h3>Name</h3>
-        <input name='name'
+        <TextField 
+          name='name'
           value={this.state.name}
           type='text'
-          placeholder='Name of Organization'
+          hintText='Name of Organization'
           onChange={this.handleChange}
           required /> * required
         <h3>Description</h3>
-        <textarea 
+        <TextField
           rows='10'
           columns='50'
           name='desc'
           value={this.state.desc}
           type='text'
-          placeholder='Description of Organization'
+          hintText='Description of Organization'
           onChange={this.handleChange} 
           required /> * required
         {/* <h3>Add Admins</h3>
@@ -135,9 +137,10 @@ class OrgForm extends React.Component {
           : null
         }
         <h3>Add Members</h3>
-        <input name='user'
+        <TextField 
+          name='user'
           type='text'
-          placeholder='Add a Member' 
+          hintText='Add a Member' 
           onChange={this.handleChange}/>
         <button className='tiny-plus'
           type='submit'
