@@ -3,6 +3,7 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import AccountCircle from 'material-ui/svg-icons/action/account-circle';
+import {Link} from 'react-router-dom';
 
 
 class ProfileMenu extends React.Component {
@@ -14,8 +15,8 @@ class ProfileMenu extends React.Component {
           anchorOrigin={{horizontal: 'left', vertical: 'top'}}
           targetOrigin={{horizontal: 'left', vertical: 'top'}}
         >
-          <MenuItem primaryText="Sign Up" />
-          <MenuItem primaryText="Sign In" />
+          <MenuItem><Link to='/welcome/signup'>signup</Link></MenuItem>
+          <MenuItem><Link to='/welcome/signin'>signin</Link></MenuItem>
           <MenuItem primaryText="Settings" />
           <MenuItem primaryText="Help" />
           <MenuItem primaryText="Sign out" />
