@@ -41,6 +41,7 @@ class TaskPreview extends React.Component {
 
     this.state.editing ? updateButtonText = 'Hide' : updateButtonText = 'Update';
     return (
+
       <div className='task-previews' key={task._id}>
         <h3>{task.taskName}</h3>
         {/* TODO: hyperlink this to the TaskItem page */}
