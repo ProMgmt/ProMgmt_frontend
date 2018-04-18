@@ -36,9 +36,7 @@ class MyOrgs extends React.Component {
           <button onClick={this.toggleAdd}>Create an Org</button>
         }
 
-        <div className='org-previews'>
-          <OrgPreview orgs={this.props.orgs} delete={this.props.orgDeleteRequest} update={this.props.orgUpdateRequest} />
-        </div>
+        <OrgPreview orgs={this.props.orgs} delete={this.props.orgDeleteRequest} update={this.props.orgUpdateRequest} />
       </div>
     )
   }

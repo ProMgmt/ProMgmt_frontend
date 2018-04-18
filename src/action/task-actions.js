@@ -17,12 +17,16 @@ export const taskDelete = task => ({
 
 export const taskCreateRequest = task => (dispatch, getState) => {
   let {auth} = getState();
-  console.log('task', task);
-  return superagent.post(`${__API_URL__}/api/project/${task.projId}/task`)
+  for(let key in task){
+    if(!task[key]){
+      delete task[key];
+    }
+  }
+
+  return superagent.post(`${__API_URL__}/api/project/${task.projectId}/task`)
     .set('Authorization', `Bearer ${auth}`)
     .send(task)
     .then(res => {
-      console.log('res.body', res.body);
       dispatch(taskCreate(res.body));
       return res;
     })
@@ -30,6 +34,13 @@ export const taskCreateRequest = task => (dispatch, getState) => {
 
 export const taskUpdateRequest = task => (dispatch, getState) => {
   let {auth} = getState();
+
+  for(let key in task){
+    if(!task[key]){
+      delete task[key];
+    }
+  }
+
   return superagent.put(`${__API_URL__}/api/task/${task._id}`)
     .set('Authorization', `Bearer ${auth}`)
     .send(task)

@@ -32,9 +32,15 @@ export const userOrgEtAllSetRequest = () => (dispatch, getState) => {
 
 export const orgCreateRequest = org => (dispatch, getState) => {
   let {auth} = getState();
+
+  for (let key in org) {
+    if (!org[key]) {
+      delete org[key];
+    }
+  }
+  
   return superagent.post(`${__API_URL__}/api/org`)
     .set('Authorization', `Bearer ${auth}`)
-    // need to pull in auth???
     .send(org)
     .then(res => {
       dispatch(orgCreate(res.body));

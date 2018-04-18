@@ -2,8 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import OrgForm from '../org/orgform';
 import OrgItem from '../org/orgitem';
-// import ProjectForm from '../project/projectform';
-// import TaskForm from '../task/taskform';
 import {userOrgEtAllSetRequest, orgCreateRequest, orgUpdateRequest} from '../../action/org-actions.js';
 import {projectCreateRequest, projectUpdateRequest} from '../../action/project-actions.js';
 import {userTaskCreateRequest, userTaskUpdateRequest} from '../../action/task-actions.js';
@@ -18,14 +16,7 @@ class DevTool extends React.Component{
     .catch(console.error);
   }
 
-  // componentWillReceiveProps(props){
-  //   if(props.org){
-  //     this.setState(props.org);
-  //   }
-  // }
-
   render(){
-    console.log('this.props.org', this.props.org);
     return(
       <section className='devtool'>
         <OrgForm
@@ -38,8 +29,6 @@ class DevTool extends React.Component{
             org={org}
           />
         )}
-        {/* <ProjectForm />
-        <TaskForm /> */}
       </section>
     )
   }

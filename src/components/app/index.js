@@ -57,8 +57,8 @@ class App extends Component{
             <Route exact path='/mytasks' component={MyTasks} />  */}
             <Route exact path='/devtool' component={DevTool} />
 
-          </section>
-        </BrowserRouter>
+            </section>
+          </BrowserRouter>
 
       </main>
     )
