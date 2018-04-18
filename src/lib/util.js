@@ -32,6 +32,13 @@ export const readCookie = name => {
   return null;
 }
 
+//credit: https://stackoverflow.com/questions/10593013/delete-cookie-by-name
+
+export const deleteCookie = () => {
+  document.cookie = 'X-ProMgmt-Token=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
+
 export const log = (...args) =>
   __DEBUG__ ? console.log(...args) : undefined;
 

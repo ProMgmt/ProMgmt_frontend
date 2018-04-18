@@ -17,10 +17,12 @@ export const profileDelete = (profile) => ({
   payload: profile, 
 })
 
-export const profileCreateRequest = (profile, userId) => (dispatch, getState) => {
+export const profileCreateRequest = (profile) => (dispatch, getState) => {
   let { auth } = getState();
-  return call.post(`${__API_URL__}/api/users/${userId}/profile`)
-  .set('Authoriztion', `Bearer ${auth}`)
+  let userId = profile.userId;
+  console.log('profile', profile);
+  return call.post(`${__API_URL__}/api/user/${userId}/profile`)
+  .set('Authorization', `Bearer ${auth}`)
   .field('desc', profile.desc)
   .attach('avatarURL', profile.avatarURL)
   .then( res => {

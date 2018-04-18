@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import { connect } from 'react-redux';
 import TaskForm from '../taskform';
 
 class TaskPreview extends React.Component {
@@ -31,18 +32,23 @@ class TaskPreview extends React.Component {
   }
 
   render() {
-    let _task = this.props.task;
+    let task = this.props.task;
     let updateButtonText;
+    let isAdmin = false;
+    task.admins.forEach(adminObj => {
+      if(this.props.user._id === adminObj._id || this.props.user._id === adminObj) isAdmin = true;
+    })
+
     this.state.editing ? updateButtonText = 'Hide' : updateButtonText = 'Update';
-    console.log('TASK ITEM', _task);
     return (
-      <div className='task-previews' key={_task._id}>
-        <h3>{_task.taskName}</h3>
+
+      <div className='task-previews' key={task._id}>
+        <h3>{task.taskName}</h3>
         {/* TODO: hyperlink this to the TaskItem page */}
-        <p>{_task.desc}</p>
-        <button onClick={() => { this.props.delete(_task) }}>x</button> <button onClick={() => {this.toggleEdit()}}>{updateButtonText}</button>
+        <p>{task.desc}</p>
+        <button onClick={() => { this.props.delete(task) }}>x</button> <button onClick={() => {this.toggleEdit()}}>{updateButtonText}</button>
         {this.state.editing ?
-          <TaskForm canToggle={true} toggle={this.toggleEdit} buttonText='Save' onComplete={this.props.update} task={_task} />
+          <TaskForm canToggle={true} toggle={this.toggleEdit} buttonText='Save' onComplete={this.props.update} task={task} />
           : null
         }
       </div>
@@ -50,4 +56,11 @@ class TaskPreview extends React.Component {
   }
 }
 
-export default TaskPreview;
+
+export const mapStateToProps = state => {
+  return {
+    user: state.user,
+  }
+}
+
+export default connect(mapStateToProps, null)(TaskPreview);

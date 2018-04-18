@@ -6,6 +6,7 @@ import AuthFrom from '../auth';
 import * as util from './../../lib/util.js';
 import {signupRequest, signinRequest} from './../../action/auth-actions.js';
 import AuthForm from '../auth';
+import GoogleOAuth from '../google-oauth';
 
 class Dashboard extends Component{
   render() {
@@ -19,10 +20,12 @@ class Dashboard extends Component{
     return (
       <section>
 
+
         <AuthForm
           auth={params.auth}
           onComplete={handleComplete}
         />
+        <GoogleOAuth />
       </section>
 
     )
