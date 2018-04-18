@@ -16,10 +16,38 @@ import MyTasks from '../task/mytasks';
 import ProfileForm from './../profile/profileform';
 import DevTool from '../devtool';
 import * as util from './../../lib/util.js';
+import {grey800} from 'material-ui/styles/colors';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import AppBar from 'material-ui/AppBar';
+import { IconButton } from 'material-ui';
+import AccountCircle from 'material-ui/svg-icons/action/account-circle'
+import ProfileMenu from './../profile/profile-menu';
 
 let store = appCreateStore();
 
+const muiTheme = getMuiTheme({
+  palette: {
+    textColor: grey800,
+  },
+  appBar: {
+    height: 50,
+  },
+});
+
 class App extends Component{
+  constructor(props){
+    super(props);
+    this.state = {open: false};
+
+    
+  }
+
+  handleToggle() {
+    this.setState({
+      open: !this.state.open
+    })
+  }
 
   componentDidMount() {
     let token = util.readCookie('X-Promgmt-Token');
@@ -30,39 +58,38 @@ class App extends Component{
 
   render() {
     return(
-      <Provider store={store}>
-        <main className='app-container'>
-          
-          {/* <Auth /> */}
-          <BrowserRouter>
-          <section>
-              <header>
-              <h1><Link to='/'>Pro_Mgmt</Link></h1>
-                <GoogleOAuth />
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <Provider store={store}>
+          <main className='app-container'>
+            
+            {/* <Auth /> */}
+            <BrowserRouter>
+            <section>
+                
+                {/* <h1><Link to='/'>Pro_Mgmt</Link></h1>
+                <GoogleOAuth /> */}
 
-                <nav>
-                  <ul>
-                    <li><Link to='/welcome/signup'>signup</Link></li>
-                    <li><Link to='/welcome/signin'>signin</Link></li>
-                    <li><Link to='/settings'>settings</Link></li>
-                    <li><Link to='/devtool'>dev tool</Link></li>
-                  </ul>
-                </nav>
-                 <NavBar />
-              </header>
-              <Route path='/welcome/:auth' component={Dashboard} />
-              <Route exact path='/settings' component={ProfileForm} />
-              <Route exact path='/dashboard' component={Dashboard} />
-              <Route exact path='/myorgs' component={MyOrgs} />
-              {/* <Route exact path='/myprojects' component={MyProjects} />
-              <Route exact path='/mytasks' component={MyTasks} />  */}
-              <Route exact path='/devtool' component={DevTool} />
+                 
+                  <NavBar
+                  open={this.state.open}
+                  
+                  />
+                 
+                
+                <Route path='/welcome/:auth' component={Dashboard} />
+                <Route exact path='/settings' component={ProfileForm} />
+                <Route exact path='/dashboard' component={Dashboard} />
+                <Route exact path='/myorgs' component={MyOrgs} />
+                <Route exact path='/myprojects' component={MyProjects} />
+                <Route exact path='/mytasks' component={MyTasks} /> 
+                <Route exact path='/devtool' component={DevTool} />
 
-            </section>
-          </BrowserRouter>
+              </section>
+            </BrowserRouter>
 
-      </main>
-     </Provider>
+        </main>
+      </Provider>
+     </MuiThemeProvider>
 
     )
   }
