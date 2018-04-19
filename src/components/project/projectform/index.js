@@ -4,6 +4,8 @@ import DatePicker from 'material-ui/DatePicker';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import Add from 'material-ui/svg-icons/content/add';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
 class ProjectForm extends React.Component{
   constructor(props){
@@ -117,22 +119,34 @@ class ProjectForm extends React.Component{
             )}
           </ul>
         )}
-        <label>
-          Add Admin:
-          <select name='adminId' value={this.state.adminId} onChange={this.handleChange}>
-            <option selectedvalue='none'>None</option>
-            {this.props.org.admins.map((admin, i) => 
-              <option key={`${admin._id}-${i}`} value={admin._id}>{admin.username}</option>
+
+          
+          <SelectField 
+            floatingLabelText='Add Admin' 
+            value={this.state.adminId} 
+            onChange={this.handleChange}
+          >
+            
+            {this.props.org.admins.map(admin => 
+              <MenuItem 
+                key={`${admin._id}-${i}`} 
+                value={admin._id}
+                primaryText={admin.username} 
+              />
             )}
-            {this.props.org.users.map((user, i) => 
-              <option key={`${admin._id}-${i}`} value={user._id}>{user.username}</option>
+            {this.props.org.users.map(user => 
+              <MenuItem 
+                key={`${admin._id}-${i}} 
+                value={user._id}
+                primaryText={user.username}
+              />
             )}
-          </select>
+          </SelectField>
           <FlatButton 
             onClick={this.handleAdminAdd}
             icon={<Add />}
           />
-        </label>
+        
         {util.renderIf(this.state.users.length > 0,
           <ul>
             <li>Existing Project Users</li>
@@ -141,22 +155,33 @@ class ProjectForm extends React.Component{
             )}
           </ul>
         )}
-        <label>
-          Add User:
-          <select name='userId' value={this.state.userId} onChange={this.handleChange}>
-            <option selectedvalue='none'>None</option>
+        
+          <SelectField
+            floatingLabelText='Add User' 
+            value={this.state.userId} 
+            onChange={this.handleChange}
+          >
+            
             {this.props.org.admins.map(admin => 
-              <option key={admin._id} value={admin._id}>{admin.username}</option>
+              <MenuItem 
+                key={admin._id} 
+                value={admin._id}
+                primaryText={admin.username}
+              />
             )}
             {this.props.org.users.map(user => 
-              <option key={user._id} value={user._id}>{user.username}</option>
+              <MenuItem 
+                key={user._id} 
+                value={user._id}
+                primaryText={user.username}
+              />
             )}
-          </select>
+          </SelectField>
           <FlatButton 
             onClick={this.handleUserAdd}
             icon={<Add />}
           />
-        </label>
+        
         <FlatButton type='submit'>{this.props.buttonText}</FlatButton>
       </form>
     )
