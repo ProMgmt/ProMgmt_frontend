@@ -17,11 +17,13 @@ class AuthForm extends Component {
       passwordError: null,
       emailError: null,
       error: null,
-      
+      modalOpen: true,
       }
 
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
+      this.handleModalOpen = this.handleModalOpen.bind(this);
+      this.handleModalClose = this.handleModalClose.bind(this);
     }
 
     handleSubmit(e) {
@@ -30,10 +32,19 @@ class AuthForm extends Component {
       .then( () => {                    
         this.setState({ username: '', email: '', password: ''} )
       })
+      .then(this.handleModalClose)
       .catch( error => {
         console.error(error);
         this.setState({error})
       })
+    }
+
+    handleModalOpen() {
+      this.setState({ modalOpen: true });
+    }
+  
+    handleModalClose() {
+      this.setState({ modalOpen: false });
     }
 
     handleChange(e) {
@@ -53,13 +64,15 @@ class AuthForm extends Component {
     }
 
     render() {
+      
       return(
-        // <Dialog
-        //   title={this.props.auth}
-        //   open={true}
-        //   modal={false}
-        //   onRequestClose={this.props.modalClose}
-        // >
+        <Dialog
+          title={this.props.auth}
+          open={this.state.modalOpen}
+          
+          modal={false}
+          onRequestClose={this.handleModalClose}
+        >
         <form
           onSubmit={this.handleSubmit}
           className='auth-form'
@@ -97,10 +110,21 @@ class AuthForm extends Component {
            
 
             
-              <FlatButton type='submit'>{this.props.auth}</FlatButton>
+              <FlatButton 
+                onClick={this.handleSubmit}
+                label={this.props.auth}
+                primary={true}
+                isKeyboardFocused={true}
+              />
+
+              <FlatButton 
+                onClick={this.handleModalClose}
+                label='Cancel'
+                primary={true}
+              /> 
             
         </form>
-        // </Dialog>
+        </Dialog>
       )
     }
   }
