@@ -1,12 +1,13 @@
 import React from 'react';
 import { runInThisContext } from 'vm';
+import * as util from '../../../lib/util.js';
 
 class TaskForm extends React.Component{
   constructor(props){
     super(props);
     let projectId = this.props.project._id;
     let {orgId} = this.props.project;
-    this.state = this.props.task ? {...props.task} : {projectId, orgId, admins: [], adminId: 'none', dependentTasks: []};
+    this.state = this.props.task ? {...props.task} : {projectId, orgId, admins: [], adminId: 'none', dependentTasks: [], status: '0'};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -98,13 +99,21 @@ class TaskForm extends React.Component{
         <label>
           Status: 
           <select name='status' value={this.state.status} onChange={this.handleChange}>
-            <option value='00'>0%</option>
+            <option value='0'>0%</option>
             <option value='25'>25%</option>
             <option value='50'>50%</option>
             <option value='75'>75%</option>
             <option value='100'>100%</option>
           </select>
         </label>
+        {util.renderIf(this.state.admins.length > 0,
+          <ul>
+            <li>Existing Task Admins</li>
+            {this.state.admins.map(user =>
+              <li key={user._id}>{user.username}</li>
+            )}
+          </ul>
+        )}
         <label>
           Add Admin:
           <select name='adminId' value={this.state.adminId} onChange={this.handleChange}>
@@ -118,6 +127,14 @@ class TaskForm extends React.Component{
           </select>
           <button onClick={this.handleAdminAdd}>+</button>
         </label>
+        {util.renderIf(this.state.dependentTasks.length > 0,
+            <ul>
+              <li>Existing Task Dependencies</li>
+              {this.state.dependentTasks.map(task => 
+                <li key={task._id}>{task.desc}</li>
+              )}
+          </ul>
+        )}
         <label>
           Add Task Dependency:
           <select name='taskDAdd' value={this.state.taskDAdd} onChange={this.handleChange}>

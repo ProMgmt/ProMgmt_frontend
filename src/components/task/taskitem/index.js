@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import TaskForm from '../../task/taskform';
 import { taskUpdateRequest, taskDeleteRequest } from '../../../action/task-actions.js';
 import ProjectForm from '../../project/projectform';
+import * as util from '../../../lib/util.js';
 
 class TaskItem extends React.Component {
   render() {
@@ -14,6 +15,22 @@ class TaskItem extends React.Component {
           <p>{task.desc}</p>
           <p>Start Date: {task.startDate}</p>
           <p>Due Date: {task.dueDate} </p>
+          {util.renderIf(task.admins.length > 0,
+            <ul>
+              <li>Existing Task Admins</li>
+              {task.admins.map(user =>
+                <li key={user._id}>{user.username}</li>
+              )}
+            </ul>
+          )}
+          {util.renderIf(task.dependentTasks.length > 0,
+            <ul>
+              <li>Existing Task Dependencies</li>
+                {task.dependentTasks.map(task => 
+                  <li key={task._id}>{task.desc}</li>
+                )}
+            </ul>
+          )}
           <button onClick={() => taskDelete(task)}>X</button>
         </div>
         <div className='edit'>
