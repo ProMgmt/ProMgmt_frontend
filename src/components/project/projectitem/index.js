@@ -5,6 +5,8 @@ import ProjectForm from '../projectform';
 import TaskForm from '../../task/taskform';
 import {taskCreateRequest} from '../../../action/task-actions.js';
 import TaskItem from '../../task/taskitem';
+import ProjectGantt from '../../gantt';
+import * as util from '../../../lib/util.js';
 
 class ProjectItem extends React.Component{
   render(){
@@ -16,6 +18,10 @@ class ProjectItem extends React.Component{
           <p>{project.desc}</p>
           <p>Start Date: {project.startDate}</p>
           <p>Due Date: {project.dueDate}</p>
+          {util.renderIf(project.tasks.length > 0,
+            <ProjectGantt
+              project={project}
+          />)}
           <button onClick={() => projectDelete(project)}>X</button>
         </div>
         <div className='edit'>
