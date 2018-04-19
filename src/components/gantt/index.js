@@ -52,7 +52,6 @@ class ProjectGantt extends React.Component{
   }
 
   render(){
-    console.log('this.state.rows', this.state.rows);
     return(
       <div className='project-gantt'>
         <Chart

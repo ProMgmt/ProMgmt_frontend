@@ -1,7 +1,7 @@
 'use strict';
 
-import call from 'superagent';
-import {profileSet} from './profile-actions.js';
+import superagent from 'superagent';
+import {profileSet, profileSetRequest} from './profile-actions.js';
 
 export const tokenSet = (token) => ({
   type: 'TOKEN_SET',
@@ -23,7 +23,7 @@ export const userUpdate = (profileId) => ({
 })
 
 export const signupRequest = (user) => (dispatch) => {
-  return call.post(`${__API_URL__}/api/signup`)
+  return superagent.post(`${__API_URL__}/api/signup`)
   .withCredentials(true)
   .send(user)
   .then( res => {
@@ -39,27 +39,14 @@ export const signupRequest = (user) => (dispatch) => {
 }
 
 export const signinRequest = (user) => (dispatch) => {
-  return call.get(`${__API_URL__}/api/signin`)
+  return superagent.get(`${__API_URL__}/api/signin`)
     .withCredentials(true)
     .auth(user.username, user.password)
     .then(({ body: {token, profileId, userId: _id} }) => {
-      console.log(token, profileId, _id);
       dispatch(tokenSet(token));
       dispatch(userSet({_id, profileId}));
-      if (profileId) {
-        profileFetch(profileId);
-      }
-      return;
-  })
-}
+      dispatch(profileSetRequest(profileId));
 
-const profileFetch = (id) => (dispatch, getState) => {
-  let {auth} = getState();
-
-  return call.get(`${__API_URL__}/api/profile/${id}`)
-    .set('Authorization', `Bearer ${auth}`)
-    .then(res => {
-      dispatch(profileSet(res.body));
-      return res;
+      return {token, profileId};
     })
 }

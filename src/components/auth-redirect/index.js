@@ -10,8 +10,6 @@ class AuthRedirect extends React.Component {
     let redirect = null;
 
     if(!this.props.auth) {
-      console.log('hist', this.props.history)
-      console.log(document.cookie)
       const { pathname } = this.props.history.location;
       if(['/mytasks', '/myorgs', '/myprojects', '/myprofile'].includes(pathname) 
         || '/dashboard' === pathname && !readCookie('X-ProMgmt-Token'))  {

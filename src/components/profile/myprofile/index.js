@@ -27,7 +27,6 @@ class MyProfile extends React.Component {
 
   render() {
     let buttonText = this.state.edit ? 'Hide' : 'Edit';
-    console.log(':::this.props.profile:::', this.props.profile);
     return(
       <div className='profile'>
         <h1>Test</h1>

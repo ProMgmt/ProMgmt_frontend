@@ -46,7 +46,6 @@ class AuthForm extends Component {
     }
   
     handleModalClose() {
-      this.setState({ modalOpen: false });
       this.props.onClose();
     }
 
