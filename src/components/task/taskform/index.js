@@ -16,6 +16,9 @@ class TaskForm extends React.Component{
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleAdminAdd = this.handleAdminAdd.bind(this);
     this.handleTaskAdd = this.handleTaskAdd.bind(this);
+    this.handleDueDateChange = this.handleDueDateChange.bind(this);
+    this.handleEndDateChange = this.handleEndDateChange.bind(this);
+    this.handleStartDateChange = this.handleStartDateChange.bind(this);
   }
 
   componentWillReceiveProps(props){
@@ -72,6 +75,24 @@ class TaskForm extends React.Component{
     }
   }
 
+  handleStartDateChange(event, date) {
+    this.setState({
+      startDate: date,
+    });
+  };
+
+  handleDueDateChange(event, date) {
+    this.setState({
+      dueDate: date,
+    });
+  };
+
+  handleEndDateChange(event, date) {
+    this.setState({
+      endDate: date
+    });
+  };
+
   render(){
     let key = this.props.key ? this.props.key : undefined;
     return(
@@ -83,20 +104,20 @@ class TaskForm extends React.Component{
           value={this.state.desc}
           onChange={this.handleChange} />
         <DatePicker
-          name='startDate'
-          type='date'
+          hintText='startDate'
+          
           value={this.state.startDate}
-          onChange={this.handleChange} />
+          onChange={this.handleStartDateChange} />
         <DatePicker
-          name='dueDate'
-          type='date'
+          hintText='dueDate'
+          
           value={this.state.dueDate}
-          onChange={this.handleChange} />
+          onChange={this.handleDueDateChange} />
         <DatePicker
-          name='endDate'
-          type='date'
+          hintText='endDate'
+          
           value={this.state.endDate}
-          onChange={this.handleChange} />
+          onChange={this.handleEndDateChange} />
         <input
           name='expectedDuration'
           type='number'
