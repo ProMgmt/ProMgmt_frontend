@@ -8,7 +8,7 @@ import { tokenDelete } from '../../../action/auth-actions';
 import { connect } from 'react-redux';
 import { deleteCookie } from '../../../lib/util';
 
-import './_profile-menu.scss';
+import './_profilemenu.scss';
 
 
 class ProfileMenu extends React.Component {
@@ -27,7 +27,8 @@ class ProfileMenu extends React.Component {
     return(
       <div>
         <IconMenu
-          iconButtonElement={<IconButton ><AccountCircle className='profile-button'/></IconButton>}
+          className='profile-menu'
+          iconButtonElement={<IconButton ><AccountCircle /></IconButton>}
           anchorOrigin={{horizontal: 'left', vertical: 'top'}}
           targetOrigin={{horizontal: 'left', vertical: 'top'}}
         >
