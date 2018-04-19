@@ -130,16 +130,20 @@ class TaskForm extends React.Component{
           placeholder='Expected Duration in Days'
           value={this.state.expectedDuration}
           onChange={this.handleChange} />
-        <label>
-          Status: 
-          <select name='status' value={this.state.status} onChange={this.handleChange}>
-            <option value='0'>0%</option>
-            <option value='25'>25%</option>
-            <option value='50'>50%</option>
-            <option value='75'>75%</option>
-            <option value='100'>100%</option>
-          </select>
-        </label>
+        
+          
+          <SelectField 
+            floatingLabelText='Status' 
+            value={this.state.status} 
+            onChange={this.handleChange}
+          >
+            <MenuItem value='0' primaryText='0%' />
+            <MenuItem value='25' primaryText='25%' />
+            <MenuItem value='50' primaryText='50%' />
+            <MenuItem value='75' primaryText='75%' />
+            <MenuItem value='100' primaryText='100%' />
+          </SelectField>
+        
         {util.renderIf(this.state.admins.length > 0,
           <ul>
             <li>Existing Task Admins</li>
@@ -148,22 +152,34 @@ class TaskForm extends React.Component{
             )}
           </ul>
         )}
-        <label>
+        
           Add Admin:
-          <select name='adminId' value={this.state.adminId} onChange={this.handleChange}>
-            <option selectedvalue='none'>None</option>
+          <SelectField 
+            floatingLabelText='Add Admin' 
+            value={this.state.adminId} 
+            onChange={this.handleChange}
+          >
+            
             {this.props.project.admins.map(admin => 
-              <option key={admin._id} value={admin._id}>{admin.username}</option>
+              <MenuItem 
+                key={admin._id} 
+                value={admin._id}
+                primaryText={admin.username}
+              />
             )}
             {this.props.project.users.map(user => 
-              <option key={user._id} value={user._id}>{user.username}</option>
+              <MenuItem 
+                key={user._id} 
+                value={user._id}
+                primaryText={user.username}
+              />
             )}
-          </select>
+          </SelectField>
           <FlatButton 
             onClick={this.handleAdminAdd}
             icon={<Add />}
           />
-        </label>
+        
         {util.renderIf(this.state.dependentTasks.length > 0,
             <ul>
               <li>Existing Task Dependencies</li>
@@ -174,12 +190,19 @@ class TaskForm extends React.Component{
         )}
         <label>
           Add Task Dependency:
-          <select name='taskDAdd' value={this.state.taskDAdd} onChange={this.handleChange}>
-            <option value='none'>None</option>
+          <SelectField 
+            floatingLabelText='Add Task Dependency' 
+            value={this.state.taskDAdd} 
+            onChange={this.handleChange}
+          >
+            
             {this.props.project.tasks.map(task => 
-              <option key={task._id}>{task.desc}</option>
+              <MenuItem 
+                key={task._id}
+                primaryText={task.desc}
+              />
             )}
-          </select>
+          </SelectField>
           <FlatButton 
             onClick={this.handleTaskAdd}
             icon={<Add />}
