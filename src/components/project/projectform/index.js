@@ -121,11 +121,11 @@ class ProjectForm extends React.Component{
           Add Admin:
           <select name='adminId' value={this.state.adminId} onChange={this.handleChange}>
             <option selectedvalue='none'>None</option>
-            {this.props.org.admins.map(admin => 
-              <option key={admin._id} value={admin._id}>{admin.username}</option>
+            {this.props.org.admins.map((admin, i) => 
+              <option key={`${admin._id}-${i}`} value={admin._id}>{admin.username}</option>
             )}
-            {this.props.org.users.map(user => 
-              <option key={user._id} value={user._id}>{user.username}</option>
+            {this.props.org.users.map((user, i) => 
+              <option key={`${admin._id}-${i}`} value={user._id}>{user.username}</option>
             )}
           </select>
           <FlatButton 
