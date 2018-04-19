@@ -26,8 +26,6 @@ class MyTasks extends React.Component {
       }
     }
 
-    console.log(':::allTasksArray:::', allTasksArray);
-
     return (
       <div className='my-tasks'>
         <h1>My Tasks</h1>

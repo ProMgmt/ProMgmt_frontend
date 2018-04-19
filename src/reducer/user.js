@@ -6,6 +6,8 @@ export default (state=null, action) => {
   switch(type) {
     case 'USER_SET':
       return payload;
+    case 'USER_UPDATE':
+      return {...state, profileId: payload};
     default: 
       return state;
   }

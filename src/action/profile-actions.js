@@ -1,6 +1,6 @@
 'use strict';
 
-import call from 'superagent';
+import superagent from 'superagent';
 
 export const profileCreate = (profile) => ({
   type: 'PROFILE_CREATE',
@@ -17,18 +17,40 @@ export const profileDelete = (profile) => ({
   payload: profile, 
 })
 
+export const userUpdate = (profileId) => ({
+  type: 'USER_UPDATE',
+  payload: profileId,
+})
+
 export const profileCreateRequest = (profile) => (dispatch, getState) => {
   let { auth } = getState();
   let userId = profile.userId;
-  console.log('profile', profile);
-  return call.post(`${__API_URL__}/api/user/${userId}/profile`)
-  .set('Authorization', `Bearer ${auth}`)
-  .field('desc', profile.desc)
-  .attach('avatarURL', profile.avatarURL)
-  .then( res => {
-    dispatch(profileCreate(res.body));
-    return res;
-  })
+  return superagent.post(`${__API_URL__}/api/user/${userId}/profile`)
+    .set('Authorization', `Bearer ${auth}`)
+    .send(profile)
+    .then( res => {
+      dispatch(profileCreate(res.body));
+      dispatch(userUpdate(res.body._id));
+      return res;
+    })
+    .then( res => {
+      res.body.auth = auth;
+      return updateUserProfile(res.body);
+    });
+}
+
+const updateUserProfile = (profile) => {
+  console.log('REQ in profile actions', profile)
+  let {userId} = profile;
+  let profileId = profile._id;
+  
+  return superagent.put(`${__API_URL__}/api/user/${userId}/${profileId}`)
+    .set('Authorization', `Bearer ${profile.auth}`)
+    .send(profile)
+    .then( res => {
+      console.log('RES in profile actions', res);
+      return res;
+    })
 }
 
 export const profileFetch = profile => ({

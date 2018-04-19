@@ -9,7 +9,6 @@ import appCreateStore from './lib/app-create-store';
 
 import './style/main.scss';
 
-
 let store = appCreateStore();
 console.log(store); 
 
