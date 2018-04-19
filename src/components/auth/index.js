@@ -73,57 +73,57 @@ class AuthForm extends Component {
           modal={false}
           onRequestClose={this.handleModalClose}
         >
-        <form
-          onSubmit={this.handleSubmit}
-          className='auth-form'
-        >
+          <form
+            onSubmit={this.handleSubmit}
+            className='auth-form'
+          >
 
-          {util.renderIf(this.props.auth === 'signup',
+            {util.renderIf(this.props.auth === 'signup',
+              
+                <TextField 
+                  type='email'
+                  name='email'
+                  floatingLabelText='email'
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                />
+              
+        )}
+              
+                <TextField
+                  type='text'
+                  name='username'
+                  floatingLabelText='username'
+                  value={this.state.username}
+                  onChange={this.handleChange}
+                />
             
-              <TextField 
-                type='email'
-                name='email'
-                floatingLabelText='email'
-                value={this.state.email}
-                onChange={this.handleChange}
-              />
-            
-      )}
-            
-              <TextField
-                type='text'
-                name='username'
-                floatingLabelText='username'
-                value={this.state.username}
-                onChange={this.handleChange}
-              />
-           
 
+              
+                <TextField
+                  type='password'
+                  name='password'
+                  floatingLabelText='password'
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                />
             
-              <TextField
-                type='password'
-                name='password'
-                floatingLabelText='password'
-                value={this.state.password}
-                onChange={this.handleChange}
-              />
-           
 
-            
-              <FlatButton 
-                onClick={this.handleSubmit}
-                label={this.props.auth}
-                primary={true}
-                isKeyboardFocused={true}
-              />
+              
+                <FlatButton 
+                  onClick={this.handleSubmit}
+                  label={this.props.auth}
+                  primary={true}
+                  
+                />
 
-              <FlatButton 
-                onClick={this.handleModalClose}
-                label='Cancel'
-                primary={true}
-              /> 
-            
-        </form>
+                <FlatButton 
+                  onClick={this.handleModalClose}
+                  label='Cancel'
+                  primary={true}
+                /> 
+              
+          </form>
         </Dialog>
       )
     }
