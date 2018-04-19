@@ -39,7 +39,10 @@ const muiTheme = getMuiTheme({
 class App extends Component{
   constructor(props){
     super(props);
-    this.state = {open: false};
+    this.state = {
+      open: false,
+      modalOpen: false,
+    };
 
     
   }
@@ -48,6 +51,14 @@ class App extends Component{
     this.setState({
       open: !this.state.open
     })
+  }
+
+  handleModalOpen() {
+    this.setState({ modalOpen: true });
+  }
+
+  handleModalClose() {
+    this.setState({ modalOpen: false });
   }
 
   componentDidMount() {

@@ -5,19 +5,32 @@ import ProjectForm from '../projectform';
 import TaskForm from '../../task/taskform';
 import {taskCreateRequest} from '../../../action/task-actions.js';
 import TaskItem from '../../task/taskitem';
+import { Card, CardText, CardHeader } from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
+import Clear from 'material-ui/svg-icons/content/clear';
 
 class ProjectItem extends React.Component{
   render(){
     let {org, project, projectUpdate, projectDelete, taskCreate} = this.props;
     return(
       <section className='project-item'>
-        <div className='content'>
-          <h4>{project.projectName}</h4>
-          <p>{project.desc}</p>
-          <p>Start Date: {project.startDate}</p>
-          <p>Due Date: {project.dueDate}</p>
-          <button onClick={() => projectDelete(project)}>X</button>
-        </div>
+        <Card className='content'>
+          <CardHeader
+          title={project.projectName}
+          actAsExpander={true}
+          showExpandableButton={true}
+          />
+
+          <CardText expandable={true}>
+            <p>{project.desc}</p>
+            <p>Start Date: {project.startDate}</p>
+            <p>Due Date: {project.dueDate}</p>
+            <FlatButton
+             onClick={() => projectDelete(project)}
+             icon={<Clear />}
+            />
+          </CardText>
+        </Card>
         <div className='edit'>
           <ProjectForm 
             buttonText='Update Project'

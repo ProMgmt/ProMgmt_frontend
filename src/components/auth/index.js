@@ -3,7 +3,8 @@
 import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
 import * as util from './../../lib/util.js';
-import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+import Dialog from 'material-ui/Dialog';
 
 class AuthForm extends Component {
   constructor(props){
@@ -16,6 +17,7 @@ class AuthForm extends Component {
       passwordError: null,
       emailError: null,
       error: null,
+      
       }
 
       this.handleChange = this.handleChange.bind(this);
@@ -52,6 +54,12 @@ class AuthForm extends Component {
 
     render() {
       return(
+        // <Dialog
+        //   title={this.props.auth}
+        //   open={true}
+        //   modal={false}
+        //   onRequestClose={this.props.modalClose}
+        // >
         <form
           onSubmit={this.handleSubmit}
           className='auth-form'
@@ -62,7 +70,7 @@ class AuthForm extends Component {
               <TextField 
                 type='email'
                 name='email'
-                hintText='email'
+                floatingLabelText='email'
                 value={this.state.email}
                 onChange={this.handleChange}
               />
@@ -72,7 +80,7 @@ class AuthForm extends Component {
               <TextField
                 type='text'
                 name='username'
-                hintText='username'
+                floatingLabelText='username'
                 value={this.state.username}
                 onChange={this.handleChange}
               />
@@ -82,16 +90,17 @@ class AuthForm extends Component {
               <TextField
                 type='password'
                 name='password'
-                hintText='password'
+                floatingLabelText='password'
                 value={this.state.password}
                 onChange={this.handleChange}
               />
            
 
             
-              <RaisedButton type='submit'>{this.props.auth}</RaisedButton>
+              <FlatButton type='submit'>{this.props.auth}</FlatButton>
             
         </form>
+        // </Dialog>
       )
     }
   }

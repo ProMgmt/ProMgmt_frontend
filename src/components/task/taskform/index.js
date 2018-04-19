@@ -1,5 +1,11 @@
 import React from 'react';
 import { runInThisContext } from 'vm';
+import TextField from 'material-ui/TextField';
+import DatePicker from 'material-ui/DatePicker';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+import FlatButton from 'material-ui/FlatButton';
+
 
 class TaskForm extends React.Component{
   constructor(props){
@@ -45,23 +51,23 @@ class TaskForm extends React.Component{
   render(){
     return(
       <form className='task-form' onSubmit={this.handleSubmit}>
-        <input
+        <TextField
           name='desc'
           type='text'
-          placeholder='Task Description'
+          floatingLabelText='Task Description'
           value={this.state.desc}
           onChange={this.handleChange} />
-        <input
+        <DatePicker
           name='startDate'
           type='date'
           value={this.state.startDate}
           onChange={this.handleChange} />
-        <input
+        <DatePicker
           name='dueDate'
           type='date'
           value={this.state.dueDate}
           onChange={this.handleChange} />
-        <input
+        <DatePicker
           name='endDate'
           type='date'
           value={this.state.endDate}
@@ -72,7 +78,7 @@ class TaskForm extends React.Component{
           placeholder='Expected Duration in Days'
           value={this.state.expectedDuration}
           onChange={this.handleChange} />
-        <label>
+        <SelectField>
           Status: 
           <select name='status' value={this.state.status} onChange={this.handleChange}>
             <option value='0'>0%</option>
@@ -81,7 +87,7 @@ class TaskForm extends React.Component{
             <option value='75'>75%</option>
             <option value='100'>100%</option>
           </select>
-        </label>
+        </SelectField>
         <button type='submit'>{this.props.buttonText}</button>
       </form>
     )
