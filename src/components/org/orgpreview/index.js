@@ -1,12 +1,18 @@
 import React from 'react';
 import OrgForm from '../orgform/index.js';
 
+import {connect} from 'react-redux';
+import {Card, CardHeader, CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
+import Create from 'material-ui/svg-icons/content/create';
+import Clear from 'material-ui/svg-icons/content/clear';
+
 class OrgPreview extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = props.orgs ? 
-      {...props.orgs, editing: false} :
+    this.state = props.org ? 
+      {...props.org, editing: false} :
       {
         _id: undefined,
         name: '',
@@ -24,34 +30,60 @@ class OrgPreview extends React.Component {
   }
 
   componentWillReceiveProps(props) {
-    if(this.props.orgs) {
-      this.setState(this.props.orgs);
+    if(this.props.org) {
+      this.setState(this.props.org);
     }
   }
 
   render() {
-     return (
+    
+    let updateButtonText;
+    this.state.editing ? updateButtonText = 'Hide' : updateButtonText = 'Update';
+    let org = this.props.org;
+    let isAdmin = false;
+    org.admins.forEach(adminObj => {
+      if(this.props.user._id === adminObj._id || this.props.user._id === adminObj) isAdmin = true;
+    })
+
+    return (
       <div className='org-previews'>
-        {(this.props.orgs.length !== 0) ? 
-          this.props.orgs.map(_org => 
-            <div key={_org._id}>
-              <h3>{_org.name}</h3>
-              <p>{_org.desc}</p>
-              {/* TODO: add a link to the OrgItem page for each Org created */}
-              <button onClick={() => {this.props.delete(_org)}}>x</button>
+        <Card key={org._id}>
+          <CardHeader 
+            title={org.name}
+            actAsExpander={true}
+            showExpandableButton={true}
+          />
+          <CardText expandable={true}>
+          
+          <p>{org.desc}</p>
+          {/* TODO: add a link to the OrgItem page for each Org created */}
+
+          {isAdmin ?
+            <div className='edit-org'>
+              <FlatButton onClick={() => {this.props.delete(org)}} icon={<Clear />}/> <FlatButton onClick={() => this.toggleEdit()} icon={<Create />}/>
+
               {this.state.editing ?
-                <OrgForm canToggle={true} toggle={this.toggleEdit} buttonText='Save' onComplete={this.props.update} org={_org} />
+                <OrgForm canToggle={true} toggle={this.toggleEdit} buttonText='Save' onComplete={this.props.update} org={org} />
                 :
-                <button onClick={() => this.toggleEdit()}>Update</button>
+                null
               }
             </div>
-          )
-          :
-          <p>You currently have no organizations, would you like to create one?</p>
-        }
+
+            :
+            null
+          }
+          </CardText>
+        </Card>
+
       </div>
     )
   }
 }
 
-export default OrgPreview;
+export const mapStateToProps = state => {
+  return {
+    user: state.user,
+  }
+}
+
+export default connect(mapStateToProps, null)(OrgPreview);

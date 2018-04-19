@@ -1,14 +1,27 @@
 'use strict';
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import * as util from './../../../lib/util.js';
+import TextField from 'material-ui/TextField';
+import FlatButton from 'material-ui/FlatButton';
+import './_profile-form.scss';
 
 class ProfileForm extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state = props.profile 
-    ? {...props.profile, preview: ''} 
-    : { desc: '', avatarURI: null, preview: ''};
+    this.state = props.profile ? 
+      { ...props.profile, preview: '', userId: this.props.user._id }
+      : 
+      {
+        firstName: '',
+        lastName: '',
+        desc: '',
+        company: '',
+        avatarURI: null,
+        preview: '',
+        title: '',
+        userId: this.props.user._id,
+      };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -16,57 +29,111 @@ class ProfileForm extends Component {
 
   componentWillReceiveProps(props) {
     if (props.profile) {
-      this.setState({...props.profile});
+      this.setState({ ...props.profile });
     }
   }
 
   handleChange(e) {
-    let { type, name } = e.target;
+    let { type, value, name } = e.target;
 
-    if(name === 'desc') {
-      this.setState({ desc: e.target.value });
+    if (name === 'desc') {
+      this.setState({ desc: value });
     }
 
-    if(name === 'avatarURI') {
-      let {files} = e.target;
+    if (name === 'avatarURI') {
+      let { files } = e.target;
       let avatarURI = files[0];
-      this.setState({avatarURI});
+      this.setState({ avatarURI });
       util.photoToDataURL(avatarURI)
-      .then(preview => this.setState({preview}))
-      .catch(console.error);
+        .then(preview => this.setState({ preview }))
+        .catch(console.error);
     }
+
+    this.setState({ [name]: value });
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.onComplete(this.state);
+    this.props.onComplete({ ...this.state });
   }
 
   render() {
-    return(
+    return (
       <form
         className='profile-form'
         onSubmit={this.handleSubmit}
       >
+        {this.state.preview ?
+          <div className='image-preview'>
+            <h2>Image Preview:</h2>
+            <img src={this.state.preview} />
+          </div>
+          : null}
 
-        <img src={this.state.preview}/>
-
-        <input  
-          type='file'
-          name='avatarURI'
+        
+        <TextField
+          className='settings-field'
+          type='text'
+          name='firstName'
+          floatingLabelText='First Name'
+          value={this.state.firstName}
           onChange={this.handleChange}
         />
 
-        <textarea
+        
+        <TextField
+          className='settings-field'
+          type='text'
+          name='lastName'
+          floatingLabelText='Last Name'
+          value={this.state.lastName}
+          onChange={this.handleChange}
+        />
+
+       
+        <TextField
+          className='settings-field'
+          type='text'
+          name='company'
+          floatingLabelText='Company'
+          value={this.state.company}
+          onChange={this.handleChange}
+        />
+
+        
+        <TextField
+          className='settings-field'
+          type='text'
+          name='title'
+          floatingLabelText='Title'
+          value={this.state.value}
+          onChange={this.handleChange}
+        />
+
+        
+        <TextField
+          className='settings-field'
           type='text'
           name='desc'
+          rows={2}
+          multiLine={true}
+          floatingLabelText='Write a Short Bio'
           value={this.state.desc}
-          onChange={this.handleChange}>
-          </textarea>
+          onChange={this.handleChange}
+        />
+        
+        <br />
+        <button type='submit'>{this.props.buttonText}</button>
 
-          <button type='submit'>{this.props.buttonText}</button>
-
-        </form>
+      </form>
+      
+      // TODO: implement this part
+      // <h3>Upload an Image</h3>
+      // <input
+      //   type='file'
+      //   name='avatarURI'
+      //   onChange={this.handleChange}
+      // />
     )
   }
 }

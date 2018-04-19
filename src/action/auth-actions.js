@@ -8,7 +8,12 @@ export const tokenSet = (token) => ({
 })
 
 export const tokenDelete = () => ({
-  type: 'TOKE_DELETE',
+  type: 'TOKEN_DELETE',
+})
+
+export const userSet = (user) => ({
+  type: 'USER_SET',
+  payload: user,
 })
 
 export const signupRequest = (user) => (dispatch) => {
@@ -31,7 +36,11 @@ export const signinRequest = (user) => (dispatch) => {
   .withCredentials(true)
   .auth(user.username, user.password)
   .then( res => {
-    dispatch(tokenSet(res.text))
+    let resObj = JSON.parse(res.text);
+    delete resObj.user.findHash;
+    delete resObj.user.password;
+    dispatch(userSet(resObj.user));
+    dispatch(tokenSet(resObj.token));
     return;
   })
 }

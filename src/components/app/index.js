@@ -12,6 +12,7 @@ import OrgForm from '../org/orgform/index.js';
 import NavBar from '../navigation';
 import MyOrgs from '../org/myorgs';
 import MyProjects from '../project/myprojects';
+import MyProfile from '../profile/myprofile';
 import MyTasks from '../task/mytasks';
 import ProfileForm from './../profile/profileform';
 import DevTool from '../devtool';
@@ -38,7 +39,10 @@ const muiTheme = getMuiTheme({
 class App extends Component{
   constructor(props){
     super(props);
-    this.state = {open: false};
+    this.state = {
+      open: false,
+      modalOpen: false,
+    };
 
     
   }
@@ -47,6 +51,14 @@ class App extends Component{
     this.setState({
       open: !this.state.open
     })
+  }
+
+  handleModalOpen() {
+    this.setState({ modalOpen: true });
+  }
+
+  handleModalClose() {
+    this.setState({ modalOpen: false });
   }
 
   componentDidMount() {
@@ -78,7 +90,7 @@ class App extends Component{
                  
                 
                 <Route path='/welcome/:auth' component={Dashboard} />
-                <Route exact path='/settings' component={ProfileForm} />
+                <Route exact path='/myprofile' component={MyProfile} />
                 <Route exact path='/dashboard' component={Dashboard} />
                 <Route exact path='/myorgs' component={MyOrgs} />
                 <Route exact path='/myprojects' component={MyProjects} />

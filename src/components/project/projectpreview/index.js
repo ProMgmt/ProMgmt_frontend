@@ -1,12 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import ProjectForm from '../projectform';
+import { Card, CardText, CardHeader } from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
+import Clear from 'material-ui/svg-icons/content/clear';
 
 class ProjectPreview extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = props.projects ?
-      {...props.projects, editing: false } :
+    this.state = props.project ?
+      { ...props.project, editing: false } :
       {
         _id: undefined,
         name: '',
@@ -24,39 +28,43 @@ class ProjectPreview extends React.Component {
   }
 
   componentWillReceiveProps(props) {
-    if (this.props.projects) {
-      this.setState(this.props.projects);
+    if (this.props.project) {
+      this.setState(this.props.project);
     }
   }
 
   render() {
-    let allProjects = this.props.projects;
-    let allProjectsArray = [];
-    for(let key in allProjects) {
-      for(let i in allProjects[key]) {
-        allProjectsArray.push(allProjects[key][i]);
-      }
-    }
+    let project = this.props.project;
+    let updateButtonText;
+    this.state.editing ? updateButtonText = 'Hide' : updateButtonText = 'Update';
+    let isAdmin = false;
+    project.admins.forEach(adminObj => {
+      if(this.props.user._id === adminObj._id || this.props.user._id === adminObj) isAdmin = true;
+    })
+
 
     return (
-      <div className='project-previews'>
-        {allProjectsArray.length !== 0 ?
-          allProjectsArray.map(_project => 
-            <div key={_project._id}>
-              <h3>{_project.projectName}</h3>
-              {/* TODO: hyperlink this to the ProjectItem page */}
-              <p>{_project.desc}</p>
-              <button onClick={() => { this.props.delete(_project) }}>x</button>
-              <ProjectForm canToggle={true} toggle={this.toggleEdit} buttonText='Save' onComplete={this.props.update} project={_project} />
-              }
-            </div>
-          )
+      <div className='project-previews' key={project._id}>
+        <h3>{project.projectName}</h3>
+        {/* TODO: hyperlink this to the ProjectItem page */}
+        <p>{project.desc}</p>
+        <button onClick={() => { this.props.delete(project) }}>x</button> <button onClick={() => {this.toggleEdit()}}>{updateButtonText}</button>
+        {this.state.editing ? 
+          <ProjectForm canToggle={true} toggle={this.toggleEdit} buttonText='Save' onComplete={this.props.update} project={project} />
+
           :
-          <p>You currently have no projects! Navigate to your MyOrgs page to add a project to a specific organization.</p>
-        }      
+          null
+        }
       </div>
     )
   }
 }
 
-export default ProjectPreview;
+
+export const mapStateToProps = state => {
+  return {
+    user: state.user,
+  }
+}
+
+export default connect(mapStateToProps, null)(ProjectPreview);

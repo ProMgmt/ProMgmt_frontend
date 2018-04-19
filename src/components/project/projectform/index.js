@@ -1,5 +1,8 @@
 import React from 'react';
 import * as util from '../../../lib/util.js';
+import DatePicker from 'material-ui/DatePicker';
+import FlatButton from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
 
 class ProjectForm extends React.Component{
   constructor(props){
@@ -21,6 +24,7 @@ class ProjectForm extends React.Component{
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleAdminAdd = this.handleAdminAdd.bind(this);
     this.handleUserAdd = this.handleUserAdd.bind(this);
+    this.handleStartDateChange = this.handleStartDateChange.bind(this);
   }
 
   componentWillReceiveProps(props){
@@ -28,6 +32,12 @@ class ProjectForm extends React.Component{
       this.setState(props.project);
     }
   }
+
+  handleStartDateChange(event, date) {
+    this.setState({
+      startDate: date,
+    });
+  };
 
   handleChange(e){
     this.setState({[e.target.name]: e.target.value});
@@ -69,36 +79,32 @@ class ProjectForm extends React.Component{
     let key = this.props.key ? this.props.key : undefined;
     return(
       <form key={key} className='project-form' onSubmit={this.handleSubmit}>
-        <input 
+        <TextField
           name='projectName'
           type='text'
-          placeholder='Project Name'
+          floatingLabelText='Project Name'
           value={this.state.projectName}
           onChange={this.handleChange} />
-        <input
+        <TextField
           name='desc'
           type='text'
-          placeholder='Project Description'
+          floatingLabelText='Project Description'
           value={this.state.desc}
           onChange={this.handleChange} />
-        <label>
-          Start Date:
-          <input
-            name='startDate'
-            type='date'
-            placeholder='Start Date'
-            value={this.state.startDate}
-            onChange={this.handleChange} />
-        </label>
-        <label>
-          Due Date: 
-          <input
-            name='dueDate'
-            type='date'
-            placeholder='Due Date'
-            value={this.state.dueDate}
-            onChange={this.handleChange} />
-        </label>
+        <DatePicker
+          name='startDate'
+          
+          hintText='Start Date'
+          value={this.state.startDate}
+          onChange={this.handleDateChange}
+        />
+        <DatePicker
+          name='dueDate'
+          
+          hintText='Due Date'
+          value={this.state.dueDate}
+          onChange={this.handleDateChange} 
+        />
         {util.renderIf(this.state.admins.length > 0,
           <ul>
             <li>Existing Project Admins</li>
@@ -141,7 +147,7 @@ class ProjectForm extends React.Component{
           </select>
           <button onClick={this.handleUserAdd}>+</button>
         </label>
-        <button type='submit'>{this.props.buttonText}</button>
+        <FlatButton type='submit'>{this.props.buttonText}</FlatButton>
       </form>
     )
   }
