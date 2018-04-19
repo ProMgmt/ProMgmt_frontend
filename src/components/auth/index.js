@@ -114,7 +114,7 @@ class AuthForm extends Component {
                 onClick={this.handleSubmit}
                 label={this.props.auth}
                 primary={true}
-                isKeyboardFocused={true}
+                
               />
 
               <FlatButton 

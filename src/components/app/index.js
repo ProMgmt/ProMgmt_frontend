@@ -53,13 +53,7 @@ class App extends Component{
     })
   }
 
-  handleModalOpen() {
-    this.setState({ modalOpen: true });
-  }
-
-  handleModalClose() {
-    this.setState({ modalOpen: false });
-  }
+  
 
   componentDidMount() {
     let token = util.readCookie('X-ProMgmt-Token');
