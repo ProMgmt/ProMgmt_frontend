@@ -5,6 +5,8 @@ import TextField from 'material-ui/TextField';
 import * as util from './../../lib/util.js';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
+import { withRouter } from 'react-router-dom'; //gives us access to everything that the router has (history, etc)
+import GoogleOauth from '../google-oauth';
 
 class AuthForm extends Component {
   constructor(props){
@@ -29,8 +31,9 @@ class AuthForm extends Component {
     handleSubmit(e) {
       e.preventDefault();
       this.props.onComplete(this.state)
-      .then( () => {                    
-        this.setState({ username: '', email: '', password: ''} )
+      .then( () => {  
+        this.props.history.push('/dashboard');                  
+        this.setState({ username: '', email: '', password: ''} );
       })
       .then(this.handleModalClose)
       .catch( error => {
@@ -45,6 +48,7 @@ class AuthForm extends Component {
   
     handleModalClose() {
       this.setState({ modalOpen: false });
+      this.props.onClose();
     }
 
     handleChange(e) {
@@ -122,6 +126,7 @@ class AuthForm extends Component {
                   label='Cancel'
                   primary={true}
                 /> 
+                <GoogleOauth/>
               
           </form>
         </Dialog>
@@ -130,7 +135,7 @@ class AuthForm extends Component {
   }
 
 
-  export default AuthForm;
+  export default withRouter(AuthForm);
 
 
 
