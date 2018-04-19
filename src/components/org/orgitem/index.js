@@ -6,6 +6,8 @@ import OrgForm from '../orgform';
 import ProjectForm from '../../project/projectform';
 import ProjectItem from '../../project/projectitem';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import Clear from 'material-ui/svg-icons/content/clear';
+import FlatButton from 'material-ui/FlatButton';
 
 class OrgItem extends React.Component{
   constructor(props) {
@@ -48,7 +50,10 @@ class OrgItem extends React.Component{
             showExpandableButton={true}
           />
           <CardText expandable={true}>{org.desc}</CardText>
-          <button onClick={() => orgDelete(org)}>X</button>
+          <FlatButton 
+            onClick={() => orgDelete(org)}
+            icon={<Clear />}
+          />
         </Card>
         {this.state.editOrg ? 
           <div className='edit'>
@@ -64,7 +69,7 @@ class OrgItem extends React.Component{
           :
           null
         }
-        <button onClick={this.toggleEditOrg}>{orgButtonText}</button>
+        <FlatButton onClick={this.toggleEditOrg}>{orgButtonText}</FlatButton>
 
         {this.state.addProject ?
           <div className='proj-form'>
@@ -85,7 +90,7 @@ class OrgItem extends React.Component{
           :
           <p>This org currently has no projects.</p>
         }
-        <button onClick={this.toggleAddProject}>{projectButtonText}</button>
+        <FlatButton onClick={this.toggleAddProject}>{projectButtonText}</FlatButton>
 
         {this.props.project[this.props.org._id].map(item => 
           <ProjectItem 

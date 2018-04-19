@@ -3,6 +3,9 @@ import {connect} from 'react-redux';
 import superagent from 'superagent';
 import * as util from '../../../lib/util.js';
 import TextField from 'material-ui/TextField';
+import FlatButton from 'material-ui/FlatButton';
+import Add from 'material-ui/svg-icons/content/add';
+import Clear from 'material-ui/svg-icons/content/clear';
 
 class OrgForm extends React.Component {
   constructor(props) {
@@ -117,13 +120,18 @@ class OrgForm extends React.Component {
           onChange={this.handleChange} 
           required /> 
         <h3>Add Admins</h3>
-        <input name='admin'
+        <TextField 
+          name='admin'
           type='text'
-          placeholder='Add an Admin' 
-          onChange={this.handleChange}/>
-        <button className='tiny-plus'
+          floatingLabelText='Add an Admin' 
+          onChange={this.handleChange}
+        />
+        <FlatButton 
+          className='tiny-plus'
           type='submit'
-          onClick={this.handleAdminSubmit}>+</button>
+          icon={<Add />}
+          onClick={this.handleAdminSubmit}
+        />
         {util.renderIf(this.state.adminError, 
           <p className='error'>{this.state.adminError}</p>
         )}
@@ -142,9 +150,12 @@ class OrgForm extends React.Component {
           type='text'
           floatingLabelText='Add a Member' 
           onChange={this.handleChange}/>
-        <button className='tiny-plus'
+        <FlatButton 
+          className='tiny-plus'
           type='submit'
-          onClick={this.handleUserSubmit}>+</button>
+          onClick={this.handleUserSubmit}
+          icon={<Add />}
+        />
         {util.renderIf(this.state.userError, 
           <p className='error'>{this.state.userError}</p>
         )}
@@ -152,13 +163,21 @@ class OrgForm extends React.Component {
           <ul>
             {this.state.userNames.map((user, i) => 
                 <div key={i}>
-                  <li>{user}</li> <button className='delete'>x</button>
+                  <li>{user}</li> 
+                  <FlatButton 
+                    className='delete'
+                    icon={<Clear />}
+                  />
                 </div>
             )}
           </ul>
           : null
         }
-        <button className='submit-button' type='submit'>{this.props.buttonText}</button>
+        <FlatButton 
+          className='submit-button' 
+          type='submit'
+          label={this.props.buttonText}
+        />
       </form>
     )
   }

@@ -82,7 +82,7 @@ class ProjectItem extends React.Component{
           :
           null
         }
-        <button onClick={this.toggleEditProject}>{editProjectButtonText}</button>
+        <FlatButton onClick={this.toggleEditProject}>{editProjectButtonText}</FlatButton>
 
         {this.state.addTask ?
           <div className='task-form'>
@@ -98,7 +98,7 @@ class ProjectItem extends React.Component{
           :
           null
         }
-        <button onClick={this.toggleAddTask}>{addTaskButtonText}</button>
+        <FlatButton onClick={this.toggleAddTask}>{addTaskButtonText}</FlatButton>
         <h3>{`Tasks belonging to ${this.props.project.name}`}</h3>
         {this.props.task[this.props.project._id].map(item =>
           <TaskItem

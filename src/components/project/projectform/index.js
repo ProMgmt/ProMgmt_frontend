@@ -3,6 +3,7 @@ import * as util from '../../../lib/util.js';
 import DatePicker from 'material-ui/DatePicker';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
+import Add from 'material-ui/svg-icons/content/add';
 
 class ProjectForm extends React.Component{
   constructor(props){
@@ -127,7 +128,10 @@ class ProjectForm extends React.Component{
               <option key={user._id} value={user._id}>{user.username}</option>
             )}
           </select>
-          <button onClick={this.handleAdminAdd}>+</button>
+          <FlatButton 
+            onClick={this.handleAdminAdd}
+            icon={<Add />}
+          />
         </label>
         {util.renderIf(this.state.users.length > 0,
           <ul>
@@ -148,7 +152,10 @@ class ProjectForm extends React.Component{
               <option key={user._id} value={user._id}>{user.username}</option>
             )}
           </select>
-          <button onClick={this.handleUserAdd}>+</button>
+          <FlatButton 
+            onClick={this.handleUserAdd}
+            icon={<Add />}
+          />
         </label>
         <FlatButton type='submit'>{this.props.buttonText}</FlatButton>
       </form>
