@@ -10,6 +10,8 @@ export default (state=null, action) => {
       return {...state, ...payload};
     case 'PROFILE_FETCH':
       return {...state, ...payload};
+    case 'PROFILE_SET':
+      return payload;
     case 'LOGOUT':
       return null;
     default:

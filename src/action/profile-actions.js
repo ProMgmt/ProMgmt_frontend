@@ -1,6 +1,7 @@
 'use strict';
 
 import superagent from 'superagent';
+import {userUpdate} from './auth-actions.js';
 
 export const profileCreate = (profile) => ({
   type: 'PROFILE_CREATE',
@@ -17,9 +18,9 @@ export const profileDelete = (profile) => ({
   payload: profile, 
 })
 
-export const userUpdate = (profileId) => ({
-  type: 'USER_UPDATE',
-  payload: profileId,
+export const profileSet = (profile) => ({
+  type: 'PROFILE_SET',
+  payload: profile,
 })
 
 export const profileCreateRequest = (profile) => (dispatch, getState) => {
