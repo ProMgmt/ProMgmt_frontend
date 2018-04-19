@@ -127,14 +127,14 @@ class ProjectForm extends React.Component{
             onChange={this.handleChange}
           >
             
-            {this.props.org.admins.map(admin => 
+            {this.props.org.admins.map((admin, i) => 
               <MenuItem 
                 key={`${admin._id}-${i}`} 
                 value={admin._id}
                 primaryText={admin.username} 
               />
             )}
-            {this.props.org.users.map(user => 
+            {this.props.org.users.map((user, i) => 
               <MenuItem 
                 key={`${admin._id}-${i}`} 
                 value={user._id}

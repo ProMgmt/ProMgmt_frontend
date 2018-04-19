@@ -41,12 +41,11 @@ class TaskItem extends React.Component {
       <section key={key} className='task-item'>
         <Card className='content'>
           <CardHeader
-            title={task.taskName}
+            title={task.desc}
             actAsExpander={true}
             showExpandableButton={true}
           />
           <CardText expandable={true}>
-            <p>{task.desc}</p>
             <p>Start Date: {task.startDate}</p>
             <p>Expected Duration: {task.expectedDuration} days</p>
             <p>Due Date: {task.dueDate} </p>
