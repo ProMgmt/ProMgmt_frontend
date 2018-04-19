@@ -37,18 +37,22 @@ class ProjectForm extends React.Component{
     e.preventDefault();
     let {adminId} = this.state;
 
-    this.setState(prevState => {
-      return {admins: [...prevState.admins, adminId]};
-    })
+    if(adminId !== 'none'){
+      this.setState(prevState => {
+        return {admins: [...prevState.admins, adminId]};
+      })
+    }
   }
 
   handleUserAdd(e){
     e.preventDefault();
     let {userId} = this.state;
 
-    this.setState(prevState => {
-      return {users: [...prevState.users, userId]};
-    })
+    if(userId !== 'none'){
+      this.setState(prevState => {
+        return {users: [...prevState.users, userId]};
+      })
+    }
   }
 
   handleSubmit(e){

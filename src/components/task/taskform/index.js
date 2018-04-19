@@ -51,19 +51,22 @@ class TaskForm extends React.Component{
     e.preventDefault();
     let {adminId} = this.state;
 
-    this.setState(prevState => {
-      return {admins: [...prevState.admins, adminId]};
-    })
-    console.log('this.state', this.state);
+    if(adminId !== 'none'){
+      this.setState(prevState => {
+        return {admins: [...prevState.admins, adminId]};
+      })
+    }
   }
 
   handleTaskAdd(e){
     e.preventDefault();
     let {taskDAdd} = this.state;
 
-    this.setState(prevState => {
-      return {dependentTasks: [...prevState.dependentTasks, taskDAdd]};
-    })
+    if(taskDAdd !== 'none'){
+      this.setState(prevState => {
+        return {dependentTasks: [...prevState.dependentTasks, taskDAdd]};
+      })
+    }
   }
 
   render(){
