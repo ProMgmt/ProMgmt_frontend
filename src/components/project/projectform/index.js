@@ -25,6 +25,7 @@ class ProjectForm extends React.Component{
     this.handleAdminAdd = this.handleAdminAdd.bind(this);
     this.handleUserAdd = this.handleUserAdd.bind(this);
     this.handleStartDateChange = this.handleStartDateChange.bind(this);
+    this.handleDueDateChange = this.handleDueDateChange.bind(this);
   }
 
   componentWillReceiveProps(props){
@@ -36,6 +37,12 @@ class ProjectForm extends React.Component{
   handleStartDateChange(event, date) {
     this.setState({
       startDate: date,
+    });
+  };
+
+  handleDueDateChange(event, date) {
+    this.setState({
+      dueDate: date,
     });
   };
 
@@ -92,18 +99,14 @@ class ProjectForm extends React.Component{
           value={this.state.desc}
           onChange={this.handleChange} />
         <DatePicker
-          name='startDate'
-          
           hintText='Start Date'
           value={this.state.startDate}
-          onChange={this.handleDateChange}
+          onChange={this.handleStartDateChange}
         />
         <DatePicker
-          name='dueDate'
-          
           hintText='Due Date'
           value={this.state.dueDate}
-          onChange={this.handleDateChange} 
+          onChange={this.handleDueDateChange} 
         />
         {util.renderIf(this.state.admins.length > 0,
           <ul>
