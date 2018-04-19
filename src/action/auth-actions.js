@@ -36,7 +36,6 @@ export const signinRequest = (user) => (dispatch) => {
   .withCredentials(true)
   .auth(user.username, user.password)
   .then( res => {
-    console.log('RES.TEXT IN AUTH ACTIONS', JSON.parse(res.text));
     let resObj = JSON.parse(res.text);
     delete resObj.user.findHash;
     delete resObj.user.password;

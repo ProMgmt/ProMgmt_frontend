@@ -42,7 +42,6 @@ class OrgPreview extends React.Component {
     let org = this.props.org;
     let isAdmin = false;
     org.admins.forEach(adminObj => {
-      console.log(this.props.user, adminObj);
       if(this.props.user._id === adminObj._id || this.props.user._id === adminObj) isAdmin = true;
     })
 
