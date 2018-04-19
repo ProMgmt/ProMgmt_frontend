@@ -7,6 +7,7 @@ import Auth from '../auth';
 import {BrowserRouter, Route, Link} from 'react-router-dom';
 
 import {tokenSet} from './../../action/auth-actions.js';
+import AuthRedirect from '../auth-redirect';
 import Welcome from './../welcome';
 import OrgForm from '../org/orgform/index.js';
 import NavBar from '../navigation';
@@ -82,7 +83,7 @@ class App extends Component{
                   
                   />
                  
-                
+                <Route path='*' component={AuthRedirect} />
                 <Route path='/welcome/:auth' component={Welcome} />
                 <Route exact path='/myprofile' component={MyProfile} />
                 <Route exact path='/myorgs' component={MyOrgs} />
