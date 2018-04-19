@@ -7,7 +7,7 @@ import Auth from '../auth';
 import {BrowserRouter, Route, Link} from 'react-router-dom';
 
 import {tokenSet} from './../../action/auth-actions.js';
-import Dashboard from './../dashboard';
+import Welcome from './../welcome';
 import OrgForm from '../org/orgform/index.js';
 import NavBar from '../navigation';
 import MyOrgs from '../org/myorgs';
@@ -15,7 +15,7 @@ import MyProjects from '../project/myprojects';
 import MyProfile from '../profile/myprofile';
 import MyTasks from '../task/mytasks';
 import ProfileForm from './../profile/profileform';
-import DevTool from '../devtool';
+import Dashboard from '../dashboard';
 import * as util from './../../lib/util.js';
 import {grey800} from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -89,13 +89,12 @@ class App extends Component{
                   />
                  
                 
-                <Route path='/welcome/:auth' component={Dashboard} />
+                <Route path='/welcome/:auth' component={Welcome} />
                 <Route exact path='/myprofile' component={MyProfile} />
-                <Route exact path='/dashboard' component={Dashboard} />
                 <Route exact path='/myorgs' component={MyOrgs} />
                 <Route exact path='/myprojects' component={MyProjects} />
                 <Route exact path='/mytasks' component={MyTasks} /> 
-                <Route exact path='/devtool' component={DevTool} />
+                <Route exact path='/dashboard' component={Dashboard} />
 
 
               </section>
