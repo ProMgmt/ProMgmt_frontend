@@ -95,10 +95,10 @@ class OrgForm extends React.Component {
   }
 
   render() {
-
+    let key = this.props.key ? this.props.key : undefined;
     return(
-      <form className='org-form' onSubmit={this.handleSubmit}>
-        
+      <form key={key} className='org-form' onSubmit={this.handleSubmit}>
+        <h3>Name</h3>
         <TextField 
           name='name'
           value={this.state.name}

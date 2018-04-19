@@ -5,15 +5,17 @@ import ProjectForm from '../projectform';
 import TaskForm from '../../task/taskform';
 import {taskCreateRequest} from '../../../action/task-actions.js';
 import TaskItem from '../../task/taskitem';
+import ProjectGantt from '../../gantt';
+import * as util from '../../../lib/util.js';
 import { Card, CardText, CardHeader } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import Clear from 'material-ui/svg-icons/content/clear';
 
 class ProjectItem extends React.Component{
   render(){
-    let {org, project, projectUpdate, projectDelete, taskCreate} = this.props;
+    let {org, project, projectUpdate, projectDelete, taskCreate, key} = this.props;
     return(
-      <section className='project-item'>
+      <section key={key} className='project-item'>
         <Card className='content'>
           <CardHeader
           title={project.projectName}
@@ -32,7 +34,8 @@ class ProjectItem extends React.Component{
           </CardText>
         </Card>
         <div className='edit'>
-          <ProjectForm 
+          <ProjectForm
+            key={project._id}
             buttonText='Update Project'
             org={org}
             project={project}

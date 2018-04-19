@@ -23,6 +23,7 @@ class OrgItem extends React.Component{
         </Card>
         <div className='edit'>
           <OrgForm
+            key={org._id}
             buttonText='Update Org'
             org={org}
             onComplete={orgUpdate}

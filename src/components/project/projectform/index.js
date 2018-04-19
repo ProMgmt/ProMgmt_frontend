@@ -1,4 +1,5 @@
 import React from 'react';
+import * as util from '../../../lib/util.js';
 import DatePicker from 'material-ui/DatePicker';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
@@ -8,15 +9,21 @@ class ProjectForm extends React.Component{
     super(props);
     this.state = this.props.project ? {...props.project} : { 
       _id: undefined,
-      orgId: undefined, 
+      orgId: this.props.org._id, 
       projectName: '',
       desc: '', 
       startDate: '', 
-      dueDate: ''
+      dueDate: '',
+      admins: [],
+      adminId: 'none',
+      users: [],
+      userId: 'none',
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleAdminAdd = this.handleAdminAdd.bind(this);
+    this.handleUserAdd = this.handleUserAdd.bind(this);
     this.handleStartDateChange = this.handleStartDateChange.bind(this);
   }
 
@@ -36,6 +43,28 @@ class ProjectForm extends React.Component{
     this.setState({[e.target.name]: e.target.value});
   }
 
+  handleAdminAdd(e){
+    e.preventDefault();
+    let {adminId} = this.state;
+
+    if(adminId !== 'none'){
+      this.setState(prevState => {
+        return {admins: [...prevState.admins, adminId]};
+      })
+    }
+  }
+
+  handleUserAdd(e){
+    e.preventDefault();
+    let {userId} = this.state;
+
+    if(userId !== 'none'){
+      this.setState(prevState => {
+        return {users: [...prevState.users, userId]};
+      })
+    }
+  }
+
   handleSubmit(e){
     e.preventDefault();
 
@@ -47,8 +76,9 @@ class ProjectForm extends React.Component{
   }
 
   render(){
+    let key = this.props.key ? this.props.key : undefined;
     return(
-      <form className='project-form' onSubmit={this.handleSubmit}>
+      <form key={key} className='project-form' onSubmit={this.handleSubmit}>
         <TextField
           name='projectName'
           type='text'
@@ -75,6 +105,48 @@ class ProjectForm extends React.Component{
           value={this.state.dueDate}
           onChange={this.handleDateChange} 
         />
+        {util.renderIf(this.state.admins.length > 0,
+          <ul>
+            <li>Existing Project Admins</li>
+            {this.state.admins.map(user =>
+              <li key={user._id}>{user.username}</li>
+            )}
+          </ul>
+        )}
+        <label>
+          Add Admin:
+          <select name='adminId' value={this.state.adminId} onChange={this.handleChange}>
+            <option selectedvalue='none'>None</option>
+            {this.props.org.admins.map(admin => 
+              <option key={admin._id} value={admin._id}>{admin.username}</option>
+            )}
+            {this.props.org.users.map(user => 
+              <option key={user._id} value={user._id}>{user.username}</option>
+            )}
+          </select>
+          <button onClick={this.handleAdminAdd}>+</button>
+        </label>
+        {util.renderIf(this.state.users.length > 0,
+          <ul>
+            <li>Existing Project Users</li>
+            {this.state.users.map(user =>
+              <li key={user._id}>{user.username}</li>
+            )}
+          </ul>
+        )}
+        <label>
+          Add User:
+          <select name='userId' value={this.state.userId} onChange={this.handleChange}>
+            <option selectedvalue='none'>None</option>
+            {this.props.org.admins.map(admin => 
+              <option key={admin._id} value={admin._id}>{admin.username}</option>
+            )}
+            {this.props.org.users.map(user => 
+              <option key={user._id} value={user._id}>{user.username}</option>
+            )}
+          </select>
+          <button onClick={this.handleUserAdd}>+</button>
+        </label>
         <FlatButton type='submit'>{this.props.buttonText}</FlatButton>
       </form>
     )
