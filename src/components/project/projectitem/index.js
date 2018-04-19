@@ -12,7 +12,36 @@ import FlatButton from 'material-ui/FlatButton';
 import Clear from 'material-ui/svg-icons/content/clear';
 
 class ProjectItem extends React.Component{
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      addTask: false,
+      editProject: false,
+    }
+
+    this.toggleAddTask = this.toggleAddTask.bind(this);
+    this.toggleEditProject = this.toggleEditProject.bind(this);
+  }
+
+  toggleAddTask() {
+    this.setState(state => {
+      return {...state, addTask: !state.addTask};
+    });
+  }
+
+  toggleEditProject() {
+    this.setState(state => {
+      return {...state, editProject: !state.editProject};
+    });
+  }
+
   render(){
+    let addTaskButtonText;
+    let editProjectButtonText;
+    this.state.addTask ? addTaskButtonText = 'Hide' : addTaskButtonText  = 'Add a Task';
+    this.state.editProject ? editProjectButtonText = 'Hide' : editProjectButtonText = 'Edit Project';
+
     let {org, project, projectUpdate, projectDelete, taskCreate, key} = this.props;
     return(
       <section key={key} className='project-item'>
@@ -38,21 +67,39 @@ class ProjectItem extends React.Component{
             />
           </CardText>
         </Card>
-        <div className='edit'>
-          <ProjectForm
-            key={project._id}
-            buttonText='Update Project'
-            org={org}
-            project={project}
-            onComplete={projectUpdate} />
-        </div>
-        <div className='task-form'>
-          <TaskForm
-            buttonText='New Task'
-            org={org}
-            project={project}
-            onComplete={taskCreate} />
-        </div>
+        {this.state.editProject ?
+          <div className='edit'>
+            <ProjectForm
+              key={project._id}
+              buttonText='Update Project'
+              org={org}
+              project={project}
+              onComplete={projectUpdate} 
+              canToggle={true}
+              toggle={this.editProject}
+              />
+          </div>
+          :
+          null
+        }
+        <button onClick={this.toggleEditProject}>{editProjectButtonText}</button>
+
+        {this.state.addTask ?
+          <div className='task-form'>
+            <TaskForm
+              buttonText='New Task'
+              org={org}
+              project={project}
+              onComplete={taskCreate} 
+              canToggle={true}
+              toggle={this.addTask}
+              />
+          </div>
+          :
+          null
+        }
+        <button onClick={this.toggleAddTask}>{addTaskButtonText}</button>
+        <h3>{`Tasks belonging to ${this.props.project.name}`}</h3>
         {this.props.task[this.props.project._id].map(item =>
           <TaskItem
             key={item._id}
