@@ -46,7 +46,6 @@ export const signinRequest = (user) => (dispatch) => {
       dispatch(tokenSet(token));
       dispatch(userSet({_id, profileId}));
       dispatch(profileSetRequest(profileId));
-
       return {token, profileId};
     })
 }
