@@ -36,7 +36,7 @@ class ProfileMenu extends React.Component {
           <MenuItem><Link to='/welcome/signin'>Sign In</Link></MenuItem>
           <MenuItem><Link to='/myprofile'>Profile Settings</Link></MenuItem>
 
-          <MenuItem><Link to='/devtool'>dev tool</Link></MenuItem>
+          <MenuItem><Link to='/dashboard'>dashboard</Link></MenuItem>
           <MenuItem><Link to='/' onClick={this.handleSignout}>sign out</Link></MenuItem>
 
         </IconMenu>
@@ -56,6 +56,6 @@ export default connect(null, mapDispatchToProps)(ProfileMenu);
   <li><Link to='/welcome/signup'>signup</Link></li>
   <li><Link to='/welcome/signin'>signin</Link></li>
   <li><Link to='/myprofile'>settings</Link></li>
-  <li><Link to='/devtool'>dev tool</Link></li>
+  <li><Link to='/dashboard'>dev tool</Link></li>
 </ul>
 </nav> */}
