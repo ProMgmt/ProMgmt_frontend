@@ -1,4 +1,7 @@
 import React from 'react';
+import DatePicker from 'material-ui/DatePicker';
+import FlatButton from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
 
 class ProjectForm extends React.Component{
   constructor(props){
@@ -14,6 +17,7 @@ class ProjectForm extends React.Component{
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleStartDateChange = this.handleStartDateChange.bind(this);
   }
 
   componentWillReceiveProps(props){
@@ -21,6 +25,12 @@ class ProjectForm extends React.Component{
       this.setState(props.project);
     }
   }
+
+  handleStartDateChange(event, date) {
+    this.setState({
+      startDate: date,
+    });
+  };
 
   handleChange(e){
     this.setState({[e.target.name]: e.target.value});
@@ -39,31 +49,33 @@ class ProjectForm extends React.Component{
   render(){
     return(
       <form className='project-form' onSubmit={this.handleSubmit}>
-        <input 
+        <TextField
           name='projectName'
           type='text'
-          placeholder='Project Name'
+          floatingLabelText='Project Name'
           value={this.state.projectName}
           onChange={this.handleChange} />
-        <input
+        <TextField
           name='desc'
           type='text'
-          placeholder='Project Description'
+          floatingLabelText='Project Description'
           value={this.state.desc}
           onChange={this.handleChange} />
-        <input
+        <DatePicker
           name='startDate'
-          type='date'
-          placeholder='Start Date'
+          
+          hintText='Start Date'
           value={this.state.startDate}
-          onChange={this.handleChange} />
-        <input
+          onChange={this.handleDateChange}
+        />
+        <DatePicker
           name='dueDate'
-          type='date'
-          placeholder='Due Date'
+          
+          hintText='Due Date'
           value={this.state.dueDate}
-          onChange={this.handleChange} />
-        <button type='submit'>{this.props.buttonText}</button>
+          onChange={this.handleDateChange} 
+        />
+        <FlatButton type='submit'>{this.props.buttonText}</FlatButton>
       </form>
     )
   }

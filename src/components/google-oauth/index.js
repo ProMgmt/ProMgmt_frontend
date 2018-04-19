@@ -14,7 +14,7 @@ class GoogleOAuth extends React.Component {
     let formattedURL = `${AUTH_URL}?${clientIDQuery}&${responseTypeQuery}&${scopeQuery}&${promptQuery}&${redirectURIQuery}`;
 
     return ( 
-      <a href={formattedURL}>login with google</a>
+      <a href={formattedURL}>signin with google</a>
     )
   }
 }
