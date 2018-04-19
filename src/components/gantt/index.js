@@ -8,9 +8,11 @@ class ProjectGantt extends React.Component{
       let setDepTasks = task.dependentTasks.reduce((acc, task) => {
         return `${acc},${task._id}`;
       },'');
+      let setStartDate = task.startDate ? new Date(task.startDate) : null;
+      let setEndDate = task.endDate ? new Date(task.endDate) : null;
       setDepTasks = setDepTasks.slice(1);
       if(!setDepTasks) setDepTasks = null;
-      let setTask = [task._id, task.desc, new Date(task.startDate), new Date(task.endDate), task.duration * 86400000, task.status ? +task.status : null, setDepTasks];
+      let setTask = [task._id, task.desc, setStartDate, setEndDate, task.expectedDuration * 86400000, task.status ? +task.status : null, setDepTasks];
       acc.push(setTask);
       return acc;
     },[])

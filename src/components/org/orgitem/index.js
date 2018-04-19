@@ -18,6 +18,7 @@ class OrgItem extends React.Component{
         </div>
         <div className='edit'>
           <OrgForm
+            key={org._id}
             buttonText='Update Org'
             org={org}
             onComplete={orgUpdate}

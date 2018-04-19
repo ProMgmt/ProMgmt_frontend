@@ -36,12 +36,12 @@ class TaskForm extends React.Component{
     this.props.onComplete({...this.state});
     if(!this.props.task){
       this.setState({desc: '',
-      startDate: '',
-      dueDate: '',
-      endDate: '',
-      expectedDuration: '',
-      actualDuration: '',
-      status: '',
+      startDate: undefined,
+      dueDate: undefined,
+      endDate: undefined,
+      expectedDuration: undefined,
+      actualDuration: undefined,
+      status: 0,
       isDependency: false,
       dependentTasks: []})
     }
@@ -70,35 +70,48 @@ class TaskForm extends React.Component{
   }
 
   render(){
+    let key = this.props.key ? this.props.key : undefined;
     return(
-      <form className='task-form' onSubmit={this.handleSubmit}>
+      <form key={key} className='task-form' onSubmit={this.handleSubmit}>
         <input
           name='desc'
           type='text'
           placeholder='Task Description'
           value={this.state.desc}
           onChange={this.handleChange} />
-        <input
-          name='startDate'
-          type='date'
-          value={this.state.startDate}
-          onChange={this.handleChange} />
-        <input
-          name='dueDate'
-          type='date'
-          value={this.state.dueDate}
-          onChange={this.handleChange} />
-        <input
-          name='endDate'
-          type='date'
-          value={this.state.endDate}
-          onChange={this.handleChange} />
-        <input
-          name='expectedDuration'
-          type='number'
-          placeholder='Expected Duration in Days'
-          value={this.state.expectedDuration}
-          onChange={this.handleChange} />
+        <label>
+          Start Date:
+          <input
+            name='startDate'
+            type='date'
+            value={this.state.startDate}
+            onChange={this.handleChange} />
+        </label>
+        <label>
+          Due Date:
+          <input
+            name='dueDate'
+            type='date'
+            value={this.state.dueDate}
+            onChange={this.handleChange} />
+        </label>
+        <label>
+          End Date:
+          <input
+            name='endDate'
+            type='date'
+            value={this.state.endDate}
+            onChange={this.handleChange} />
+        </label>
+        <label>
+          Expected Duration:
+          <input
+            name='expectedDuration'
+            type='number'
+            placeholder='Expected Duration in Days'
+            value={this.state.expectedDuration}
+            onChange={this.handleChange} />
+        </label>
         <label>
           Status: 
           <select name='status' value={this.state.status} onChange={this.handleChange}>

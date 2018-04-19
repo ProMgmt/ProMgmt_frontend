@@ -10,9 +10,9 @@ import * as util from '../../../lib/util.js';
 
 class ProjectItem extends React.Component{
   render(){
-    let {org, project, projectUpdate, projectDelete, taskCreate} = this.props;
+    let {org, project, projectUpdate, projectDelete, taskCreate, key} = this.props;
     return(
-      <section className='project-item'>
+      <section key={key} className='project-item'>
         <div className='content'>
           <h4>{project.projectName}</h4>
           <p>{project.desc}</p>
@@ -25,7 +25,8 @@ class ProjectItem extends React.Component{
           <button onClick={() => projectDelete(project)}>X</button>
         </div>
         <div className='edit'>
-          <ProjectForm 
+          <ProjectForm
+            key={project._id}
             buttonText='Update Project'
             org={org}
             project={project}

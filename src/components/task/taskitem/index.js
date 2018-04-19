@@ -7,14 +7,16 @@ import * as util from '../../../lib/util.js';
 
 class TaskItem extends React.Component {
   render() {
-    let { org, project, task, taskUpdate, taskDelete, taskCreate } = this.props;
+    let { org, project, task, taskUpdate, taskDelete, taskCreate, key } = this.props;
     return(
-      <section className='task-item'>
+      <section key={key} className='task-item'>
         <div className='content'>
           <h4>{task.taskName}</h4>
           <p>{task.desc}</p>
           <p>Start Date: {task.startDate}</p>
+          <p>Expected Duration: {task.expectedDuration} days</p>
           <p>Due Date: {task.dueDate} </p>
+          <p>Status: {task.status}% Complete</p>
           {util.renderIf(task.admins.length > 0,
             <ul>
               <li>Existing Task Admins</li>

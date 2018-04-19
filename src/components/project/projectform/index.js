@@ -6,7 +6,7 @@ class ProjectForm extends React.Component{
     super(props);
     this.state = this.props.project ? {...props.project} : { 
       _id: undefined,
-      orgId: undefined, 
+      orgId: this.props.org._id, 
       projectName: '',
       desc: '', 
       startDate: '', 
@@ -66,8 +66,9 @@ class ProjectForm extends React.Component{
   }
 
   render(){
+    let key = this.props.key ? this.props.key : undefined;
     return(
-      <form className='project-form' onSubmit={this.handleSubmit}>
+      <form key={key} className='project-form' onSubmit={this.handleSubmit}>
         <input 
           name='projectName'
           type='text'
@@ -80,18 +81,24 @@ class ProjectForm extends React.Component{
           placeholder='Project Description'
           value={this.state.desc}
           onChange={this.handleChange} />
-        <input
-          name='startDate'
-          type='date'
-          placeholder='Start Date'
-          value={this.state.startDate}
-          onChange={this.handleChange} />
-        <input
-          name='dueDate'
-          type='date'
-          placeholder='Due Date'
-          value={this.state.dueDate}
-          onChange={this.handleChange} />
+        <label>
+          Start Date:
+          <input
+            name='startDate'
+            type='date'
+            placeholder='Start Date'
+            value={this.state.startDate}
+            onChange={this.handleChange} />
+        </label>
+        <label>
+          Due Date: 
+          <input
+            name='dueDate'
+            type='date'
+            placeholder='Due Date'
+            value={this.state.dueDate}
+            onChange={this.handleChange} />
+        </label>
         {util.renderIf(this.state.admins.length > 0,
           <ul>
             <li>Existing Project Admins</li>
