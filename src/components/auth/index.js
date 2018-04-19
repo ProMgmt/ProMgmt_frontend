@@ -35,7 +35,6 @@ class AuthForm extends Component {
         this.props.history.push('/dashboard');                  
         this.setState({ username: '', email: '', password: ''} );
       })
-      .then(this.handleModalClose)
       .catch( error => {
         console.error(error);
         this.setState({error})
