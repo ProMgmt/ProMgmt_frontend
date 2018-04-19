@@ -27,6 +27,11 @@ class ProjectItem extends React.Component{
             <p>{project.desc}</p>
             <p>Start Date: {project.startDate}</p>
             <p>Due Date: {project.dueDate}</p>
+            {util.renderIf(project.tasks,
+              <ProjectGantt 
+                project={project}
+                />
+            )}
             <FlatButton
              onClick={() => projectDelete(project)}
              icon={<Clear />}
