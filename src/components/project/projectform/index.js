@@ -136,7 +136,7 @@ class ProjectForm extends React.Component{
             )}
             {this.props.org.users.map(user => 
               <MenuItem 
-                key={`${admin._id}-${i}} 
+                key={`${admin._id}-${i}`} 
                 value={user._id}
                 primaryText={user.username}
               />
