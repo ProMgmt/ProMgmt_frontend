@@ -2,6 +2,9 @@
 
 import React, { Component } from 'react';
 import * as util from './../../../lib/util.js';
+import TextField from 'material-ui/TextField';
+import FlatButton from 'material-ui/FlatButton';
+import './_profile-form.scss';
 
 class ProfileForm extends Component {
   constructor(props) {
@@ -67,45 +70,58 @@ class ProfileForm extends Component {
           </div>
           : null}
 
-        <h3>First Name</h3>
-        <input
+        
+        <TextField
+          className='settings-field'
           type='text'
           name='firstName'
+          floatingLabelText='First Name'
           value={this.state.firstName}
           onChange={this.handleChange}
         />
 
-        <h3>Last Name</h3>
-        <input
+        
+        <TextField
+          className='settings-field'
           type='text'
           name='lastName'
+          floatingLabelText='Last Name'
           value={this.state.lastName}
           onChange={this.handleChange}
         />
 
-        <h3>Company</h3>
-        <input
+       
+        <TextField
+          className='settings-field'
           type='text'
           name='company'
+          floatingLabelText='Company'
           value={this.state.company}
           onChange={this.handleChange}
         />
 
-        <h3>Title</h3>
-        <input
+        
+        <TextField
+          className='settings-field'
           type='text'
           name='title'
+          floatingLabelText='Title'
           value={this.state.value}
           onChange={this.handleChange}
         />
 
-        <h3>Write a Short Bio</h3>
-        <textarea
+        
+        <TextField
+          className='settings-field'
           type='text'
           name='desc'
+          rows={2}
+          multiLine={true}
+          floatingLabelText='Write a Short Bio'
           value={this.state.desc}
-          onChange={this.handleChange}>
-        </textarea>
+          onChange={this.handleChange}
+        />
+        
         <br />
         <button type='submit'>{this.props.buttonText}</button>
 
