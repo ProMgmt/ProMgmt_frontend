@@ -73,10 +73,10 @@ class AuthForm extends Component {
         <Dialog
           title={this.props.auth}
           open={this.state.modalOpen}
-          
           modal={false}
           onRequestClose={this.handleModalClose}
         >
+          
           <form
             onSubmit={this.handleSubmit}
             className='auth-form'
