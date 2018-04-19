@@ -6,7 +6,7 @@ import {userOrgEtAllSetRequest, orgCreateRequest, orgUpdateRequest} from '../../
 import {projectCreateRequest, projectUpdateRequest} from '../../action/project-actions.js';
 import {userTaskCreateRequest, userTaskUpdateRequest} from '../../action/task-actions.js';
 
-class Dashboard extends React.Component{
+class DevTool extends React.Component{
   constructor(props){
     super(props);
 
@@ -74,4 +74,4 @@ let mapDispatchToProps = dispatch => ({
   taskUpdate: task => dispatch(userTaskUpdateRequest(task)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(DevTool);

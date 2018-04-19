@@ -1,6 +1,6 @@
 <App />
   <Auth />                  // log in/sign in functionality
-  <Dashboard />
+  <Welcome />
 
     <Navigation />          // holds links to MyProfile MyOrgs MyProjects MyTasks LogOut
 

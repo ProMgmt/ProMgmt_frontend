@@ -6,6 +6,7 @@ import {Card, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import Create from 'material-ui/svg-icons/content/create';
 import Clear from 'material-ui/svg-icons/content/clear';
+import Dialog from 'material-ui/Dialog';
 
 class OrgPreview extends React.Component {
   constructor(props) {
@@ -60,10 +61,17 @@ class OrgPreview extends React.Component {
 
           {isAdmin ?
             <div className='edit-org'>
-              <FlatButton onClick={() => {this.props.delete(org)}} icon={<Clear />}/> <FlatButton onClick={() => this.toggleEdit()} icon={<Create />}/>
+              <FlatButton style={{top: 0}} onClick={() => {this.props.delete(org)}} icon={<Clear />}/> <FlatButton style={{float: 'right'}} onClick={() => this.toggleEdit()} icon={<Create />}/>
 
               {this.state.editing ?
+                <Dialog
+                  title={org.name}
+                  open={true}
+                  modal={false}
+                >
+
                 <OrgForm canToggle={true} toggle={this.toggleEdit} buttonText='Save' onComplete={this.props.update} org={org} />
+                </Dialog>
                 :
                 null
               }

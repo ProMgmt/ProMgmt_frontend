@@ -5,6 +5,8 @@ import TextField from 'material-ui/TextField';
 import * as util from './../../lib/util.js';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
+import { withRouter } from 'react-router-dom'; //gives us access to everything that the router has (history, etc)
+import GoogleOauth from '../google-oauth';
 
 class AuthForm extends Component {
   constructor(props){
@@ -17,23 +19,35 @@ class AuthForm extends Component {
       passwordError: null,
       emailError: null,
       error: null,
-      
+      modalOpen: true,
       }
 
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
+      this.handleModalOpen = this.handleModalOpen.bind(this);
+      this.handleModalClose = this.handleModalClose.bind(this);
     }
 
     handleSubmit(e) {
       e.preventDefault();
       this.props.onComplete(this.state)
-      .then( () => {                    
-        this.setState({ username: '', email: '', password: ''} )
+      .then( () => {  
+        this.props.history.push('/dashboard');                  
+        this.setState({ username: '', email: '', password: ''} );
       })
       .catch( error => {
         console.error(error);
         this.setState({error})
       })
+    }
+
+    handleModalOpen() {
+      this.setState({ modalOpen: true });
+    }
+  
+    handleModalClose() {
+      this.setState({ modalOpen: false });
+      this.props.onClose();
     }
 
     handleChange(e) {
@@ -53,60 +67,74 @@ class AuthForm extends Component {
     }
 
     render() {
+      
       return(
-        // <Dialog
-        //   title={this.props.auth}
-        //   open={true}
-        //   modal={false}
-        //   onRequestClose={this.props.modalClose}
-        // >
-        <form
-          onSubmit={this.handleSubmit}
-          className='auth-form'
+        <Dialog
+          title={this.props.auth}
+          open={this.state.modalOpen}
+          modal={false}
+          onRequestClose={this.handleModalClose}
         >
+          
+          <form
+            onSubmit={this.handleSubmit}
+            className='auth-form'
+          >
 
-          {util.renderIf(this.props.auth === 'signup',
+            {util.renderIf(this.props.auth === 'signup',
+              
+                <TextField 
+                  type='email'
+                  name='email'
+                  floatingLabelText='email'
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                />
+              
+        )}
+              
+                <TextField
+                  type='text'
+                  name='username'
+                  floatingLabelText='username'
+                  value={this.state.username}
+                  onChange={this.handleChange}
+                />
             
-              <TextField 
-                type='email'
-                name='email'
-                floatingLabelText='email'
-                value={this.state.email}
-                onChange={this.handleChange}
-              />
-            
-      )}
-            
-              <TextField
-                type='text'
-                name='username'
-                floatingLabelText='username'
-                value={this.state.username}
-                onChange={this.handleChange}
-              />
-           
 
+              
+                <TextField
+                  type='password'
+                  name='password'
+                  floatingLabelText='password'
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                />
             
-              <TextField
-                type='password'
-                name='password'
-                floatingLabelText='password'
-                value={this.state.password}
-                onChange={this.handleChange}
-              />
-           
 
-            
-              <FlatButton type='submit'>{this.props.auth}</FlatButton>
-            
-        </form>
-        // </Dialog>
+              
+                <FlatButton 
+                  onClick={this.handleSubmit}
+                  label={this.props.auth}
+                  primary={true}
+                  
+                />
+
+                <FlatButton 
+                  onClick={this.handleModalClose}
+                  label='Cancel'
+                  primary={true}
+                /> 
+                <GoogleOauth/>
+              
+          </form>
+        </Dialog>
       )
     }
   }
 
 
-  export default AuthForm;
+  export default withRouter(AuthForm);
 
 
 

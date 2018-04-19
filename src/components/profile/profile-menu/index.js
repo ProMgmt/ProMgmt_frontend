@@ -8,7 +8,7 @@ import { tokenDelete } from '../../../action/auth-actions';
 import { connect } from 'react-redux';
 import { deleteCookie } from '../../../lib/util';
 
-import './_profile-menu.scss';
+import './_profilemenu.scss';
 
 
 class ProfileMenu extends React.Component {
@@ -27,7 +27,8 @@ class ProfileMenu extends React.Component {
     return(
       <div>
         <IconMenu
-          iconButtonElement={<IconButton ><AccountCircle className='profile-button'/></IconButton>}
+          className='profile-menu'
+          iconButtonElement={<IconButton ><AccountCircle /></IconButton>}
           anchorOrigin={{horizontal: 'left', vertical: 'top'}}
           targetOrigin={{horizontal: 'left', vertical: 'top'}}
         >
@@ -36,7 +37,7 @@ class ProfileMenu extends React.Component {
           <MenuItem><Link to='/welcome/signin'>Sign In</Link></MenuItem>
           <MenuItem><Link to='/myprofile'>Profile Settings</Link></MenuItem>
 
-          <MenuItem><Link to='/devtool'>dev tool</Link></MenuItem>
+          <MenuItem><Link to='/dashboard'>dashboard</Link></MenuItem>
           <MenuItem><Link to='/' onClick={this.handleSignout}>sign out</Link></MenuItem>
 
         </IconMenu>
@@ -56,6 +57,6 @@ export default connect(null, mapDispatchToProps)(ProfileMenu);
   <li><Link to='/welcome/signup'>signup</Link></li>
   <li><Link to='/welcome/signin'>signin</Link></li>
   <li><Link to='/myprofile'>settings</Link></li>
-  <li><Link to='/devtool'>dev tool</Link></li>
+  <li><Link to='/dashboard'>dev tool</Link></li>
 </ul>
 </nav> */}
