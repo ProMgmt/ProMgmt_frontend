@@ -119,7 +119,7 @@ class ProjectForm extends React.Component{
             )}
           </ul>
         )}
-        
+
           
           <SelectField 
             floatingLabelText='Add Admin' 
@@ -129,14 +129,14 @@ class ProjectForm extends React.Component{
             
             {this.props.org.admins.map(admin => 
               <MenuItem 
-                key={admin._id} 
+                key={`${admin._id}-${i}`} 
                 value={admin._id}
                 primaryText={admin.username} 
               />
             )}
             {this.props.org.users.map(user => 
               <MenuItem 
-                key={user._id} 
+                key={`${admin._id}-${i}} 
                 value={user._id}
                 primaryText={user.username}
               />
