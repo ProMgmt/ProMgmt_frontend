@@ -7,7 +7,25 @@ import * as util from '../../../lib/util.js';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 
 class TaskItem extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      edit: false,
+    }
+
+    this.toggleEdit = this.toggleEdit.bind(this);
+  }
+
+  toggleEdit() {
+    this.setState(state => {
+      return {edit: !state.edit};
+    });
+  }
+
   render() {
+    let editTaskButtonText;
+    this.state.edit ? editTaskButtonText = 'Hide' : editTaskButtonText = 'Edit';
     let { org, project, task, taskUpdate, taskDelete, taskCreate, key } = this.props;
     return(
       <section key={key} className='task-item'>
@@ -42,14 +60,23 @@ class TaskItem extends React.Component {
           </CardText>
           <button onClick={() => taskDelete(task)}>X</button>
         </Card>
-        <div className='edit'>
-          <TaskForm  
-            buttonText='Update Task'
-            org={org}
-            project={project}
-            task={task}
-            onComplete={taskUpdate} />
-        </div>
+        <button onClick={this.toggleEdit}>{editTaskButtonText}</button>
+        {this.state.edit ? 
+          <div className='edit'>
+            <TaskForm  
+              buttonText='Update Task'
+              org={org}
+              project={project}
+              task={task}
+              onComplete={taskUpdate} 
+              canToggle={true}
+              toggle={this.toggleEdit}
+              />
+          </div>
+          :
+          null
+        }
+
       </section>
     )
   } 

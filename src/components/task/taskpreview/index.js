@@ -32,14 +32,15 @@ class TaskPreview extends React.Component {
   }
 
   render() {
-    let task = this.props.task;
     let updateButtonText;
+    this.state.editing ? updateButtonText = 'Hide' : updateButtonText = 'Update';
+    
+    let {task} = this.props;
     let isAdmin = false;
     task.admins.forEach(adminObj => {
       if(this.props.user._id === adminObj._id || this.props.user._id === adminObj) isAdmin = true;
     })
 
-    this.state.editing ? updateButtonText = 'Hide' : updateButtonText = 'Update';
     return (
 
       <div className='task-previews' key={task._id}>

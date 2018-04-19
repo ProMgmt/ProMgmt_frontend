@@ -37,6 +37,11 @@ class TaskForm extends React.Component{
     delete this.state.adminId;
     delete this.state.taskDAdd;
     this.props.onComplete({...this.state});
+    
+    if(this.props.canToggle) {
+      this.props.toggle();
+    }
+
     if(!this.props.task){
       this.setState({desc: '',
       startDate: undefined,
@@ -147,7 +152,7 @@ class TaskForm extends React.Component{
           <select name='taskDAdd' value={this.state.taskDAdd} onChange={this.handleChange}>
             <option value='none'>None</option>
             {this.props.project.tasks.map(task => 
-              <option value={task._id}>{task.desc}</option>
+              <option key={task._id}>{task.desc}</option>
             )}
           </select>
           <button onClick={this.handleTaskAdd}>+</button>

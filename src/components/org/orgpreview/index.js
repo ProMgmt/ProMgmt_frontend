@@ -39,7 +39,7 @@ class OrgPreview extends React.Component {
     
     let updateButtonText;
     this.state.editing ? updateButtonText = 'Hide' : updateButtonText = 'Update';
-    let org = this.props.org;
+    let {org} = this.props;
     let isAdmin = false;
     org.admins.forEach(adminObj => {
       if(this.props.user._id === adminObj._id || this.props.user._id === adminObj) isAdmin = true;

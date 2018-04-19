@@ -9,6 +9,18 @@ import {userTaskCreateRequest, userTaskUpdateRequest} from '../../action/task-ac
 class DevTool extends React.Component{
   constructor(props){
     super(props);
+
+    this.state = {
+      add: false
+    }
+
+    this.toggleAdd = this.toggleAdd.bind(this);
+  }
+
+  toggleAdd() {
+    this.setState(state => {
+      return {add: !state.add}
+    })
   }
 
   componentDidMount(){
@@ -17,12 +29,26 @@ class DevTool extends React.Component{
   }
 
   render(){
+    let buttonText;
+    this.state.add ? buttonText = 'Add an Org' : buttonText = 'Hide Add Org Form';
     return(
       <section className='devtool'>
-        <OrgForm
-          onComplete={this.props.orgCreate}
-          buttonText='Create Org'
-        />
+        <button onClick={this.toggleAdd}>Add an Org</button>
+        {this.state.add ? 
+          <OrgForm
+            onComplete={this.props.orgCreate}
+            buttonText='Create Org'
+            canToggle={true}
+            toggle={this.toggleAdd}
+          />
+          :
+          null
+        }
+        {this.props.orgs.length !== 0 ?
+          <h3>Your Organizations:</h3>
+          :
+          <p>You currently are not a member of any organizations, click above to get started!</p>
+        }
         {this.props.orgs.map(org => 
           <OrgItem
             key={org._id}

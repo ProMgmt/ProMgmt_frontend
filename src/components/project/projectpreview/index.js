@@ -34,7 +34,7 @@ class ProjectPreview extends React.Component {
   }
 
   render() {
-    let project = this.props.project;
+    let {project} = this.props;
     let updateButtonText;
     this.state.editing ? updateButtonText = 'Hide' : updateButtonText = 'Update';
     let isAdmin = false;

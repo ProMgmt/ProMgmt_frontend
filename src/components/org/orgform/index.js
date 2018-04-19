@@ -75,7 +75,6 @@ class OrgForm extends React.Component {
   handleUserSubmit(e) {
     e.preventDefault();
 
-
     let name = this.state.user.split(' ');
     let firstName= name[0];
     let lastName = name[name.length - 1];
@@ -117,14 +116,14 @@ class OrgForm extends React.Component {
           floatingLabelText='Description of Organization'
           onChange={this.handleChange} 
           required /> 
-        {/* <h3>Add Admins</h3>
+        <h3>Add Admins</h3>
         <input name='admin'
           type='text'
           placeholder='Add an Admin' 
           onChange={this.handleChange}/>
         <button className='tiny-plus'
           type='submit'
-          onClick={this.handleAdminSubmit}>+</button> */}
+          onClick={this.handleAdminSubmit}>+</button>
         {util.renderIf(this.state.adminError, 
           <p className='error'>{this.state.adminError}</p>
         )}
@@ -145,15 +144,15 @@ class OrgForm extends React.Component {
           onChange={this.handleChange}/>
         <button className='tiny-plus'
           type='submit'
-          onClick={this.handleUserSubmit}>+</button> */}
+          onClick={this.handleUserSubmit}>+</button>
         {util.renderIf(this.state.userError, 
           <p className='error'>{this.state.userError}</p>
         )}
         {this.state.userNames !== undefined ?
           <ul>
             {this.state.userNames.map((user, i) => 
-                <div>
-                  <li key={i}>{user}</li> <button className='delete'>x</button>
+                <div key={i}>
+                  <li>{user}</li> <button className='delete'>x</button>
                 </div>
             )}
           </ul>
