@@ -9,14 +9,23 @@ import AuthForm from '../auth';
 import GoogleOAuth from '../google-oauth';
 
 class Welcome extends Component{
-  render() {
+  constructor(props) {
+    super(props)
 
+    this.handleClose = this.handleClose.bind(this)
+  }
+
+  handleClose() {
+    this.props.history.goBack();
+  }
+
+  render() {
     let { params } = this.props.match;
 
     let handleComplete = params.auth === 'signin' 
     ? this.props.signin
     : this.props.signup;
-
+    
     return (
       <section>
 
@@ -24,8 +33,9 @@ class Welcome extends Component{
         <AuthForm
           auth={params.auth}
           onComplete={handleComplete}
+          onClose={this.handleClose}
         />
-        <GoogleOAuth />
+
       </section>
 
     )
