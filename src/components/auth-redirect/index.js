@@ -12,7 +12,7 @@ class AuthRedirect extends React.Component {
     if(!this.props.auth) {
       const { pathname } = this.props.history.location;
       if(['/mytasks', '/myorgs', '/myprojects', '/myprofile'].includes(pathname) 
-        || '/dashboard' === pathname && !readCookie('X-ProMgmt-Token'))  {
+        || '/dashboard' === pathname && !(readCookie('X-ProMgmt-Token') || localStorage.token))  {
         redirect = <Redirect to='/' />
       }
     }
