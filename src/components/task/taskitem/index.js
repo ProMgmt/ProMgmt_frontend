@@ -6,6 +6,8 @@ import ProjectForm from '../../project/projectform';
 import FlatButton from 'material-ui/FlatButton';
 import * as util from '../../../lib/util.js';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
+import Subheader from 'material-ui/Subheader';
+import {List, ListItem} from 'material-ui/List';
 
 class TaskItem extends React.Component {
   constructor(props) {
@@ -37,24 +39,30 @@ class TaskItem extends React.Component {
 
     return (
       <section key={key} className='task-item'>
-        <Card className='content'>
+        <Card className='content' style={{backgroundColor: '#ddeaff'}}>
           <CardHeader
             title={task.desc}
             actAsExpander={true}
             showExpandableButton={true}
           />
+
+
           <CardText expandable={true}>
             <p>Start Date: {new Date(task.startDate).toDateString()}</p>
             <p>Expected Duration: {task.expectedDuration} days</p>
             <p>Due Date: {new Date(task.dueDate).toDateString()} </p>
             <p>Status: {task.status}% Complete</p>
             {util.renderIf(task.admins.length > 0,
-              <ul>
-                <li>Existing Task Admins</li>
+              <List>
+                <Subheader>Existing Task Admins</Subheader>
                 {task.admins.map(user =>
-                  <li key={user._id}>{user.username}</li>
+                  <ListItem 
+                    key={user._id}
+                    primaryText={user.username}
+                  />
+                  
                 )}
-              </ul>
+              </List>
             )}
             {util.renderIf(task.dependentTasks.length > 0,
               <ul>

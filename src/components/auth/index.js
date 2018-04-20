@@ -111,7 +111,7 @@ class AuthForm extends Component {
                 />
             
 
-              
+              <div>
                 <FlatButton 
                   onClick={this.handleSubmit}
                   label={this.props.auth}
@@ -124,7 +124,7 @@ class AuthForm extends Component {
                   label='Cancel'
                   primary={true}
                 /> 
-                
+              </div>
           </form>
         </Dialog>
       )

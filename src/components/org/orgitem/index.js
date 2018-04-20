@@ -8,6 +8,10 @@ import ProjectItem from '../../project/projectitem';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import Clear from 'material-ui/svg-icons/content/clear';
 import FlatButton from 'material-ui/FlatButton';
+import Create from 'material-ui/svg-icons/content/create';
+import Divider from 'material-ui/Divider';
+
+import './_org-item.scss';
 
 class OrgItem extends React.Component {
   constructor(props) {
@@ -43,14 +47,26 @@ class OrgItem extends React.Component {
     let { org, orgDelete, orgUpdate, projectCreate } = this.props;
     return (
       <section className='org-item'>
-        <Card className='content'>
+        <Card className='content' style={{backgroundColor: '#afceff'}}>
           <CardHeader
             title={org.name}
             actAsExpander={true}
             showExpandableButton={true}
           />
-          <CardText expandable={true}>{org.desc}
+          <div className='org-buttons'>
+            <FlatButton 
+              onClick={this.toggleEditOrg}
+              icon={<Create />}
+             
+            />
+            <FlatButton
+              onClick={() => orgDelete(org)}
+              icon={<Clear />}
+              style={{color: 'red'}}
+            />
+          </div>
 
+          <CardText expandable={true}>{org.desc}
             {this.state.addProject ?
               <div className='proj-form'>
                 <ProjectForm
@@ -66,7 +82,10 @@ class OrgItem extends React.Component {
             }
 
             {this.props.project.length !== 0 ?
-              <h3>{`Projects belonging to ${this.props.org.name}`}:</h3>
+              <div style={{marginTop: '5vw'}}>
+                <h3 style={{marginBottom: '.5vw'}}>{`Projects belonging to ${this.props.org.name}`}:</h3>
+                <Divider />
+              </div>
               :
               <p>This org currently has no projects.</p>
             }
@@ -80,10 +99,6 @@ class OrgItem extends React.Component {
               />)}
 
           </CardText>
-          <FlatButton
-            onClick={() => orgDelete(org)}
-            icon={<Clear />}
-          />
           {this.state.editOrg ?
             <div className='edit'>
               <OrgForm
@@ -98,7 +113,6 @@ class OrgItem extends React.Component {
             :
             null
           }
-          <FlatButton onClick={this.toggleEditOrg}>{orgButtonText}</FlatButton>
         </Card>
 
       </section>
