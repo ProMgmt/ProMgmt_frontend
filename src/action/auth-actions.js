@@ -46,7 +46,10 @@ export const signinRequest = (user) => (dispatch) => {
     .then(({ body: {token, profileId, userId: _id} }) => {
       dispatch(tokenSet(token));
       dispatch(userSet({_id, profileId}));
-      dispatch(profileSetRequest(profileId));
+      if(!!profileId) {
+        console.log(':::profileId', profileId);
+        dispatch(profileSetRequest(profileId));
+      }
       dispatch(userOrgEtAllSetRequest());
       return {token, profileId};
   })

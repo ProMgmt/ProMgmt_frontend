@@ -24,7 +24,7 @@ class MyProfile extends React.Component {
     
     return(
       <div className='profile'>
-        <h1>Test</h1>
+        <h1>Your Profile:</h1>
         {!this.props.profile ?
           <ProfileForm user={this.props.user} buttonText='Create a Profile' onComplete={this.props.profileCreateRequest} />
           :

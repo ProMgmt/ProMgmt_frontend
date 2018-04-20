@@ -2,9 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import OrgForm from '../org/orgform';
 import OrgItem from '../org/orgitem';
-import {userOrgEtAllSetRequest, orgCreateRequest, orgUpdateRequest} from '../../action/org-actions.js';
-import {projectCreateRequest, projectUpdateRequest} from '../../action/project-actions.js';
-import {userTaskCreateRequest, userTaskUpdateRequest} from '../../action/task-actions.js';
+import { userOrgEtAllSetRequest, orgCreateRequest, orgUpdateRequest } from '../../action/org-actions.js';
+import { projectCreateRequest, projectUpdateRequest } from '../../action/project-actions.js';
+import { userTaskCreateRequest, userTaskUpdateRequest } from '../../action/task-actions.js';
 import FlatButton from 'material-ui/FlatButton';
 
 class Dashboard extends React.Component{
@@ -25,8 +25,8 @@ class Dashboard extends React.Component{
   }
 
   componentWillReceiveProps(props){
-    if(!props.loggedIn){
-      this.props.history.replace('/welcome/signup');
+    if (!props.loggedIn) {
+      props.history.replace('/welcome/signup');
     }
   }
 
@@ -35,6 +35,7 @@ class Dashboard extends React.Component{
     this.state.add ? buttonText = 'Add an Org' : buttonText = 'Hide Add Org Form';
     return(
       <section className='devtool'>
+        <h1>Your Projects</h1>
         <FlatButton onClick={this.toggleAdd}>Add an Org</FlatButton>
         {this.state.add ? 
           <OrgForm
@@ -65,7 +66,9 @@ class Dashboard extends React.Component{
 let mapStateToProps = state => ({
   orgs: state.orgs,
   loggedIn: !!state.auth,
+  user: state.user,
 })
+
 
 let mapDispatchToProps = dispatch => ({
   userOrgEtAllSet: () => dispatch(userOrgEtAllSetRequest()),

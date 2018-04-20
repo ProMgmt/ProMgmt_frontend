@@ -101,7 +101,7 @@ class App extends Component{
   }
 }
 
-let mapDispatchToProps = dispatch => {
+const mapDispatchToProps = dispatch => {
   return {
     userSetRequest: () => dispatch(userSetRequest()),
     tokenSet: token => dispatch(tokenSet(token)),
