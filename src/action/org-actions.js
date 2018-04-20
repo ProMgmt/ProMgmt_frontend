@@ -32,6 +32,7 @@ export const userOrgEtAllSetRequest = () => (dispatch, getState) => {
 
 export const orgCreateRequest = org => (dispatch, getState) => {
   let {auth} = getState();
+  console.log(org);
 
   for (let key in org) {
     if (!org[key]) {

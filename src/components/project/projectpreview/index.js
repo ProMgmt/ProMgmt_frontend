@@ -51,7 +51,6 @@ class ProjectPreview extends React.Component {
         <button onClick={() => { this.props.delete(project) }}>x</button> <button onClick={() => {this.toggleEdit()}}>{updateButtonText}</button>
         {this.state.editing ? 
           <ProjectForm canToggle={true} toggle={this.toggleEdit} buttonText='Save' onComplete={this.props.update} project={project} />
-
           :
           null
         }

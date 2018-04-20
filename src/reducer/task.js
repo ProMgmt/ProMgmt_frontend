@@ -16,6 +16,9 @@ export default (state=[], action) => {
       },{});
       return newTasks;
 
+    case 'TOKEN_DELETE':
+      return null;
+
     case 'PROJECT_CREATE':
       return {...state, [payload._id]: []};
 
