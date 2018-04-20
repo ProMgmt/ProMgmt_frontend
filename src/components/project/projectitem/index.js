@@ -10,6 +10,8 @@ import * as util from '../../../lib/util.js';
 import { Card, CardText, CardHeader } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import Clear from 'material-ui/svg-icons/content/clear';
+import Create from 'material-ui/svg-icons/content/create';
+import Divider from 'material-ui/Divider';
 
 class ProjectItem extends React.Component {
   constructor(props) {
@@ -46,11 +48,20 @@ class ProjectItem extends React.Component {
 
     return (
       <section key={key} className='project-item'>
-        <Card className='content'>
+        <Card className='content' style={{backgroundColor: '#c4dbff'}}>
           <CardHeader
             title={project.projectName}
             actAsExpander={true}
             showExpandableButton={true}
+          />
+          <FlatButton
+            onClick={this.toggleEditProject}
+            icon={<Create />}
+          />
+          <FlatButton
+            onClick={() => projectDelete(project)}
+            icon={<Clear />}
+            style={{color: 'red'}}
           />
 
           <CardText expandable={true}>
@@ -62,12 +73,24 @@ class ProjectItem extends React.Component {
                 project={project}
               />
             )}
-            <FlatButton
-              onClick={() => projectDelete(project)}
-              icon={<Clear />}
-            />
-            <FlatButton
-              onClick={this.toggleEditProject}>{editProjectButtonText}</FlatButton>
+
+            
+                        {this.state.editProject ?
+              <div className='edit'>
+                <ProjectForm
+                  key={project._id}
+                  buttonText='Update Project'
+                  org={org}
+                  project={project}
+                  onComplete={projectUpdate}
+                  canToggle={true}
+                  toggle={this.toggleEditProject}
+                />
+              </div>
+              :
+              null
+            }
+
 
             {this.state.addTask ?
               <div className='task-form'>
@@ -77,18 +100,21 @@ class ProjectItem extends React.Component {
                   project={project}
                   onComplete={taskCreate}
                   canToggle={true}
-                  toggle={this.addTask}
+                  toggle={this.toggleAddTask}
                 />
               </div>
               :
               null
             }
-            <FlatButton onClick={this.toggleAddTask}>{addTaskButtonText}</FlatButton>
             {this.props.task[this.props.project._id] !== 0 ?
-              <h3>{`Tasks belonging to ${this.props.project.projectName}`}</h3>
+              <div style={{marginTop: '5vw'}}>
+                <h3 style={{marginBottom: '.5vw'}}>{`Tasks belonging to ${this.props.project.projectName}`}</h3>
+                <Divider />
+              </div>
               :
               <p>You currently have no tasks for this project.</p>
             }
+            <FlatButton onClick={this.toggleAddTask}>{addTaskButtonText}</FlatButton>
             {this.props.task[this.props.project._id].map(item =>
               <TaskItem
                 key={item._id}
@@ -97,21 +123,6 @@ class ProjectItem extends React.Component {
                 task={item}
               />
             )}
-            {this.state.editProject ?
-              <div className='edit'>
-                <ProjectForm
-                  key={project._id}
-                  buttonText='Update Project'
-                  org={org}
-                  project={project}
-                  onComplete={projectUpdate}
-                  canToggle={true}
-                  toggle={toggleEditProject}
-                />
-              </div>
-              :
-              null
-            }
           </CardText>
         </Card>
 

@@ -7,6 +7,8 @@ import FlatButton from 'material-ui/FlatButton';
 import Add from 'material-ui/svg-icons/content/add';
 import Clear from 'material-ui/svg-icons/content/clear';
 import './_org-form.scss';
+import {List, ListItem} from 'material-ui/List';
+import SubHeader from 'material-ui/Subheader';
 
 class OrgForm extends React.Component {
   constructor(props) {
@@ -14,8 +16,8 @@ class OrgForm extends React.Component {
 
     if(props.org){
       var tempState = props.org;
-      tempState.adminNames = tempState.admins.map(admin => admin.username);
-      tempState.userNames = tempState.users.map(user => user.username);
+      tempState.adminNames ? tempState.adminNames = tempState.admins.map(admin => admin.username) : null;
+      tempState.userNames ? tempState.users.map(user => user.username) : null;
     }
     this.state = {
       _id: props.org ? props.org._id : undefined,
@@ -80,7 +82,11 @@ class OrgForm extends React.Component {
         let fullName = `${profile.firstName} ${profile.lastName}`;
 
         this.setState(prevState => {
-          return !prevState.admins.includes(profile.userId) ? {admins: [...prevState.admins, profile.userId], adminNames: [...prevState.adminNames, fullName]} : {}
+          if(prevState.admins) {
+            return !prevState.admins.includes(profile.userId) ? {admins: [...prevState.admins, profile.userId], adminNames: [...prevState.adminNames, fullName]} : {}
+          } else {
+            return {admins: [profile.userId], adminNames: [fullName]};
+          }
         });
       })
       .catch(err => {
@@ -104,8 +110,11 @@ class OrgForm extends React.Component {
         console.log('full nerm', fullName)
         console.log('profile', profile)
         this.setState(prevState => {
-          // TODO: Make better fix to not add duplicates
-          return !prevState.users.includes(profile.userId) ? {users: [...prevState.users, profile.userId], userNames: [...prevState.userNames, fullName]} : {}
+          if(prevState.users) {
+            return !prevState.users.includes(profile.userId) ? {users: [...prevState.users, profile.userId], userNames: [...prevState.userNames, fullName]} : {}
+          } else {
+            return {users: [profile.userId], userNames: [fullName]}
+          }
         });
       })
       .catch(err => {
@@ -141,7 +150,7 @@ class OrgForm extends React.Component {
           floatingLabelText='Description of Organization'
           onChange={this.handleChange} 
           required /> 
-        <h3>Add Admins</h3>
+        <div style={{display: 'inline-block'}}>
         <TextField 
           style={{display: 'block'}}
           className='org-field'
@@ -155,33 +164,44 @@ class OrgForm extends React.Component {
           type='submit'
           icon={<Add />}
           onClick={this.handleAdminSubmit}
+          style={{float: 'right'}}
         />
+        </div>
         {util.renderIf(this.state.adminError, 
           <p className='error'>{this.state.adminError}</p>
         )}
         {(this.state.adminNames !== undefined) ?
-          <ul>
+          <List>
+            <SubHeader>Admins</SubHeader>
             {this.state.adminNames.map((admin, i) => 
-              <li key={i}>{admin}</li>
+              <ListItem 
+                key={i}
+                primaryText={admin}
+              />
             )}
+
               {/* TODO: add remove admin functionality */}
-          </ul>
+          </List>
+
           : null
         }
-        <h3>Add Members</h3>
-        <TextField 
-          style={{display: 'block'}}
-          className='org-field'
-          name='user'
-          type='text'
-          floatingLabelText='Add a Member' 
-          onChange={this.handleChange}/>
-        <FlatButton 
-          className='tiny-plus'
-          type='submit'
-          onClick={this.handleUserSubmit}
-          icon={<Add />}
-        />
+        
+        <div  style={{display: 'inline-block'}}>
+          <TextField 
+            style={{display: 'block'}}
+            className='org-field'
+            name='user'
+            type='text'
+            floatingLabelText='Add a Member' 
+            onChange={this.handleChange}/>
+          <FlatButton 
+            className='tiny-plus'
+            type='submit'
+            onClick={this.handleUserSubmit}
+            icon={<Add />}
+            style={{float: 'right'}}
+          />
+        </div>
         {util.renderIf(this.state.userError, 
           <p className='error'>{this.state.userError}</p>
         )}

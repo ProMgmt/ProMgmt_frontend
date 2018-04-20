@@ -30,7 +30,7 @@ class MyOrgs extends React.Component {
   
   render() {    
     return (
-      <div className='my-orgs'>
+      <div className='my-orgs' style={{paddingLeft: '3.5vw'}}>
         <h1 className='h1-orgs'>My Orgs</h1>
         {(this.props.orgs.length !== 0) ? 
           this.props.orgs.map(_org =>
