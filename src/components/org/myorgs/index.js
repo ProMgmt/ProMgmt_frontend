@@ -38,11 +38,6 @@ class MyOrgs extends React.Component {
           )
           : <p>You currently have no organizations, would you like to create one?</p>
         }
-        {this.state.add ?
-          <OrgForm canToggle={true} toggle={this.toggleAdd} onComplete={this.props.orgCreateRequest} buttonText='Save' org={this.props.orgs}/>
-          : 
-          <FlatButton onClick={this.toggleAdd} label='Create an Org' />
-        }
       </div>
     )
   }
