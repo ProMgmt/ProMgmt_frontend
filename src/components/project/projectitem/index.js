@@ -97,24 +97,23 @@ class ProjectItem extends React.Component {
                 task={item}
               />
             )}
-
+            {this.state.editProject ?
+              <div className='edit'>
+                <ProjectForm
+                  key={project._id}
+                  buttonText='Update Project'
+                  org={org}
+                  project={project}
+                  onComplete={projectUpdate}
+                  canToggle={true}
+                  toggle={this.editProject}
+                />
+              </div>
+              :
+              null
+            }
           </CardText>
         </Card>
-        {this.state.editProject ?
-          <div className='edit'>
-            <ProjectForm
-              key={project._id}
-              buttonText='Update Project'
-              org={org}
-              project={project}
-              onComplete={projectUpdate}
-              canToggle={true}
-              toggle={this.editProject}
-            />
-          </div>
-          :
-          null
-        }
 
       </section>
     )

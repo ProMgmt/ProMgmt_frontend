@@ -2,6 +2,7 @@
 
 import superagent from 'superagent';
 import {profileSet, profileSetRequest} from './profile-actions.js';
+import {userOrgEtAllSetRequest} from './org-actions.js';
 
 export const tokenSet = (token) => ({
   type: 'TOKEN_SET',
@@ -46,8 +47,9 @@ export const signinRequest = (user) => (dispatch) => {
       dispatch(tokenSet(token));
       dispatch(userSet({_id, profileId}));
       dispatch(profileSetRequest(profileId));
+      dispatch(userOrgEtAllSetRequest());
       return {token, profileId};
-    })
+  })
 }
 
 export const userSetRequest = () => (dispatch, getState) => {

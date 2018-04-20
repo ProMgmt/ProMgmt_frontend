@@ -75,6 +75,7 @@ class ProfileForm extends Component {
 
         
         <TextField
+          style={{display: 'block'}}
           className='settings-field'
           type='text'
           name='firstName'
@@ -85,6 +86,7 @@ class ProfileForm extends Component {
 
         
         <TextField
+          style={{display: 'block'}}
           className='settings-field'
           type='text'
           name='lastName'
@@ -95,6 +97,7 @@ class ProfileForm extends Component {
 
        
         <TextField
+          style={{display: 'block'}}
           className='settings-field'
           type='text'
           name='company'
@@ -105,6 +108,7 @@ class ProfileForm extends Component {
 
         
         <TextField
+          style={{display: 'block'}}
           className='settings-field'
           type='text'
           name='title'
@@ -115,6 +119,7 @@ class ProfileForm extends Component {
 
         
         <TextField
+          style={{display: 'block'}}
           className='settings-field'
           type='text'
           name='desc'
@@ -126,7 +131,7 @@ class ProfileForm extends Component {
         />
         
         <br />
-        <button type='submit'>{this.props.buttonText}</button>
+        <FlatButton type='submit'>{this.props.buttonText}</FlatButton>
 
       </form>
       

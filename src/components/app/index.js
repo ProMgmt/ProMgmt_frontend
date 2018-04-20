@@ -7,6 +7,8 @@ import Auth from '../auth';
 import {BrowserRouter, Route, Link} from 'react-router-dom';
 
 import {tokenSet, userSet, userSetRequest} from './../../action/auth-actions.js';
+import {tokenSet} from './../../action/auth-actions.js';
+import {userOrgEtAllSetRequest} from '../../action/org-actions.js';
 import AuthRedirect from '../auth-redirect';
 import Welcome from './../welcome';
 import OrgForm from '../org/orgform/index.js';
@@ -58,6 +60,7 @@ class App extends Component{
       this.props.tokenSet(token);
 
       this.props.userSetRequest();
+      this.props.userOrgEtAllSet();
     }
   }
 
@@ -77,7 +80,7 @@ class App extends Component{
 
                  
                   <NavBar
-                  open={this.state.open}
+                    open={this.state.open}
                   />
                  
                 <Route path='*' component={AuthRedirect} />
@@ -103,6 +106,7 @@ let mapDispatchToProps = dispatch => {
   return {
     userSetRequest: () => dispatch(userSetRequest()),
     tokenSet: token => dispatch(tokenSet(token)),
+    userOrgEtAllSet: () => dispatch(userOrgEtAllSetRequest()),
   }
 }
 

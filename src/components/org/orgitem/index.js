@@ -84,22 +84,22 @@ class OrgItem extends React.Component {
             onClick={() => orgDelete(org)}
             icon={<Clear />}
           />
+          {this.state.editOrg ?
+            <div className='edit'>
+              <OrgForm
+                key={org._id}
+                buttonText='Update Org'
+                org={org}
+                onComplete={orgUpdate}
+                canToggle={true}
+                toggle={this.toggleEditOrg}
+              />
+            </div>
+            :
+            null
+          }
           <FlatButton onClick={this.toggleEditOrg}>{orgButtonText}</FlatButton>
         </Card>
-        {this.state.editOrg ?
-          <div className='edit'>
-            <OrgForm
-              key={org._id}
-              buttonText='Update Org'
-              org={org}
-              onComplete={orgUpdate}
-              canToggle={true}
-              toggle={this.toggleEditOrg}
-            />
-          </div>
-          :
-          null
-        }
 
       </section>
     )

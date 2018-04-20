@@ -18,7 +18,6 @@ class AuthRedirect extends React.Component {
     }
 
     return redirect;
-    
   }
 
 }

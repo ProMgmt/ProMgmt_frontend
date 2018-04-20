@@ -6,6 +6,7 @@ import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import Add from 'material-ui/svg-icons/content/add';
 import Clear from 'material-ui/svg-icons/content/clear';
+import './_org-form.scss';
 
 class OrgForm extends React.Component {
   constructor(props) {
@@ -102,6 +103,8 @@ class OrgForm extends React.Component {
       
       <form key={key} className='org-form' onSubmit={this.handleSubmit}>
         <TextField 
+          style={{display: 'block'}}
+          className='org-field'
           name='name'
           value={this.state.name}
           type='text'
@@ -111,6 +114,8 @@ class OrgForm extends React.Component {
           
         
         <TextField
+          style={{display: 'block'}}
+          className='org-field'
           multiLine={true}
           rows={2}
           name='desc'
@@ -121,6 +126,8 @@ class OrgForm extends React.Component {
           required /> 
         <h3>Add Admins</h3>
         <TextField 
+          style={{display: 'block'}}
+          className='org-field'
           name='admin'
           type='text'
           floatingLabelText='Add an Admin' 
@@ -146,6 +153,8 @@ class OrgForm extends React.Component {
         }
         <h3>Add Members</h3>
         <TextField 
+          style={{display: 'block'}}
+          className='org-field'
           name='user'
           type='text'
           floatingLabelText='Add a Member' 

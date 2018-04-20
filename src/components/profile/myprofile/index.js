@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import ProfileForm from '../profileform';
 import * as profileActions from '../../../action/profile-actions.js';
+import FlatButton from 'material-ui/FlatButton/FlatButton';
 
 class MyProfile extends React.Component {
   constructor(props) {
@@ -35,7 +36,7 @@ class MyProfile extends React.Component {
             <p>{this.props.profile.title}</p>
             <h4>Bio:</h4>
             <p>{this.props.profile.desc}</p>
-            <button onClick={this.toggleEdit}>{buttonText}</button>  
+            <FlatButton onClick={this.toggleEdit}>{buttonText}</FlatButton>  
           </div>
         }
         {this.state.edit ?

@@ -24,9 +24,10 @@ class Dashboard extends React.Component{
     })
   }
 
-  componentDidMount(){
-    this.props.userOrgEtAllSet()
-      .catch(console.error);
+  componentWillReceiveProps(props){
+    if(!props.loggedIn){
+      this.props.history.replace('/welcome/signup');
+    }
   }
 
   render(){
@@ -63,6 +64,7 @@ class Dashboard extends React.Component{
 
 let mapStateToProps = state => ({
   orgs: state.orgs,
+  loggedIn: !!state.auth,
 })
 
 let mapDispatchToProps = dispatch => ({

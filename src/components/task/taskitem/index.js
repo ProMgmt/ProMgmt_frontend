@@ -64,33 +64,30 @@ class TaskItem extends React.Component {
                 )}
               </ul>
             )}
-          {this.state.edit ?
-            <div className='edit'>
-              <TaskForm
-                buttonText='Update Task'
-                org={org}
-                project={project}
-                task={task}
-                onComplete={taskUpdate}
-                canToggle={true}
-                toggle={this.toggleEdit}
-              />
-            </div>
-            :
-            null
-          }
+            {this.state.edit ?
+              <div className='edit'>
+                <TaskForm
+                  buttonText='Update Task'
+                  org={org}
+                  project={project}
+                  task={task}
+                  onComplete={taskUpdate}
+                  canToggle={true}
+                  toggle={this.toggleEdit}
+                />
+              </div>
+              :
+              null
+            }
 
+            {isAdmin ?
+              <div className='admin-buttons'>
+                <FlatButton onClick={() => taskDelete(task)}>X</FlatButton>
+                <FlatButton onClick={this.toggleEdit}>{editTaskButtonText}</FlatButton>
+              </div>
+            : null
+            }
           </CardText>
-          {isAdmin ?
-            <div className='admin-buttons'>
-              <FlatButton onClick={() => taskDelete(task)}>X</FlatButton>
-              <FlatButton onClick={this.toggleEdit}>{editTaskButtonText}</FlatButton>
-            </div>
-          : null
-          }
-
-
-
         </Card>
 
       </section>

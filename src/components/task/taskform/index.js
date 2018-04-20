@@ -11,21 +11,42 @@ import Add from 'material-ui/svg-icons/content/add';
 class TaskForm extends React.Component{
   constructor(props){
     super(props);
-    this.state = this.props.task ? {...props.task} : {projectId: this.props.project._id, orgId: this.props.project.orgId, admins: [], adminId: 'none', dependentTasks: [], status: '0'};
+    if(this.props.task){
+      this.props.task.startDate = this.props.task.startDate ? new Date(this.props.task.startDate) : null;
+      this.props.task.dueDate = this.props.task.dueDate ? new Date(this.props.task.dueDate) : null;
+      this.props.task.endDate = this.props.task.endDate ? new Date(this.props.task.endDate) : null;
+    }
+    this.state = this.props.task ? {...props.task, adminId: '', taskDAdd: ''} : {projectId: this.props.project._id, orgId: this.props.project.orgId, admins: [], adminId: {}, dependentTasks: [], status: '0', addDTask: {}};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleAdminAdd = this.handleAdminAdd.bind(this);
     this.handleTaskAdd = this.handleTaskAdd.bind(this);
+    this.handleStatusChange = this.handleStatusChange.bind(this);
     this.handleDueDateChange = this.handleDueDateChange.bind(this);
     this.handleEndDateChange = this.handleEndDateChange.bind(this);
     this.handleStartDateChange = this.handleStartDateChange.bind(this);
+    this.handleStatusChange = this.handleStatusChange.bind(this);
+    this.handleAdminChange = this.handleAdminChange.bind(this);
+    this.handleTaskDepChange = this.handleTaskDepChange.bind(this);
   }
 
   componentWillReceiveProps(props){
     if(props.task){
       this.setState(props.task);
     }
+  }
+
+  handleStatusChange(event, index, value){
+    this.setState({status: value});
+  }
+
+  handleAdminChange(event, index, value){
+    this.setState({adminId: value});
+  }
+
+  handleTaskDepChange(event, index, value){
+    this.setState({taskDAdd: value});
   }
 
   handleChange(e){
@@ -40,6 +61,8 @@ class TaskForm extends React.Component{
     e.preventDefault();
     delete this.state.adminId;
     delete this.state.taskDAdd;
+    this.state.admins = this.state.admins.map(admin => admin._id);
+    this.state.dependentTasks = this.state.dependentTasks.map(task => task._id);
     this.props.onComplete({...this.state});
     
     if(this.props.canToggle) {
@@ -59,6 +82,10 @@ class TaskForm extends React.Component{
     }
   }
 
+  handleStatusChange(event, index, value) {
+    this.setState({value});
+  }
+
   handleAdminAdd(e){
     e.preventDefault();
     let {adminId} = this.state;
@@ -74,7 +101,7 @@ class TaskForm extends React.Component{
     e.preventDefault();
     let {taskDAdd} = this.state;
 
-    if(taskDAdd !== 'none'){
+    if(!!taskDAdd){
       this.setState(prevState => {
         return {dependentTasks: [...prevState.dependentTasks, taskDAdd]};
       })
@@ -104,38 +131,43 @@ class TaskForm extends React.Component{
     return(
       <form key={key} className='task-form' onSubmit={this.handleSubmit}>
         <TextField
+          style={{display: 'block'}}
           name='desc'
           type='text'
           floatingLabelText='Task Description'
           value={this.state.desc}
           onChange={this.handleChange} />
-        <DatePicker
-          hintText='startDate'
           
+        <DatePicker
+          style={{display: 'block'}}
+          hintText='startDate'
           value={this.state.startDate}
           onChange={this.handleStartDateChange} />
         <DatePicker
+          style={{display: 'block'}}
           hintText='dueDate'
-          
           value={this.state.dueDate}
           onChange={this.handleDueDateChange} />
-        <DatePicker
-          hintText='endDate'
           
+        <DatePicker
+          style={{display: 'block'}}
+          hintText='endDate'
           value={this.state.endDate}
           onChange={this.handleEndDateChange} />
-        <input
+        
+        <TextField
+          style={{display: 'block'}}
           name='expectedDuration'
           type='number'
-          placeholder='Expected Duration in Days'
+          floatingLabelText='Expected Duration in Days'
           value={this.state.expectedDuration}
           onChange={this.handleChange} />
-        
           
           <SelectField 
+            style={{display: 'block'}}
             floatingLabelText='Status' 
             value={this.state.status} 
-            onChange={this.handleChange}
+            onChange={this.handleStatusChange}
           >
             <MenuItem value='0' primaryText='0%' />
             <MenuItem value='25' primaryText='25%' />
@@ -153,24 +185,25 @@ class TaskForm extends React.Component{
           </ul>
         )}
         
-          Add Admin:
+          
           <SelectField 
+            style={{display: 'block'}}
             floatingLabelText='Add Admin' 
             value={this.state.adminId} 
-            onChange={this.handleChange}
+            onChange={this.handleAdminChange}
           >
             
             {this.props.project.admins.map(admin => 
               <MenuItem 
                 key={admin._id} 
-                value={admin._id}
+                value={admin}
                 primaryText={admin.username}
               />
             )}
             {this.props.project.users.map(user => 
               <MenuItem 
                 key={user._id} 
-                value={user._id}
+                value={user}
                 primaryText={user.username}
               />
             )}
@@ -188,17 +221,18 @@ class TaskForm extends React.Component{
               )}
           </ul>
         )}
-        <label>
-          Add Task Dependency:
+       
           <SelectField 
+            style={{display: 'block'}}
             floatingLabelText='Add Task Dependency' 
             value={this.state.taskDAdd} 
-            onChange={this.handleChange}
+            onChange={this.handleTaskDepChange}
           >
             
             {this.props.project.tasks.map(task => 
               <MenuItem 
                 key={task._id}
+                value={task}
                 primaryText={task.desc}
               />
             )}
@@ -207,7 +241,7 @@ class TaskForm extends React.Component{
             onClick={this.handleTaskAdd}
             icon={<Add />}
           />
-        </label>
+        
         <FlatButton 
           type='submit'
           label={this.props.buttonText}
