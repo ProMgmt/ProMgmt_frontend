@@ -54,7 +54,7 @@ class OrgItem extends React.Component {
             {this.state.addProject ?
               <div className='proj-form'>
                 <ProjectForm
-                  buttonText='New Project'
+                  buttonText='Save Project'
                   org={org}
                   onComplete={projectCreate}
                   canToggle={true}

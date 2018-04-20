@@ -124,8 +124,7 @@ class AuthForm extends Component {
                   label='Cancel'
                   primary={true}
                 /> 
-                <GoogleOauth/>
-              
+                
           </form>
         </Dialog>
       )

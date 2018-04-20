@@ -55,8 +55,8 @@ class ProjectItem extends React.Component {
 
           <CardText expandable={true}>
             <p>{project.desc}</p>
-            <p>Start Date: {project.startDate}</p>
-            <p>Due Date: {project.dueDate}</p>
+            <p>Start Date: {new Date(project.startDate).toDateString()}</p>
+            <p>Due Date: {new Date(project.dueDate).toDateString()}</p>
             {util.renderIf(project.tasks.length > 0,
               <ProjectGantt
                 project={project}
