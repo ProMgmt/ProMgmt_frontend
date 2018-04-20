@@ -53,6 +53,9 @@ class ProfileForm extends Component {
   }
 
   handleSubmit(e) {
+    if (this.props.canToggle) {
+      this.props.toggle();
+    }
     e.preventDefault();
     this.props.onComplete({ ...this.state });
   }
@@ -110,7 +113,7 @@ class ProfileForm extends Component {
           type='text'
           name='title'
           floatingLabelText='Title'
-          value={this.state.value}
+          value={this.state.title}
           onChange={this.handleChange}
         />
 

@@ -30,8 +30,6 @@ class TaskItem extends React.Component {
     let { org, project, task, taskUpdate, taskDelete, taskCreate, key } = this.props;
 
     let isAdmin = false;
-    console.log('this.props.user', this.props.user);
-    console.log('task.admins', task.admins);
     // TODO: Check this functionality b/c can't text it since i have no tasks
     task.admins.forEach(adminObj => {
       if (this.props.user._id === adminObj._id || this.props.user._id === adminObj) isAdmin = true;

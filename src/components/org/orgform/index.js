@@ -63,7 +63,7 @@ class OrgForm extends React.Component {
     // TODO: FIX ERROR USER NOT AUTHORIZED
 
     superagent.get(`${__API_URL__}/api/profile/${firstName}/${lastName}`)
-      .set({Authorization: `Bearer: ${this.props.auth}`})
+      .set('Authorization', `Bearer ${this.props.auth}`)      
       .then(profile => {
         let fullName = `${profile.firstName} ${profile.lastName}`;
         this.setState(prevState => {
@@ -84,7 +84,7 @@ class OrgForm extends React.Component {
     let lastName = name[name.length - 1];
 
     superagent.get(`${__API_URL__}/api/profile/${firstName}/${lastName}`)
-      .set({Authorization: `Bearer: ${this.props.auth}`})
+      .set('Authorization', `Bearer ${this.props.auth}`)
       .then(profile => {
         let fullName = `${profile.firstName} ${profile.lastName}`;
         this.setState(prevState => {

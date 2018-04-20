@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import Auth from '../auth';
 import {BrowserRouter, Route, Link} from 'react-router-dom';
 
+import {tokenSet, userSet, userSetRequest} from './../../action/auth-actions.js';
 import {tokenSet} from './../../action/auth-actions.js';
 import {userOrgEtAllSetRequest} from '../../action/org-actions.js';
 import AuthRedirect from '../auth-redirect';
@@ -45,8 +46,6 @@ class App extends Component{
       open: false,
       modalOpen: false,
     };
-
-    
   }
 
   handleToggle() {
@@ -55,12 +54,12 @@ class App extends Component{
     })
   }
 
-  
-
   componentDidMount() {
     let token = util.readCookie('X-ProMgmt-Token');
     if(token) {
       this.props.tokenSet(token);
+
+      this.props.userSetRequest();
       this.props.userOrgEtAllSet();
     }
   }
@@ -82,7 +81,6 @@ class App extends Component{
                  
                   <NavBar
                     open={this.state.open}
-                  
                   />
                  
                 <Route path='*' component={AuthRedirect} />
@@ -92,7 +90,6 @@ class App extends Component{
                 <Route exact path='/myprojects' component={MyProjects} />
                 <Route exact path='/mytasks' component={MyTasks} /> 
                 <Route exact path='/dashboard' component={Dashboard} />
-
 
               </section>
             </BrowserRouter>
@@ -107,6 +104,7 @@ class App extends Component{
 
 let mapDispatchToProps = dispatch => {
   return {
+    userSetRequest: () => dispatch(userSetRequest()),
     tokenSet: token => dispatch(tokenSet(token)),
     userOrgEtAllSet: () => dispatch(userOrgEtAllSetRequest()),
   }

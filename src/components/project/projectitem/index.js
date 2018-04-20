@@ -44,7 +44,6 @@ class ProjectItem extends React.Component {
 
     let { org, project, projectUpdate, projectDelete, taskCreate, key } = this.props;
 
-    console.log('THIS.PROPS.PROJECT', this.props.project);
     return (
       <section key={key} className='project-item'>
         <Card className='content'>

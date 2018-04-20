@@ -40,8 +40,30 @@ export const profileCreateRequest = (profile) => (dispatch, getState) => {
     });
 }
 
+export const profileSetRequest = (req) => (dispatch, getState) => {
+  let {auth} = getState();
+
+  return superagent.get(`${__API_URL__}/api/profile/${req}`)
+    .set('Authorization', `Bearer ${auth}`)
+    .then(res => {
+      dispatch(profileSet(res.body));
+      return res;
+    })
+}
+
+export const profileUpdateRequest = (profile) => (dispatch, getState) => {
+  let {auth} = getState();
+
+  return superagent.put(`${__API_URL__}/api/profile/${profile._id}`)
+    .set('Authorization', `Bearer ${auth}`)
+    .send(profile)
+    .then(res => {
+      dispatch(profileUpdate(res.body));
+      return res;
+    })
+}
+
 const updateUserProfile = (profile) => {
-  console.log('REQ in profile actions', profile)
   let {userId} = profile;
   let profileId = profile._id;
   
@@ -53,8 +75,3 @@ const updateUserProfile = (profile) => {
       return res;
     })
 }
-
-export const profileFetch = profile => ({
-  type: 'PROFILE_FETCH', 
-  payload: profile
-})

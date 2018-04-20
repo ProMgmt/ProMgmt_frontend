@@ -11,29 +11,22 @@ class MyProfile extends React.Component {
     this.state = {edit: false};
 
     this.toggleEdit = this.toggleEdit.bind(this);
-    this.toggleAdd = this.toggleAdd.bind(this);
   }
 
   toggleEdit() {
     this.setState(state => {
-      edit: !state.edit;
-    });
-  }
-
-  toggleAdd() {
-    this.setState(state => {
-      add: !state.add;
+      return {edit: !state.edit}
     });
   }
 
   render() {
     let buttonText = this.state.edit ? 'Hide' : 'Edit';
-    console.log(':::this.props.profile:::', this.props.profile);
+    
     return(
       <div className='profile'>
         <h1>Test</h1>
         {!this.props.profile ?
-          <ProfileForm user={this.props.user} buttonText='Create a Profile' onComplete={this.props.profileCreateRequest}/>
+          <ProfileForm user={this.props.user} buttonText='Create a Profile' onComplete={this.props.profileCreateRequest} />
           :
           <div className='profile-info'>
             <h3>{`Hello ${this.props.profile.firstName} ${this.props.profile.lastName}!`}</h3>
@@ -46,6 +39,12 @@ class MyProfile extends React.Component {
             <FlatButton onClick={this.toggleEdit}>{buttonText}</FlatButton>  
           </div>
         }
+        {this.state.edit ?
+          <ProfileForm user={this.props.user} canToggle={true} toggle={this.toggleEdit} profile={this.props.profile} buttonText='Save Changes' onComplete={this.props.profileUpdateRequest} />
+          :
+          null
+        }
+        
       </div>
     )
   }
@@ -61,6 +60,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   userOrgSet: () => dispatch(orgActions.userOrgEtAllSetRequest()),
   profileCreateRequest: (profile) => dispatch(profileActions.profileCreateRequest(profile)),
+  profileUpdateRequest: (profile) => dispatch(profileActions.profileUpdateRequest(profile)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyProfile);
