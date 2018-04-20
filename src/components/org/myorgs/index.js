@@ -5,6 +5,7 @@ import * as util from '../../../lib/util.js';
 import OrgPreview from '../orgpreview/index.js';
 import OrgForm from '../orgform/index.js';
 import FlatButton from 'material-ui/FlatButton';
+import './_myorgs.scss';
 
 class MyOrgs extends React.Component {
   constructor(props) {
@@ -30,7 +31,7 @@ class MyOrgs extends React.Component {
   render() {    
     return (
       <div className='my-orgs'>
-        <h1>My Orgs</h1>
+        <h1 className='h1-orgs'>My Orgs</h1>
         {(this.props.orgs.length !== 0) ? 
           this.props.orgs.map(_org =>
             <OrgPreview org={_org} delete={this.props.orgDeleteRequest} update={this.props.orgUpdateRequest} />

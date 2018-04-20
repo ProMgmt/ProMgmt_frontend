@@ -66,7 +66,7 @@ class OrgItem extends React.Component {
             }
 
             {this.props.project.length !== 0 ?
-              <h3>{`Projects belonging to ${this.props.org.name}`}</h3>
+              <h3>{`Projects belonging to ${this.props.org.name}`}:</h3>
               :
               <p>This org currently has no projects.</p>
             }
