@@ -16,8 +16,8 @@ class OrgForm extends React.Component {
 
     if(props.org){
       var tempState = props.org;
-      tempState.adminNames = tempState.admins.map(admin => admin.username);
-      tempState.userNames = tempState.users.map(user => user.username);
+      tempState.adminNames ? tempState.adminNames = tempState.admins.map(admin => admin.username) : null;
+      tempState.userNames ? tempState.users.map(user => user.username) : null;
     }
     this.state = {
       _id: props.org ? props.org._id : undefined,
@@ -76,7 +76,11 @@ class OrgForm extends React.Component {
         let fullName = `${profile.firstName} ${profile.lastName}`;
 
         this.setState(prevState => {
-          return !prevState.admins.includes(profile.userId) ? {admins: [...prevState.admins, profile.userId], adminNames: [...prevState.adminNames, fullName]} : {}
+          if(prevState.admins) {
+            return !prevState.admins.includes(profile.userId) ? {admins: [...prevState.admins, profile.userId], adminNames: [...prevState.adminNames, fullName]} : {}
+          } else {
+            return {admins: [profile.userId], adminNames: [fullName]};
+          }
         });
       })
       .catch(err => {
@@ -100,8 +104,11 @@ class OrgForm extends React.Component {
         console.log('full nerm', fullName)
         console.log('profile', profile)
         this.setState(prevState => {
-          // TODO: Make better fix to not add duplicates
-          return !prevState.users.includes(profile.userId) ? {users: [...prevState.users, profile.userId], userNames: [...prevState.userNames, fullName]} : {}
+          if(prevState.users) {
+            return !prevState.users.includes(profile.userId) ? {users: [...prevState.users, profile.userId], userNames: [...prevState.userNames, fullName]} : {}
+          } else {
+            return {users: [profile.userId], userNames: [fullName]}
+          }
         });
       })
       .catch(err => {
@@ -166,8 +173,10 @@ class OrgForm extends React.Component {
                 primaryText={admin}
               />
             )}
+
               {/* TODO: add remove admin functionality */}
           </List>
+
           : null
         }
         

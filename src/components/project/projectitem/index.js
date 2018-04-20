@@ -74,6 +74,24 @@ class ProjectItem extends React.Component {
               />
             )}
 
+            
+                        {this.state.editProject ?
+              <div className='edit'>
+                <ProjectForm
+                  key={project._id}
+                  buttonText='Update Project'
+                  org={org}
+                  project={project}
+                  onComplete={projectUpdate}
+                  canToggle={true}
+                  toggle={this.toggleEditProject}
+                />
+              </div>
+              :
+              null
+            }
+
+
             {this.state.addTask ?
               <div className='task-form'>
                 <TaskForm
@@ -82,7 +100,7 @@ class ProjectItem extends React.Component {
                   project={project}
                   onComplete={taskCreate}
                   canToggle={true}
-                  toggle={this.addTask}
+                  toggle={this.toggleAddTask}
                 />
               </div>
               :
@@ -105,21 +123,6 @@ class ProjectItem extends React.Component {
                 task={item}
               />
             )}
-            {this.state.editProject ?
-              <div className='edit'>
-                <ProjectForm
-                  key={project._id}
-                  buttonText='Update Project'
-                  org={org}
-                  project={project}
-                  onComplete={projectUpdate}
-                  canToggle={true}
-                  toggle={toggleEditProject}
-                />
-              </div>
-              :
-              null
-            }
           </CardText>
         </Card>
 

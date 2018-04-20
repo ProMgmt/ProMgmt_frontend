@@ -105,6 +105,7 @@ class ProjectForm extends React.Component{
   }
 
   render(){
+    console.log(':::this.props.org', this.props.org)
     let key = this.props.key ? this.props.key : undefined;
     return(
       <form key={key} className='project-form' onSubmit={this.handleSubmit}>
@@ -154,20 +155,28 @@ class ProjectForm extends React.Component{
                 key='none'
                 value='none'
                 primaryText='none' />
-            {this.props.org.admins.map((admin, i) => 
-              <MenuItem 
-                key={`${admin._id}-${i}`} 
-                value={admin}
-                primaryText={admin.username} 
-              />
-            )}
-            {/* {this.props.org.users.map((user, i) => 
+            {this.props.org ?
+              this.props.org.admins.map((admin, i) => 
+                <MenuItem 
+                  key={`${admin._id}-${i}`} 
+                  value={admin}
+                  primaryText={admin.username} 
+                />
+              )
+              : null
+            }
+            {this.props.org ?
+              this.props.org.users ?
+              this.props.org.users.map((user, i) => 
               <MenuItem 
                 key={`${user._id}-${i}`} 
                 value={user._id}
                 primaryText={user.username}
               />
-            )} */}
+             )
+             : null 
+             : null
+            }
           </SelectField>
           <FlatButton 
             onClick={this.handleAdminAdd}
@@ -193,20 +202,28 @@ class ProjectForm extends React.Component{
                 key='none'
                 value='none'
                 primaryText='none' />
-            {this.props.org.admins.map(admin => 
+            {this.props.org ?
+              this.props.org.admins.map((admin, i) => 
+                <MenuItem 
+                  key={`${admin._id}-${i}`} 
+                  value={admin}
+                  primaryText={admin.username} 
+                />
+              )
+              : null
+            }            
+            {this.props.org ?
+              this.props.org.users ?
+              this.props.org.users.map((user, i) => 
               <MenuItem 
-                key={admin._id} 
-                value={admin}
-                primaryText={admin.username}
-              />
-            )}
-            {/* {this.props.org.users.map(user => 
-              <MenuItem 
-                key={user._id} 
+                key={`${user._id}-${i}`} 
                 value={user._id}
                 primaryText={user.username}
               />
-            )} */}
+             )
+             : null 
+             : null
+            }
           </SelectField>
           <FlatButton 
             onClick={this.handleUserAdd}

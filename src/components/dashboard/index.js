@@ -36,9 +36,11 @@ class Dashboard extends React.Component{
     let buttonText;
     this.state.add ? buttonText = 'Add an Org' : buttonText = 'Hide Add Org Form';
     return(
+
       <section className='devtool' style={{padding: '3.5vw'}}>
         {/* <h1>Your Projects</h1> */}
         <FlatButton onClick={this.toggleAdd} style={{marginBottom: '2.4vw'}}>Add an Org</FlatButton>
+
         {this.state.add ? 
           <OrgForm
             onComplete={this.props.orgCreate}
