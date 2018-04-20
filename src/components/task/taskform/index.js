@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import { runInThisContext } from 'vm';
 import * as util from '../../../lib/util.js';
 import TextField from 'material-ui/TextField';
@@ -7,6 +8,8 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
 import Add from 'material-ui/svg-icons/content/add';
+import Clear from 'material-ui/svg-icons/content/clear';
+import {taskRemoveAdmin} from '../../../action/task-actions.js';
 
 class TaskForm extends React.Component{
   constructor(props){
@@ -29,6 +32,7 @@ class TaskForm extends React.Component{
     this.handleStatusChange = this.handleStatusChange.bind(this);
     this.handleAdminChange = this.handleAdminChange.bind(this);
     this.handleTaskDepChange = this.handleTaskDepChange.bind(this);
+    this.handleTaskRemoveAdmin = this.handleTaskRemoveAdmin.bind(this);
   }
 
   componentWillReceiveProps(props){
@@ -61,8 +65,10 @@ class TaskForm extends React.Component{
     e.preventDefault();
     delete this.state.adminId;
     delete this.state.taskDAdd;
-    this.state.admins = this.state.admins.map(admin => admin._id);
-    this.state.dependentTasks = this.state.dependentTasks.map(task => task._id);
+    this.state.admins ? this.setState(prevState => {
+      return {admins: prevState.admins.map(admin => admin._id)}}) : null;
+    this.state.dependentTasks ? this.setState(prevState => {
+      return {dependentTasks: prevState.dependentTasks.map(task => task._id)}}) : null;
     console.log('this.state @ taskform submit', this.state);
     this.props.onComplete({...this.state});
     
@@ -123,7 +129,14 @@ class TaskForm extends React.Component{
     });
   };
 
+  handleTaskRemoveAdmin(e){
+    console.log('e.target.value @ delete button', e.target.value);
+    this.props.taskRemoveAdmin(this.props.task, e.target.value);
+  }
+
   render(){
+    let {handleTaskRemoveAdmin} = this.props;
+    console.log('handleTaskRemoveAdmin', handleTaskRemoveAdmin);
     let key = this.props.key ? this.props.key : undefined;
     return(
       <form key={key} className='task-form' onSubmit={this.handleSubmit}>
@@ -177,7 +190,15 @@ class TaskForm extends React.Component{
           <ul>
             <li>Existing Task Admins</li>
             {this.state.admins.map(user =>
-              <li key={user._id}>{user.username}</li>
+              <li key={user._id}>
+                {user.username}
+                <FlatButton 
+                  type='button'
+                  value={user}
+                  onClick={(e) => handleTaskRemoveAdmin(e)}
+                  icon={<Clear/>}
+                  />
+              </li>
             )}
           </ul>
         )}
@@ -247,5 +268,10 @@ class TaskForm extends React.Component{
     )
   }
 }
+
+
+let mapDispatchToProps = dispatch => ({
+  taskRemoveAdmin: (task, removeUser) => dispatch(taskRemoveAdmin(task, removeUser)),
+});
 
 export default TaskForm;
