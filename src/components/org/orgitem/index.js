@@ -45,6 +45,7 @@ class OrgItem extends React.Component {
     this.state.addProject ? projectButtonText = 'Hide' : projectButtonText = 'Add a Project';
 
     let { org, orgDelete, orgUpdate, projectCreate } = this.props;
+    console.log('THIS PROPS PROJECT', this.props.project);
     return (
       <section className='org-item'>
         <Card className='content' style={{backgroundColor: '#afceff'}}>
@@ -80,16 +81,22 @@ class OrgItem extends React.Component {
               :
               null
             }
+            <br/>
+            <br/>
+        <FlatButton onClick={this.toggleAddProject}>{projectButtonText}</FlatButton>
 
-            {this.props.project.length !== 0 ?
+
+            {this.props.project !== null ?
+              this.props.project[this.props.org._id].length !== 0 ?
               <div style={{marginTop: '5vw'}}>
                 <h3 style={{marginBottom: '.5vw'}}>{`Projects belonging to ${this.props.org.name}`}:</h3>
                 <Divider />
               </div>
               :
               <p>This org currently has no projects.</p>
+              :
+              null
             }
-            <FlatButton onClick={this.toggleAddProject}>{projectButtonText}</FlatButton>
 
             {this.props.project[this.props.org._id].map(item =>
               <ProjectItem
