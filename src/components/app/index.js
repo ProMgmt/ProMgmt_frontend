@@ -81,7 +81,7 @@ class App extends Component{
 
                  
                   <NavBar
-                  open={this.state.open}
+                    open={this.state.open}
                   
                   />
                  

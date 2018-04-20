@@ -5,6 +5,8 @@ import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
 import MenuItem from 'material-ui/MenuItem';
 import ProfileMenu from './../profile/profile-menu';
+import * as util from './../../lib/util.js';
+import FlatButton from 'material-ui/FlatButton';
 
 import './_nav.scss';
 
@@ -13,7 +15,10 @@ import './_nav.scss';
 class NavBar extends React.Component {
   constructor(props){
     super(props);
-    this.state = {open: false}
+    this.state = {
+      open: false,
+      logged: false,
+    }
     this.handleToggle = this.handleToggle.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
@@ -32,10 +37,23 @@ class NavBar extends React.Component {
         <AppBar
           title="Pro_Mgmt"
           onLeftIconButtonClick={this.handleToggle}
+        //   iconElementRight={this.state.logged ? <ProfileMenu /> 
+        //   : <FlatButton label='Sign In/Sign Up' containerElement={<Link to='/welcome/signin' />}
+          
+        // /> }
          
         >
 
           <ProfileMenu />
+          {/* {util.renderIf(!this.state.user, 
+          <FlatButton
+            label='Sign In/Sign Up'
+            containerElement={<Link to='/welcome/signin' />}
+            
+          />
+          )}  
+          {util.renderIf(this.state.user, <ProfileMenu />)} */}
+          
 
          </AppBar>
                   

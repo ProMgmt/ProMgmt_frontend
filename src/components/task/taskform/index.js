@@ -22,6 +22,7 @@ class TaskForm extends React.Component{
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleAdminAdd = this.handleAdminAdd.bind(this);
     this.handleTaskAdd = this.handleTaskAdd.bind(this);
+    this.handleStatusChange = this.handleStatusChange.bind(this);
     this.handleDueDateChange = this.handleDueDateChange.bind(this);
     this.handleEndDateChange = this.handleEndDateChange.bind(this);
     this.handleStartDateChange = this.handleStartDateChange.bind(this);
@@ -81,6 +82,10 @@ class TaskForm extends React.Component{
     }
   }
 
+  handleStatusChange(event, index, value) {
+    this.setState({value});
+  }
+
   handleAdminAdd(e){
     e.preventDefault();
     let {adminId} = this.state;
@@ -126,35 +131,40 @@ class TaskForm extends React.Component{
     return(
       <form key={key} className='task-form' onSubmit={this.handleSubmit}>
         <TextField
+          style={{display: 'block'}}
           name='desc'
           type='text'
           floatingLabelText='Task Description'
           value={this.state.desc}
           onChange={this.handleChange} />
-        <DatePicker
-          hintText='startDate'
           
+        <DatePicker
+          style={{display: 'block'}}
+          hintText='startDate'
           value={this.state.startDate}
           onChange={this.handleStartDateChange} />
         <DatePicker
+          style={{display: 'block'}}
           hintText='dueDate'
-          
           value={this.state.dueDate}
           onChange={this.handleDueDateChange} />
-        <DatePicker
-          hintText='endDate'
           
+        <DatePicker
+          style={{display: 'block'}}
+          hintText='endDate'
           value={this.state.endDate}
           onChange={this.handleEndDateChange} />
-        <input
+        
+        <TextField
+          style={{display: 'block'}}
           name='expectedDuration'
           type='number'
-          placeholder='Expected Duration in Days'
+          floatingLabelText='Expected Duration in Days'
           value={this.state.expectedDuration}
           onChange={this.handleChange} />
-        
           
           <SelectField 
+            style={{display: 'block'}}
             floatingLabelText='Status' 
             value={this.state.status} 
             onChange={this.handleStatusChange}
@@ -175,8 +185,9 @@ class TaskForm extends React.Component{
           </ul>
         )}
         
-          Add Admin:
+          
           <SelectField 
+            style={{display: 'block'}}
             floatingLabelText='Add Admin' 
             value={this.state.adminId} 
             onChange={this.handleAdminChange}
@@ -210,9 +221,9 @@ class TaskForm extends React.Component{
               )}
           </ul>
         )}
-        <label>
-          Add Task Dependency:
+       
           <SelectField 
+            style={{display: 'block'}}
             floatingLabelText='Add Task Dependency' 
             value={this.state.taskDAdd} 
             onChange={this.handleTaskDepChange}
@@ -230,7 +241,7 @@ class TaskForm extends React.Component{
             onClick={this.handleTaskAdd}
             icon={<Add />}
           />
-        </label>
+        
         <FlatButton 
           type='submit'
           label={this.props.buttonText}
