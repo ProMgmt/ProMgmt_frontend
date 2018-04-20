@@ -97,12 +97,14 @@ class OrgItem extends React.Component {
               null
             }
 
-            {this.props.project[this.props.org._id].map(item =>
+            {this.props.project[this.props.org._id] ?
+              this.props.project[this.props.org._id].map(item =>
               <ProjectItem
                 key={item._id}
                 org={org}
                 project={item}
-              />)}
+              />)
+            : null}
 
           </CardText>
           {this.state.editOrg ?

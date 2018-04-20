@@ -61,12 +61,14 @@ class Dashboard extends React.Component{
           <p>You currently are not a member of any organizations, click above to get started!</p>
           : null
         }
-        {this.props.orgs.map(org => 
-          <OrgItem
+        {this.props.orgs ?
+          this.props.orgs.map(org => 
+            <OrgItem
             key={org._id}
             org={org}
           />
-        )}
+        )
+        : null}
       </section>
     )
   }
