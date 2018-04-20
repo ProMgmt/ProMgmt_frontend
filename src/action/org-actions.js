@@ -22,6 +22,7 @@ export const orgUpdate = org => ({
 
 export const userOrgEtAllSetRequest = () => (dispatch, getState) => {
   let {auth} = getState();
+  console.log('auth', auth);
   return superagent.get(`${__API_URL__}/api/org/user/me`)
     .set('Authorization', `Bearer ${auth}`)
     .then(res => {
