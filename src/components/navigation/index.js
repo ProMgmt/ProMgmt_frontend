@@ -38,7 +38,7 @@ class NavBar extends React.Component {
         <AppBar
           title="Pro_Mgmt"
           onLeftIconButtonClick={this.handleToggle}
-          showMenuIconButton={!this.props.auth}
+          showMenuIconButton={this.props.auth}
         >
           <ProfileMenu />
          </AppBar>
