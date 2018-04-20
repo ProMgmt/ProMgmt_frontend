@@ -27,8 +27,8 @@ class MyProjects extends React.Component {
     }
 
     return(
-      <div className='my-projects' style={{padding: '3.5vw'}}>
-        <h1>My Projects</h1>
+      <div className='my-projects' style={{margin: '50px 50px 50px 50px', padding: '3.5vw', backgroundColor: 'rgba(255, 255, 255, .5)', padding: '30px 30px'}}>
+        <h1 style={{margin: '0px 0px 20px 0px'}}>My Projects</h1>
         {allProjectsArray.length !== 0 ?
           allProjectsArray.map(_project => 
             <ProjectPreview project={_project} key={_project._id} delete={this.props.projectDeleteRequest} update={this.props.projectUpdateRequest} />

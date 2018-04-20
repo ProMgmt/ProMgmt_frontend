@@ -16,7 +16,7 @@ class Landing extends React.Component {
 
           <p className='landing-paragraph'>In addition, the application provides you with a task gantt chart, so that you can better visualize your progress as your teammates progress.</p>
 
-          <p className='landing-paragraph'>This application was created by Taylor Stemple, Katy Robinson, David Kosmos, and Nicole Weese.</p>
+          <p className='bold'>To begin, click the icon on the top right to Sign Up and create a user profile.</p>
         </div>
       </div>
     )
