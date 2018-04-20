@@ -10,6 +10,16 @@ import { deleteCookie } from '../../../lib/util';
 
 import './_profilemenu.scss';
 
+const styles = {
+  link: {
+    textDecoration: 'none',
+    color: '#000',
+    ':visited': {
+      textDecoration: 'none',
+      color: '#000'
+    },
+  },
+};
 
 class ProfileMenu extends React.Component {
   constructor(props) {
@@ -32,18 +42,19 @@ class ProfileMenu extends React.Component {
           iconButtonElement={<IconButton ><AccountCircle /></IconButton>}
           anchorOrigin={{horizontal: 'left', vertical: 'top'}}
           targetOrigin={{horizontal: 'left', vertical: 'top'}}
+          style={{textDecoration: 'none'}}
         >
         {!this.props.loggedIn ?
           <div className='signinup'>
-            <MenuItem><Link to='/welcome/signup'>Sign Up</Link></MenuItem>
-            <MenuItem><Link to='/welcome/signin'>Sign In</Link></MenuItem>
+            <MenuItem ><Link style={styles.link} to='/welcome/signup'>Sign Up</Link></MenuItem>
+            <MenuItem><Link style={styles.link} to='/welcome/signin'>Sign In</Link></MenuItem>
           </div>
         :
         null
         }
-          <MenuItem><Link to='/myprofile'>Profile Settings</Link></MenuItem>
+          <MenuItem><Link style={styles.link} to='/myprofile'>Profile Settings</Link></MenuItem>
         {this.props.loggedIn ?
-          <MenuItem><Link to='/' onClick={this.handleSignout}>sign out</Link></MenuItem>
+          <MenuItem><Link style={styles.link} to='/' onClick={this.handleSignout}>sign out</Link></MenuItem>
           :
           null
         }
@@ -64,12 +75,3 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileMenu);
-
-{/* <nav>
-<ul>
-  <li><Link to='/welcome/signup'>signup</Link></li>
-  <li><Link to='/welcome/signin'>signin</Link></li>
-  <li><Link to='/myprofile'>settings</Link></li>
-  <li><Link to='/dashboard'>dev tool</Link></li>
-</ul>
-</nav> */}

@@ -63,6 +63,7 @@ class TaskForm extends React.Component{
     delete this.state.taskDAdd;
     this.state.admins = this.state.admins.map(admin => admin._id);
     this.state.dependentTasks = this.state.dependentTasks.map(task => task._id);
+    console.log('this.state @ taskform submit', this.state);
     this.props.onComplete({...this.state});
     
     if(this.props.canToggle) {
@@ -80,10 +81,6 @@ class TaskForm extends React.Component{
       isDependency: false,
       dependentTasks: []})
     }
-  }
-
-  handleStatusChange(event, index, value) {
-    this.setState({value});
   }
 
   handleAdminAdd(e){

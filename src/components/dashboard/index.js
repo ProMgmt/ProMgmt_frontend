@@ -6,6 +6,7 @@ import { userOrgEtAllSetRequest, orgCreateRequest, orgUpdateRequest } from '../.
 import { projectCreateRequest, projectUpdateRequest } from '../../action/project-actions.js';
 import { userTaskCreateRequest, userTaskUpdateRequest } from '../../action/task-actions.js';
 import FlatButton from 'material-ui/FlatButton';
+import './_dashboard.scss';
 
 class Dashboard extends React.Component{
   constructor(props){
@@ -35,7 +36,7 @@ class Dashboard extends React.Component{
     this.state.add ? buttonText = 'Add an Org' : buttonText = 'Hide Add Org Form';
     return(
       <section className='devtool'>
-        <h1>Your Projects</h1>
+        {/* <h1>Your Projects</h1> */}
         <FlatButton onClick={this.toggleAdd}>Add an Org</FlatButton>
         {this.state.add ? 
           <OrgForm

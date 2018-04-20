@@ -42,7 +42,7 @@ class ProjectItem extends React.Component {
     this.state.addTask ? addTaskButtonText = 'Hide' : addTaskButtonText = 'Add a Task';
     this.state.editProject ? editProjectButtonText = 'Hide' : editProjectButtonText = 'Edit Project';
 
-    let { org, project, projectUpdate, projectDelete, taskCreate, key } = this.props;
+    let { org, project, projectUpdate, projectDelete, taskCreate, key, toggleEditProject } = this.props;
 
     return (
       <section key={key} className='project-item'>
@@ -55,8 +55,8 @@ class ProjectItem extends React.Component {
 
           <CardText expandable={true}>
             <p>{project.desc}</p>
-            <p>Start Date: {project.startDate}</p>
-            <p>Due Date: {project.dueDate}</p>
+            <p>Start Date: {new Date(project.startDate).toDateString()}</p>
+            <p>Due Date: {new Date(project.dueDate).toDateString()}</p>
             {util.renderIf(project.tasks.length > 0,
               <ProjectGantt
                 project={project}
@@ -106,7 +106,7 @@ class ProjectItem extends React.Component {
                   project={project}
                   onComplete={projectUpdate}
                   canToggle={true}
-                  toggle={this.editProject}
+                  toggle={toggleEditProject}
                 />
               </div>
               :

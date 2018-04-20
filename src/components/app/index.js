@@ -27,7 +27,6 @@ import { IconButton } from 'material-ui';
 import AccountCircle from 'material-ui/svg-icons/action/account-circle'
 import ProfileMenu from './../profile/profile-menu';
 
-//let store = appCreateStore();
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -67,16 +66,9 @@ class App extends Component{
     return(
 
       <MuiThemeProvider muiTheme={muiTheme}>
-        {/* <Provider store={store}> */}
           <main className='app-container'>
-            {/* <Auth /> */}
             <BrowserRouter>
             <section>
-                
-                {/* <h1><Link to='/'>Pro_Mgmt</Link></h1>
-                <GoogleOAuth /> */}
-
-                 
                   <NavBar
                     open={this.state.open}
                   />
@@ -93,12 +85,15 @@ class App extends Component{
             </BrowserRouter>
 
         </main>
-      {/* </Provider> */}
     </MuiThemeProvider>
 
     )
   }
 }
+
+const mapStateToProps = state => ({
+  user: state.user,
+})
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -108,4 +103,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

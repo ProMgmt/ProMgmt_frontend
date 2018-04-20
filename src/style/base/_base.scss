@@ -1,0 +1,23 @@
+@import '../lib/_vars';
+
+h1, h2, h3, p, div, li {
+  font-family: $font;
+  font-weight: bold;
+  color: $dark-grey;
+}
+
+p {
+  font-size: $font-sm;
+  color: $dark-grey;
+  font-weight: lighter;
+  padding: 1vw 1vw;
+}
+
+button {
+  padding: $btn-pad;
+  color: $dark-grey;
+}
+
+body {
+  margin: 0 auto;
+}

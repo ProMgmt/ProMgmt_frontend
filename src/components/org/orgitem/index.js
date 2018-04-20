@@ -54,7 +54,7 @@ class OrgItem extends React.Component {
             {this.state.addProject ?
               <div className='proj-form'>
                 <ProjectForm
-                  buttonText='New Project'
+                  buttonText='Save Project'
                   org={org}
                   onComplete={projectCreate}
                   canToggle={true}
@@ -66,7 +66,7 @@ class OrgItem extends React.Component {
             }
 
             {this.props.project.length !== 0 ?
-              <h3>{`Projects belonging to ${this.props.org.name}`}</h3>
+              <h3>{`Projects belonging to ${this.props.org.name}`}:</h3>
               :
               <p>This org currently has no projects.</p>
             }

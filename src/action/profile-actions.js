@@ -25,8 +25,8 @@ export const profileSet = (profile) => ({
 
 export const profileCreateRequest = (profile) => (dispatch, getState) => {
   let { auth } = getState();
-  console.log('profile sent to request', profile);
   let userId = profile.userId;
+  profile.createdDate = new Date();
   return superagent.post(`${__API_URL__}/api/user/${userId}/profile`)
     .set('Authorization', `Bearer ${auth}`)
     .send(profile)
@@ -72,7 +72,6 @@ const updateUserProfile = (profile) => {
     .set('Authorization', `Bearer ${profile.auth}`)
     .send(profile)
     .then( res => {
-      console.log('RES in profile actions', res);
       return res;
     })
 }

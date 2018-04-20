@@ -45,7 +45,6 @@ class TaskPreview extends React.Component {
 
       <div className='task-previews' key={task._id}>
         <h3>{task.taskName}</h3>
-        {/* TODO: hyperlink this to the TaskItem page */}
         <p>{task.desc}</p>
         <button onClick={() => { this.props.delete(task) }}>x</button> <button onClick={() => {this.toggleEdit()}}>{updateButtonText}</button>
         {this.state.editing ?

@@ -11,6 +11,7 @@ export const tokenSet = (token) => ({
 
 export const tokenDelete = () => ({
   type: 'TOKEN_DELETE',
+  payload: null,
 })
 
 export const userSet = (user) => ({
@@ -28,10 +29,11 @@ export const signupRequest = (user) => (dispatch) => {
   .withCredentials(true)
   .send(user)
   .then( res => {
-    dispatch(tokenSet(res.text))
-    
+    console.log('res.body', res.body);
+    dispatch(tokenSet(res.body.token));
+    dispatch(userSet({_id: res.body.userId}));
     try {
-      localStorage.token = res.text;
+      localStorage.token = res.body.token;
     } catch(err) {
       console.error(err);
     }
@@ -47,7 +49,6 @@ export const signinRequest = (user) => (dispatch) => {
       dispatch(tokenSet(token));
       dispatch(userSet({_id, profileId}));
       if(!!profileId) {
-        console.log(':::profileId', profileId);
         dispatch(profileSetRequest(profileId));
       }
       dispatch(userOrgEtAllSetRequest());
@@ -60,8 +61,11 @@ export const userSetRequest = () => (dispatch, getState) => {
   return superagent.get(`${__API_URL__}/api/me`)
     .set('Authorization', `Bearer ${auth}`)
     .then(res => {
-      console.log(res);
       dispatch(userSet(res.body));
+      return res;
+    })
+    .then(res => {
+      if(!!res.body.profileId) dispatch(profileSetRequest(res.body.profileId));
       return res;
     })
 }
