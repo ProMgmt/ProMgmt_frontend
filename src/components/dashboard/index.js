@@ -51,13 +51,15 @@ class Dashboard extends React.Component{
           :
           null
         }
-        {this.props.orgs.length !== 0 ?
+        {this.props.orgs ?
+          this.props.orgs.length !== 0 ?
           <div style={{marginBottom: '2vw'}}>
             <h3 style={{marginBottom: '.5vw'}}>Your Organizations:</h3>
             <Divider />
           </div>
           :
           <p>You currently are not a member of any organizations, click above to get started!</p>
+          : null
         }
         {this.props.orgs.map(org => 
           <OrgItem
