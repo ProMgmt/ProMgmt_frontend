@@ -15,8 +15,8 @@ class ProjectForm extends React.Component{
       orgId: this.props.org._id, 
       projectName: '',
       desc: '', 
-      startDate: '', 
-      dueDate: '',
+      startDate: {}, 
+      dueDate: {},
       admins: [],
       adminId: 'none',
       users: [],
@@ -90,23 +90,27 @@ class ProjectForm extends React.Component{
     return(
       <form key={key} className='project-form' onSubmit={this.handleSubmit}>
         <TextField
+          style={{display: 'block'}}
           name='projectName'
           type='text'
           floatingLabelText='Project Name'
           value={this.state.projectName}
           onChange={this.handleChange} />
         <TextField
+          style={{display: 'block'}}
           name='desc'
           type='text'
           floatingLabelText='Project Description'
           value={this.state.desc}
           onChange={this.handleChange} />
         <DatePicker
+          style={{display: 'block'}}
           hintText='Start Date'
           value={this.state.startDate}
           onChange={this.handleStartDateChange}
         />
         <DatePicker
+          style={{display: 'block'}}
           hintText='Due Date'
           value={this.state.dueDate}
           onChange={this.handleDueDateChange} 
@@ -119,24 +123,25 @@ class ProjectForm extends React.Component{
             )}
           </ul>
         )}
-        
+
           
           <SelectField 
+            style={{display: 'block'}}
             floatingLabelText='Add Admin' 
             value={this.state.adminId} 
             onChange={this.handleChange}
           >
             
-            {this.props.org.admins.map(admin => 
+            {this.props.org.admins.map((admin, i) => 
               <MenuItem 
-                key={admin._id} 
+                key={`${admin._id}-${i}`} 
                 value={admin._id}
                 primaryText={admin.username} 
               />
             )}
-            {this.props.org.users.map(user => 
+            {this.props.org.users.map((user, i) => 
               <MenuItem 
-                key={user._id} 
+                key={`${admin._id}-${i}`} 
                 value={user._id}
                 primaryText={user.username}
               />
@@ -156,7 +161,8 @@ class ProjectForm extends React.Component{
           </ul>
         )}
         
-          <SelectField
+          <SelectField  
+            style={{display: 'block'}}
             floatingLabelText='Add User' 
             value={this.state.userId} 
             onChange={this.handleChange}
