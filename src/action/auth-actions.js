@@ -49,3 +49,14 @@ export const signinRequest = (user) => (dispatch) => {
       return {token, profileId};
     })
 }
+
+export const userSetRequest = () => (dispatch, getState) => {
+  let {auth} = getState();
+  return superagent.get(`${__API_URL__}/api/me`)
+    .set('Authorization', `Bearer ${auth}`)
+    .then(res => {
+      console.log(user);
+      dispatch(userSet(user));
+      return user;
+    })
+}

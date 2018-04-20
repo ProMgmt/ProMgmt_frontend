@@ -26,7 +26,7 @@ class Dashboard extends React.Component{
 
   componentDidMount(){
     this.props.userOrgEtAllSet()
-    .catch(console.error);
+      .catch(console.error);
   }
 
   render(){
