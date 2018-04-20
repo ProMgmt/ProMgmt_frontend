@@ -4,6 +4,7 @@ import ProjectForm from '../projectform';
 import { Card, CardText, CardHeader } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import Clear from 'material-ui/svg-icons/content/clear';
+import Create from 'material-ui/svg-icons/content/create';
 
 class ProjectPreview extends React.Component {
   constructor(props) {
@@ -44,17 +45,26 @@ class ProjectPreview extends React.Component {
 
 
     return (
-      <div className='project-previews' key={this.props.key}>
-        <h3>{project.projectName}</h3>
-        {/* TODO: hyperlink this to the ProjectItem page */}
-        <p>{project.desc}</p>
-        <button onClick={() => { this.props.delete(project) }}>x</button> <button onClick={() => {this.toggleEdit()}}>{updateButtonText}</button>
-        {this.state.editing ? 
-          <ProjectForm canToggle={true} toggle={this.toggleEdit} buttonText='Save' onComplete={this.props.update} project={project} />
+      <div className='project-previews' >
+        <Card key={this.props.key}>
+          <CardHeader
+            title={project.projectName}
+            actAsExpander={true}
+            showExpandableButton={true}
+          />
+          <CardText expandable={true}>
+        
+          {/* TODO: hyperlink this to the ProjectItem page */}
+          <p>{project.desc}</p>
+          <FlatButton onClick={() => { this.props.delete(project) }} icon={<Clear />}/> <FlatButton onClick={() => {this.toggleEdit()}} icon={<Create />}/>
+          {this.state.editing ? 
+            <ProjectForm canToggle={true} toggle={this.toggleEdit} buttonText='Save' onComplete={this.props.update} project={project} />
 
-          :
-          null
-        }
+            :
+            null
+          }
+          </CardText>
+        </Card>
       </div>
     )
   }

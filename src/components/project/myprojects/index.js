@@ -27,7 +27,7 @@ class MyProjects extends React.Component {
     }
 
     return(
-      <div className='my-projects'>
+      <div className='my-projects' style={{padding: '3.5vw'}}>
         <h1>My Projects</h1>
         {allProjectsArray.length !== 0 ?
           allProjectsArray.map(_project => 
