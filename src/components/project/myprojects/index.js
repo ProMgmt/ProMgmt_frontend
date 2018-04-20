@@ -29,7 +29,7 @@ class MyProjects extends React.Component {
         <h1>My Projects</h1>
         {allProjectsArray.length !== 0 ?
           allProjectsArray.map(_project => 
-            <ProjectPreview project={_project} delete={this.props.projectDeleteRequest} update={this.props.projectUpdateRequest} />
+            <ProjectPreview project={_project} key={_project._id} delete={this.props.projectDeleteRequest} update={this.props.projectUpdateRequest} />
           )
           :
           <p>You currently have no projects! Navigate to your MyOrgs page to add a project to a specific organization.</p>
