@@ -7,6 +7,7 @@ import Auth from '../auth';
 import {BrowserRouter, Route, Link} from 'react-router-dom';
 
 import {tokenSet} from './../../action/auth-actions.js';
+import {userOrgEtAllSetRequest} from '../../action/org-actions.js';
 import AuthRedirect from '../auth-redirect';
 import Welcome from './../welcome';
 import OrgForm from '../org/orgform/index.js';
@@ -60,6 +61,7 @@ class App extends Component{
     let token = util.readCookie('X-ProMgmt-Token');
     if(token) {
       this.props.tokenSet(token);
+      this.props.userOrgEtAllSet();
     }
   }
 
@@ -106,7 +108,7 @@ class App extends Component{
 let mapDispatchToProps = dispatch => {
   return {
     tokenSet: token => dispatch(tokenSet(token)),
-    // fetchProfileStuff
+    userOrgEtAllSet: () => dispatch(userOrgEtAllSetRequest()),
   }
 }
 
