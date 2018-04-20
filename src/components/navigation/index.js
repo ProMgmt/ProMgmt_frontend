@@ -7,6 +7,7 @@ import MenuItem from 'material-ui/MenuItem';
 import ProfileMenu from './../profile/profile-menu';
 import * as util from './../../lib/util.js';
 import FlatButton from 'material-ui/FlatButton';
+import {connect} from 'react-redux';
 
 import './_nav.scss';
 
@@ -37,6 +38,7 @@ class NavBar extends React.Component {
         <AppBar
           title="Pro_Mgmt"
           onLeftIconButtonClick={this.handleToggle}
+          showMenuIconButton={!this.props.auth}
         >
           <ProfileMenu />
          </AppBar>
@@ -59,7 +61,11 @@ class NavBar extends React.Component {
   }
 }
 
-export default NavBar;
+let mapStateToProps = state => ({
+  auth: state.auth,
+})
+
+export default connect(mapStateToProps, null)(NavBar);
     
 
   
