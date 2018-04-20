@@ -10,6 +10,7 @@ import {tokenSet, userSet, userSetRequest} from './../../action/auth-actions.js'
 import {userOrgEtAllSetRequest} from '../../action/org-actions.js';
 import AuthRedirect from '../auth-redirect';
 import Welcome from './../welcome';
+import Landing from './../landing';
 import OrgForm from '../org/orgform/index.js';
 import NavBar from '../navigation';
 import MyOrgs from '../org/myorgs';
@@ -81,6 +82,8 @@ class App extends Component{
                 <Route exact path='/myprojects' component={MyProjects} />
                 <Route exact path='/mytasks' component={MyTasks} /> 
                 <Route exact path='/dashboard' component={Dashboard} />
+                <Route exact path='/' component={Landing} />
+
 
               </section>
             </BrowserRouter>
