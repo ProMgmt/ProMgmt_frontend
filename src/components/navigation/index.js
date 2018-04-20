@@ -37,24 +37,8 @@ class NavBar extends React.Component {
         <AppBar
           title="Pro_Mgmt"
           onLeftIconButtonClick={this.handleToggle}
-        //   iconElementRight={this.state.logged ? <ProfileMenu /> 
-        //   : <FlatButton label='Sign In/Sign Up' containerElement={<Link to='/welcome/signin' />}
-          
-        // /> }
-         
         >
-
           <ProfileMenu />
-          {/* {util.renderIf(!this.state.user, 
-          <FlatButton
-            label='Sign In/Sign Up'
-            containerElement={<Link to='/welcome/signin' />}
-            
-          />
-          )}  
-          {util.renderIf(this.state.user, <ProfileMenu />)} */}
-          
-
          </AppBar>
                   
         <Drawer
