@@ -13,8 +13,7 @@ export default (state=null, action) => {
 
     case 'PROFILE_SET':
       return payload;
-
-    case 'LOGOUT':
+    case 'TOKEN_DELETE':
       return null;
 
     default:

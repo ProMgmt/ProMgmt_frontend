@@ -1,13 +1,13 @@
 'use strict';
 
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import * as util from './../../../lib/util.js';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import './_profile-form.scss';
 
-class ProfileForm extends Component {
+class ProfileForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = props.profile ? 
@@ -18,7 +18,6 @@ class ProfileForm extends Component {
         lastName: '',
         desc: '',
         company: '',
-        avatarURI: null,
         title: '',
         userId: this.props.user._id,
       };
@@ -40,14 +39,14 @@ class ProfileForm extends Component {
       this.setState({ desc: value });
     }
 
-    if (name === 'avatarURI') {
-      let { files } = e.target;
-      let avatarURI = files[0];
-      this.setState({ avatarURI });
-      util.photoToDataURL(avatarURI)
-        .then(preview => this.setState({ preview }))
-        .catch(console.error);
-    }
+    // if (name === 'avatarURI') {
+    //   let { files } = e.target;
+    //   let avatarURI = files[0];
+    //   this.setState({ avatarURI });
+    //   util.photoToDataURL(avatarURI)
+    //     .then(preview => this.setState({ preview }))
+    //     .catch(console.error);
+    // }
 
     this.setState({ [name]: value });
   }
