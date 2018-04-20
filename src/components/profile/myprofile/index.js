@@ -23,7 +23,7 @@ class MyProfile extends React.Component {
     let buttonText = this.state.edit ? 'Hide' : 'Edit';
     
     return(
-      <div className='profile'>
+      <div className='profile' style={{padding: }}>
         <h1>Your Profile:</h1>
         {!this.props.profile ?
           <ProfileForm user={this.props.user} buttonText='Create a Profile' onComplete={this.props.profileCreateRequest} />
