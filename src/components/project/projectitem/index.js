@@ -42,7 +42,7 @@ class ProjectItem extends React.Component {
     this.state.addTask ? addTaskButtonText = 'Hide' : addTaskButtonText = 'Add a Task';
     this.state.editProject ? editProjectButtonText = 'Hide' : editProjectButtonText = 'Edit Project';
 
-    let { org, project, projectUpdate, projectDelete, taskCreate, key } = this.props;
+    let { org, project, projectUpdate, projectDelete, taskCreate, key, toggleEditProject } = this.props;
 
     return (
       <section key={key} className='project-item'>
@@ -106,7 +106,7 @@ class ProjectItem extends React.Component {
                   project={project}
                   onComplete={projectUpdate}
                   canToggle={true}
-                  toggle={this.editProject}
+                  toggle={toggleEditProject}
                 />
               </div>
               :

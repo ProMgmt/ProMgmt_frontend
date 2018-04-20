@@ -92,6 +92,10 @@ class App extends Component{
   }
 }
 
+const mapStateToProps = state => ({
+  user: state.user,
+})
+
 const mapDispatchToProps = dispatch => {
   return {
     userSetRequest: () => dispatch(userSetRequest()),
@@ -100,4 +104,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

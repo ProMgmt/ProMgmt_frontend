@@ -12,15 +12,20 @@ class OrgForm extends React.Component {
   constructor(props) {
     super(props);
 
+    if(props.org){
+      var tempState = props.org;
+      tempState.adminNames = tempState.admins.map(admin => admin.username);
+      tempState.userNames = tempState.users.map(user => user.username);
+    }
     this.state = {
       _id: props.org ? props.org._id : undefined,
       name: props.org ? props.org.name : '',
       desc: props.org ? props.org.desc : '',
       projects: props.org ? props.org.projects : [],
       admins: props.org ? props.org.admins : [],
-      adminNames: props.org && props.org.adminNames ? props.org.adminNames : ['Nicole Weese'],
+      adminNames: props.org ? tempState.adminNames : [],
       users: props.org ? props.org.users : [],
-      userNames: props.org ? props.org.users : ['Nicole Weese'],
+      userNames: props.org ? tempState.userNames : [],
       admin: '',
       user: '',
       adminError: '',

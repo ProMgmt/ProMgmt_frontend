@@ -30,8 +30,8 @@ export const signupRequest = (user) => (dispatch) => {
   .send(user)
   .then( res => {
     console.log('res.body', res.body);
-    dispatch(tokenSet(res.body.token))
-    dispatch(userSet([res.body.userId, null]))
+    dispatch(tokenSet(res.body.token));
+    dispatch(userSet({_id: res.body.userId}));
     try {
       localStorage.token = res.body.token;
     } catch(err) {
@@ -62,6 +62,10 @@ export const userSetRequest = () => (dispatch, getState) => {
     .set('Authorization', `Bearer ${auth}`)
     .then(res => {
       dispatch(userSet(res.body));
+      return res;
+    })
+    .then(res => {
+      if(!!res.body.profileId) dispatch(profileSetRequest(res.body.profileId));
       return res;
     })
 }

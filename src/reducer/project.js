@@ -12,8 +12,8 @@ export default (state=[], action) => {
 
     case 'ORG_CREATE':
       return {...state, [payload._id]: []};
+      
     case 'ORG_DELETE':
-
       delete state[payload._id];
       return {...state};
 

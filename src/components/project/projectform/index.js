@@ -10,7 +10,14 @@ import MenuItem from 'material-ui/MenuItem';
 class ProjectForm extends React.Component{
   constructor(props){
     super(props);
-    this.state = this.props.project ? {...props.project} : { 
+    if(this.props.project){
+      var tempProject = {...props.project};
+      tempProject.startDate = new Date(tempProject.startDate);
+      tempProject.dueDate = new Date(tempProject.dueDate);
+      tempProject.adminId = 'none';
+      tempProject.userId = 'none';
+    }
+    this.state = this.props.project ? {...tempProject} : { 
       _id: undefined,
       orgId: this.props.org._id, 
       projectName: '',
@@ -29,10 +36,14 @@ class ProjectForm extends React.Component{
     this.handleUserAdd = this.handleUserAdd.bind(this);
     this.handleStartDateChange = this.handleStartDateChange.bind(this);
     this.handleDueDateChange = this.handleDueDateChange.bind(this);
+    this.handleAdminChange = this.handleAdminChange.bind(this);
+    this.handleUserChange = this.handleUserChange.bind(this);
   }
 
   componentWillReceiveProps(props){
     if (props.project){
+      props.project.startDate = new Date(props.project.startDate);
+      props.project.dueDate = new Date(props.project.dueDate);
       this.setState(props.project);
     }
   }
@@ -53,6 +64,10 @@ class ProjectForm extends React.Component{
     this.setState({[e.target.name]: e.target.value});
   }
 
+  handleAdminChange(e, i, v){
+    this.setState({adminId: v});
+  }
+
   handleAdminAdd(e){
     e.preventDefault();
     let {adminId} = this.state;
@@ -62,6 +77,10 @@ class ProjectForm extends React.Component{
         return {admins: [...prevState.admins, adminId]};
       })
     }
+  }
+
+  handleUserChange(e, i, v){
+    this.setState({userId: v});
   }
 
   handleUserAdd(e){
@@ -129,13 +148,16 @@ class ProjectForm extends React.Component{
             style={{display: 'block'}}
             floatingLabelText='Add Admin' 
             value={this.state.adminId} 
-            onChange={this.handleChange}
+            onChange={this.handleAdminChange}
           >
-            
+              <MenuItem
+                key='none'
+                value='none'
+                primaryText='none' />
             {this.props.org.admins.map((admin, i) => 
               <MenuItem 
                 key={`${admin._id}-${i}`} 
-                value={admin._id}
+                value={admin}
                 primaryText={admin.username} 
               />
             )}
@@ -165,13 +187,16 @@ class ProjectForm extends React.Component{
             style={{display: 'block'}}
             floatingLabelText='Add User' 
             value={this.state.userId} 
-            onChange={this.handleChange}
+            onChange={this.handleUserChange}
           >
-            
+              <MenuItem
+                key='none'
+                value='none'
+                primaryText='none' />
             {this.props.org.admins.map(admin => 
               <MenuItem 
                 key={admin._id} 
-                value={admin._id}
+                value={admin}
                 primaryText={admin.username}
               />
             )}
