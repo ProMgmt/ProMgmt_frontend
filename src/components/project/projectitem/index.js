@@ -56,11 +56,11 @@ class ProjectItem extends React.Component {
           />
           <FlatButton
             onClick={this.toggleEditProject}
-            icon={<Create />}
+            icon={<Create style={{width: '14px'}}/>}
           />
           <FlatButton
             onClick={() => projectDelete(project)}
-            icon={<Clear />}
+            icon={<Clear style={{width: '14px'}}/>}
             style={{color: 'red'}}
           />
 

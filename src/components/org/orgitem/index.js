@@ -47,7 +47,7 @@ class OrgItem extends React.Component {
     let { org, orgDelete, orgUpdate, projectCreate } = this.props;
     return (
       <section className='org-item'>
-        <Card className='content' style={{backgroundColor: '#afceff'}}>
+        <Card className='content' style={{backgroundColor: '#afceff', opacity: '0.9'}}>
           <CardHeader
             title={org.name}
             actAsExpander={true}
@@ -56,13 +56,13 @@ class OrgItem extends React.Component {
           <div className='org-buttons'>
             <FlatButton 
               onClick={this.toggleEditOrg}
-              icon={<Create />}
+              icon={<Create style={{width: '14px'}} />}
               
              
             />
             <FlatButton
               onClick={() => orgDelete(org)}
-              icon={<Clear />}
+              icon={<Clear style={{width: '14px'}}/>}
               style={{color: 'red'}}
               
             />
