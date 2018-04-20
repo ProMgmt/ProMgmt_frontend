@@ -6,6 +6,7 @@ import { userOrgEtAllSetRequest, orgCreateRequest, orgUpdateRequest } from '../.
 import { projectCreateRequest, projectUpdateRequest } from '../../action/project-actions.js';
 import { userTaskCreateRequest, userTaskUpdateRequest } from '../../action/task-actions.js';
 import FlatButton from 'material-ui/FlatButton';
+import './_dashboard.scss';
 
 class Dashboard extends React.Component{
   constructor(props){

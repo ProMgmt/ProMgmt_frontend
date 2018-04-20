@@ -27,6 +27,7 @@ import { IconButton } from 'material-ui';
 import AccountCircle from 'material-ui/svg-icons/action/account-circle'
 import ProfileMenu from './../profile/profile-menu';
 
+
 const muiTheme = getMuiTheme({
   palette: {
     textColor: grey800,

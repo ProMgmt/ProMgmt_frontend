@@ -31,16 +31,16 @@ class MyOrgs extends React.Component {
     return (
       <div className='my-orgs'>
         <h1>My Orgs</h1>
-        {this.state.add ?
-          <OrgForm canToggle={true} toggle={this.toggleAdd} onComplete={this.props.orgCreateRequest} buttonText='Save'/>
-          : 
-          <FlatButton onClick={this.toggleAdd} label='Create an Org' />
-        }
         {(this.props.orgs.length !== 0) ? 
           this.props.orgs.map(_org =>
             <OrgPreview org={_org} delete={this.props.orgDeleteRequest} update={this.props.orgUpdateRequest} />
           )
           : <p>You currently have no organizations, would you like to create one?</p>
+        }
+        {this.state.add ?
+          <OrgForm canToggle={true} toggle={this.toggleAdd} onComplete={this.props.orgCreateRequest} buttonText='Save'/>
+          : 
+          <FlatButton onClick={this.toggleAdd} label='Create an Org' />
         }
       </div>
     )
