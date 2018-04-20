@@ -69,7 +69,6 @@ let mapStateToProps = state => ({
   user: state.user,
 })
 
-
 let mapDispatchToProps = dispatch => ({
   userOrgEtAllSet: () => dispatch(userOrgEtAllSetRequest()),
   orgCreate: org => dispatch(orgCreateRequest(org)),

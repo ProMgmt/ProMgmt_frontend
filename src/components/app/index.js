@@ -69,7 +69,6 @@ class App extends Component{
       <MuiThemeProvider muiTheme={muiTheme}>
         {/* <Provider store={store}> */}
           <main className='app-container'>
-            
             {/* <Auth /> */}
             <BrowserRouter>
             <section>
