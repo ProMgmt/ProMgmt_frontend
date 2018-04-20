@@ -139,13 +139,13 @@ class ProjectForm extends React.Component{
                 primaryText={admin.username} 
               />
             )}
-            {this.props.org.users.map((user, i) => 
+            {/* {this.props.org.users.map((user, i) => 
               <MenuItem 
-                key={`${admin._id}-${i}`} 
+                key={`${user._id}-${i}`} 
                 value={user._id}
                 primaryText={user.username}
               />
-            )}
+            )} */}
           </SelectField>
           <FlatButton 
             onClick={this.handleAdminAdd}
@@ -175,13 +175,13 @@ class ProjectForm extends React.Component{
                 primaryText={admin.username}
               />
             )}
-            {this.props.org.users.map(user => 
+            {/* {this.props.org.users.map(user => 
               <MenuItem 
                 key={user._id} 
                 value={user._id}
                 primaryText={user.username}
               />
-            )}
+            )} */}
           </SelectField>
           <FlatButton 
             onClick={this.handleUserAdd}

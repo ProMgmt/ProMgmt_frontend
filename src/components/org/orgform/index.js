@@ -18,7 +18,7 @@ class OrgForm extends React.Component {
       desc: props.org ? props.org.desc : '',
       projects: props.org ? props.org.projects : [],
       admins: props.org ? props.org.admins : [],
-      adminNames: props.org ? props.org.adminNames : ['Nicole Weese'],
+      adminNames: props.org && props.org.adminNames ? props.org.adminNames : ['Nicole Weese'],
       users: props.org ? props.org.users : [],
       userNames: props.org ? props.org.users : ['Nicole Weese'],
       admin: '',
@@ -61,13 +61,15 @@ class OrgForm extends React.Component {
     let firstName = name[0];
     let lastName = name[name.length - 1];
     // TODO: FIX ERROR USER NOT AUTHORIZED
-
-    superagent.get(`${__API_URL__}/api/profile/${firstName}/${lastName}`)
+    
+    // TODO: if (!firstName) tell the user they messed up
+    if (firstName) superagent.get(`${__API_URL__}/api/profile/${firstName}/${lastName}`)
       .set('Authorization', `Bearer ${this.props.auth}`)      
-      .then(profile => {
+      .then(({ body: profile }) => {
         let fullName = `${profile.firstName} ${profile.lastName}`;
+
         this.setState(prevState => {
-          return {admins: [...prevState.admins, profile.userId], adminNames: [...prevState.adminNames, fullName]}
+          return !prevState.admins.includes(profile.userId) ? {admins: [...prevState.admins, profile.userId], adminNames: [...prevState.adminNames, fullName]} : {}
         });
       })
       .catch(err => {
@@ -83,12 +85,16 @@ class OrgForm extends React.Component {
     let firstName= name[0];
     let lastName = name[name.length - 1];
 
-    superagent.get(`${__API_URL__}/api/profile/${firstName}/${lastName}`)
+    // TODO: if (!firstName) tell the user they messed up
+    if(firstName) superagent.get(`${__API_URL__}/api/profile/${firstName}/${lastName}`)
       .set('Authorization', `Bearer ${this.props.auth}`)
-      .then(profile => {
+      .then(({ body: profile }) => {
         let fullName = `${profile.firstName} ${profile.lastName}`;
+        console.log('full nerm', fullName)
+        console.log('profile', profile)
         this.setState(prevState => {
-          return {users: [...prevState.users, profile.userId], userNames: [...prevState.userNames, fullName]}
+          // TODO: Make better fix to not add duplicates
+          return !prevState.users.includes(profile.userId) ? {users: [...prevState.users, profile.userId], userNames: [...prevState.userNames, fullName]} : {}
         });
       })
       .catch(err => {
@@ -170,7 +176,9 @@ class OrgForm extends React.Component {
         )}
         {this.state.userNames !== undefined ?
           <ul>
-            {this.state.userNames.map((user, i) => 
+            {this.state.userNames
+              .filter(a => a)
+              .map((user, i) => 
                 <div key={i}>
                   <li>{user}</li> 
                   <FlatButton 

@@ -44,9 +44,9 @@ class TaskItem extends React.Component {
             showExpandableButton={true}
           />
           <CardText expandable={true}>
-            <p>Start Date: {task.startDate}</p>
+            <p>Start Date: {new Date(task.startDate).toDateString()}</p>
             <p>Expected Duration: {task.expectedDuration} days</p>
-            <p>Due Date: {task.dueDate} </p>
+            <p>Due Date: {new Date(task.dueDate).toDateString()} </p>
             <p>Status: {task.status}% Complete</p>
             {util.renderIf(task.admins.length > 0,
               <ul>

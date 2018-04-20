@@ -6,6 +6,8 @@ import ProjectForm from '../projectform';
 import * as orgActions from '../../../action/org-actions.js';
 import * as projectActions from '../../../action/project-actions.js';
 
+import './_myprojects.scss';
+
 class MyProjects extends React.Component {
   constructor(props) {
     super(props);
