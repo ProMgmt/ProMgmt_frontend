@@ -34,7 +34,7 @@ class MyOrgs extends React.Component {
         <h1 className='h1-orgs'>My Orgs</h1>
         {(this.props.orgs.length !== 0) ? 
           this.props.orgs.map(_org =>
-            <OrgPreview org={_org} delete={this.props.orgDeleteRequest} update={this.props.orgUpdateRequest} />
+            <OrgPreview key={_org._id} org={_org} delete={this.props.orgDeleteRequest} update={this.props.orgUpdateRequest} />
           )
           : <p>You currently have no organizations, would you like to create one?</p>
         }
