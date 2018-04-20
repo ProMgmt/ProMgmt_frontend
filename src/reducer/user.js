@@ -8,6 +8,8 @@ export default (state=null, action) => {
       return payload;
     case 'USER_UPDATE':
       return {...state, profileId: payload};
+    case 'TOKEN_DELETE':
+      return null;
     default: 
       return state;
   }

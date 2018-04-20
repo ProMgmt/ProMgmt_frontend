@@ -11,6 +11,7 @@ export const tokenSet = (token) => ({
 
 export const tokenDelete = () => ({
   type: 'TOKEN_DELETE',
+  payload: null,
 })
 
 export const userSet = (user) => ({
@@ -28,10 +29,11 @@ export const signupRequest = (user) => (dispatch) => {
   .withCredentials(true)
   .send(user)
   .then( res => {
-    dispatch(tokenSet(res.text))
-    
+    console.log('res.body', res.body);
+    dispatch(tokenSet(res.body.token))
+    dispatch(userSet([res.body.userId, null]))
     try {
-      localStorage.token = res.text;
+      localStorage.token = res.body.token;
     } catch(err) {
       console.error(err);
     }
