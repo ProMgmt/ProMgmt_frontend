@@ -3,6 +3,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import TaskForm from '../taskform';
+import { Card, CardHeader, CardText } from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
+import Create from 'material-ui/svg-icons/content/create';
+import Clear from 'material-ui/svg-icons/content/clear';
 
 class TaskPreview extends React.Component {
   constructor(props) {
@@ -43,14 +47,26 @@ class TaskPreview extends React.Component {
 
     return (
 
-      <div className='task-previews' key={task._id}>
-        <h3>{task.taskName}</h3>
-        <p>{task.desc}</p>
-        <button onClick={() => { this.props.delete(task) }}>x</button> <button onClick={() => {this.toggleEdit()}}>{updateButtonText}</button>
-        {this.state.editing ?
-          <TaskForm canToggle={true} toggle={this.toggleEdit} buttonText='Save' onComplete={this.props.update} task={task} />
-          : null
-        }
+      <div className='task-previews' >
+        <Card key={task._id}>
+          <CardHeader
+            title={task.desc}
+            actAsExpander={true}
+            showExpandableButton={true}
+          />
+          <CardText expandable={true}>
+
+            
+            
+            <p>{task.desc}</p>
+            <p>{task.startDate}</p>
+            <FlatButton onClick={() => { this.props.delete(task) }} icon={<Clear />}/> <FlatButton onClick={() => {this.toggleEdit()}} icon={<Create />}/>
+            {this.state.editing ?
+              <TaskForm canToggle={true} toggle={this.toggleEdit} buttonText='Save' onComplete={this.props.update} task={task} />
+              : null
+            }
+          </CardText>
+        </Card>
       </div>
     )
   }

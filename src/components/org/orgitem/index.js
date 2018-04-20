@@ -57,12 +57,14 @@ class OrgItem extends React.Component {
             <FlatButton 
               onClick={this.toggleEditOrg}
               icon={<Create />}
+              
              
             />
             <FlatButton
               onClick={() => orgDelete(org)}
               icon={<Clear />}
               style={{color: 'red'}}
+              
             />
           </div>
 
