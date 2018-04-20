@@ -31,7 +31,7 @@ class ProfileMenu extends React.Component {
   handleSignout() {
     this.props.signout();
     deleteCookie();
-    delete localStorage.token();
+    delete localStorage.token;
   }
 
   render(){
