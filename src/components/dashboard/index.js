@@ -36,7 +36,6 @@ class Dashboard extends React.Component{
     this.state.add ? buttonText = 'Add an Org' : buttonText = 'Hide Add Org Form';
     return(
       <section className='devtool'>
-        {/* <h1>Your Projects</h1> */}
         <FlatButton onClick={this.toggleAdd}>Add an Org</FlatButton>
         {this.state.add ? 
           <OrgForm

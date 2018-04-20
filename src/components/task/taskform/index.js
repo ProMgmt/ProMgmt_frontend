@@ -8,15 +8,15 @@ import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
 import Add from 'material-ui/svg-icons/content/add';
 
-class TaskForm extends React.Component{
-  constructor(props){
+class TaskForm extends React.Component {
+  constructor(props) {
     super(props);
-    if(this.props.task){
+    if (this.props.task) {
       this.props.task.startDate = this.props.task.startDate ? new Date(this.props.task.startDate) : null;
       this.props.task.dueDate = this.props.task.dueDate ? new Date(this.props.task.dueDate) : null;
       this.props.task.endDate = this.props.task.endDate ? new Date(this.props.task.endDate) : null;
     }
-    this.state = this.props.task ? {...props.task, adminId: '', taskDAdd: ''} : {projectId: this.props.project._id, orgId: this.props.project.orgId, admins: [], adminId: {}, dependentTasks: [], status: '0', addDTask: {}};
+    this.state = this.props.task ? { ...props.task, adminId: '', taskDAdd: '' } : { projectId: this.props.project._id, orgId: this.props.project.orgId, admins: [], adminId: {}, dependentTasks: [], status: '0', addDTask: {} };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -31,76 +31,78 @@ class TaskForm extends React.Component{
     this.handleTaskDepChange = this.handleTaskDepChange.bind(this);
   }
 
-  componentWillReceiveProps(props){
-    if(props.task){
+  componentWillReceiveProps(props) {
+    if (props.task) {
       this.setState(props.task);
     }
   }
 
-  handleStatusChange(event, index, value){
-    this.setState({status: value});
+  handleStatusChange(event, index, value) {
+    this.setState({ status: value });
   }
 
-  handleAdminChange(event, index, value){
-    this.setState({adminId: value});
+  handleAdminChange(event, index, value) {
+    this.setState({ adminId: value });
   }
 
-  handleTaskDepChange(event, index, value){
-    this.setState({taskDAdd: value});
+  handleTaskDepChange(event, index, value) {
+    this.setState({ taskDAdd: value });
   }
 
-  handleChange(e){
-    if(e.target.type === 'number'){
-      this.setState({[e.target.name]: +e.target.value});
+  handleChange(e) {
+    if (e.target.type === 'number') {
+      this.setState({ [e.target.name]: +e.target.value });
     } else {
-      this.setState({[e.target.name]: e.target.value});
+      this.setState({ [e.target.name]: e.target.value });
     }
   }
 
-  handleSubmit(e){
+  handleSubmit(e) {
     e.preventDefault();
     delete this.state.adminId;
     delete this.state.taskDAdd;
     this.state.admins = this.state.admins.map(admin => admin._id);
     this.state.dependentTasks = this.state.dependentTasks.map(task => task._id);
     console.log('this.state @ taskform submit', this.state);
-    this.props.onComplete({...this.state});
-    
-    if(this.props.canToggle) {
+    this.props.onComplete({ ...this.state });
+
+    if (this.props.canToggle) {
       this.props.toggle();
     }
 
-    if(!this.props.task){
-      this.setState({desc: '',
-      startDate: undefined,
-      dueDate: undefined,
-      endDate: undefined,
-      expectedDuration: undefined,
-      actualDuration: undefined,
-      status: 0,
-      isDependency: false,
-      dependentTasks: []})
-    }
-  }
-
-  handleAdminAdd(e){
-    e.preventDefault();
-    let {adminId} = this.state;
-
-    if(adminId !== 'none'){
-      this.setState(prevState => {
-        return {admins: [...prevState.admins, adminId]};
+    if (!this.props.task) {
+      this.setState({
+        desc: '',
+        startDate: undefined,
+        dueDate: undefined,
+        endDate: undefined,
+        expectedDuration: undefined,
+        actualDuration: undefined,
+        status: 0,
+        isDependency: false,
+        dependentTasks: []
       })
     }
   }
 
-  handleTaskAdd(e){
+  handleAdminAdd(e) {
     e.preventDefault();
-    let {taskDAdd} = this.state;
+    let { adminId } = this.state;
 
-    if(!!taskDAdd){
+    if (adminId !== 'none') {
       this.setState(prevState => {
-        return {dependentTasks: [...prevState.dependentTasks, taskDAdd]};
+        return { admins: [...prevState.admins, adminId] };
+      })
+    }
+  }
+
+  handleTaskAdd(e) {
+    e.preventDefault();
+    let { taskDAdd } = this.state;
+
+    if (!!taskDAdd) {
+      this.setState(prevState => {
+        return { dependentTasks: [...prevState.dependentTasks, taskDAdd] };
       })
     }
   }
@@ -123,56 +125,56 @@ class TaskForm extends React.Component{
     });
   };
 
-  render(){
+  render() {
     let key = this.props.key ? this.props.key : undefined;
-    return(
+    return (
       <form key={key} className='task-form' onSubmit={this.handleSubmit}>
         <TextField
-          style={{display: 'block'}}
+          style={{ display: 'block' }}
           name='desc'
           type='text'
           floatingLabelText='Task Description'
           value={this.state.desc}
           onChange={this.handleChange} />
-          
+
         <DatePicker
-          style={{display: 'block'}}
+          style={{ display: 'block' }}
           hintText='startDate'
           value={this.state.startDate}
           onChange={this.handleStartDateChange} />
         <DatePicker
-          style={{display: 'block'}}
+          style={{ display: 'block' }}
           hintText='dueDate'
           value={this.state.dueDate}
           onChange={this.handleDueDateChange} />
-          
+
         <DatePicker
-          style={{display: 'block'}}
+          style={{ display: 'block' }}
           hintText='endDate'
           value={this.state.endDate}
           onChange={this.handleEndDateChange} />
-        
+
         <TextField
-          style={{display: 'block'}}
+          style={{ display: 'block' }}
           name='expectedDuration'
           type='number'
           floatingLabelText='Expected Duration in Days'
           value={this.state.expectedDuration}
           onChange={this.handleChange} />
-          
-          <SelectField 
-            style={{display: 'block'}}
-            floatingLabelText='Status' 
-            value={this.state.status} 
-            onChange={this.handleStatusChange}
-          >
-            <MenuItem value='0' primaryText='0%' />
-            <MenuItem value='25' primaryText='25%' />
-            <MenuItem value='50' primaryText='50%' />
-            <MenuItem value='75' primaryText='75%' />
-            <MenuItem value='100' primaryText='100%' />
-          </SelectField>
-        
+
+        <SelectField
+          style={{ display: 'block' }}
+          floatingLabelText='Status'
+          value={this.state.status}
+          onChange={this.handleStatusChange}
+        >
+          <MenuItem value='0' primaryText='0%' />
+          <MenuItem value='25' primaryText='25%' />
+          <MenuItem value='50' primaryText='50%' />
+          <MenuItem value='75' primaryText='75%' />
+          <MenuItem value='100' primaryText='100%' />
+        </SelectField>
+
         {util.renderIf(this.state.admins.length > 0,
           <ul>
             <li>Existing Task Admins</li>
@@ -181,65 +183,79 @@ class TaskForm extends React.Component{
             )}
           </ul>
         )}
-        
-          
-          <SelectField 
-            style={{display: 'block'}}
-            floatingLabelText='Add Admin' 
-            value={this.state.adminId} 
-            onChange={this.handleAdminChange}
-          >
-            
-            {this.props.project.admins.map(admin => 
-              <MenuItem 
-                key={admin._id} 
-                value={admin}
-                primaryText={admin.username}
-              />
-            )}
-            {this.props.project.users.map(user => 
-              <MenuItem 
-                key={user._id} 
-                value={user}
-                primaryText={user.username}
-              />
-            )}
-          </SelectField>
-          <FlatButton 
-            onClick={this.handleAdminAdd}
-            icon={<Add />}
-          />
-        
+
+
+        <SelectField
+          style={{ display: 'block' }}
+          floatingLabelText='Add Admin'
+          value={this.state.adminId}
+          onChange={this.handleAdminChange}
+        >
+
+          {this.props.project ?
+            this.props.project.admins ?
+              this.props.project.admins.map(admin =>
+                <MenuItem
+                  key={admin._id}
+                  value={admin}
+                  primaryText={admin.username}
+                />
+              )
+              : null
+            : null
+          }
+          {this.props.project ?
+            this.props.project.users ?
+              this.props.project.users.map(user =>
+                <MenuItem
+                  key={user._id}
+                  value={user}
+                  primaryText={user.username}
+                />)
+              : null
+            : null
+          }
+        </SelectField>
+        <FlatButton
+          onClick={this.handleAdminAdd}
+          icon={<Add />}
+        />
+
         {util.renderIf(this.state.dependentTasks.length > 0,
-            <ul>
-              <li>Existing Task Dependencies</li>
-              {this.state.dependentTasks.map(task => 
-                <li key={task._id}>{task.desc}</li>
-              )}
+          <ul>
+            <li>Existing Task Dependencies</li>
+            {this.state.dependentTasks.map(task =>
+              <li key={task._id}>{task.desc}</li>
+            )}
           </ul>
         )}
-       
-          <SelectField 
-            style={{display: 'block'}}
-            floatingLabelText='Add Task Dependency' 
-            value={this.state.taskDAdd} 
-            onChange={this.handleTaskDepChange}
-          >
-            
-            {this.props.project.tasks.map(task => 
-              <MenuItem 
-                key={task._id}
-                value={task}
-                primaryText={task.desc}
-              />
-            )}
-          </SelectField>
-          <FlatButton 
-            onClick={this.handleTaskAdd}
-            icon={<Add />}
-          />
-        
-        <FlatButton 
+
+        <SelectField
+          style={{ display: 'block' }}
+          floatingLabelText='Add Task Dependency'
+          value={this.state.taskDAdd}
+          onChange={this.handleTaskDepChange}
+        >
+
+          {this.props.project ?
+            this.props.project.tasks ?
+              this.props.project.tasks.map(task =>
+                <MenuItem
+                  key={task._id}
+                  value={task}
+                  primaryText={task.desc}
+                />
+              )
+              : null
+            : null
+          }
+        </SelectField>
+        <FlatButton
+          onClick={this.handleTaskAdd}
+          icon={<Add />}
+        />
+
+        <FlatButton
           type='submit'
           label={this.props.buttonText}
         />
