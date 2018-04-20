@@ -34,7 +34,7 @@ class MyTasks extends React.Component {
             <TaskPreview task={_task} delete={this.props.taskDeleteRequest} update={this.props.taskUpdateRequest} />
           )
           :
-          <p>You currently have no tasks! Navigate to your MyOrgs page to add a task to a specific organization.</p>
+          <p>You currently have no tasks! Navigate to the Dashboard page to add a task to a specific project/organization.</p>
         }
       </div>
     )
