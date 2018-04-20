@@ -15,8 +15,8 @@ class ProjectForm extends React.Component{
       orgId: this.props.org._id, 
       projectName: '',
       desc: '', 
-      startDate: '', 
-      dueDate: '',
+      startDate: {}, 
+      dueDate: {},
       admins: [],
       adminId: 'none',
       users: [],
@@ -90,23 +90,27 @@ class ProjectForm extends React.Component{
     return(
       <form key={key} className='project-form' onSubmit={this.handleSubmit}>
         <TextField
+          style={{display: 'block'}}
           name='projectName'
           type='text'
           floatingLabelText='Project Name'
           value={this.state.projectName}
           onChange={this.handleChange} />
         <TextField
+          style={{display: 'block'}}
           name='desc'
           type='text'
           floatingLabelText='Project Description'
           value={this.state.desc}
           onChange={this.handleChange} />
         <DatePicker
+          style={{display: 'block'}}
           hintText='Start Date'
           value={this.state.startDate}
           onChange={this.handleStartDateChange}
         />
         <DatePicker
+          style={{display: 'block'}}
           hintText='Due Date'
           value={this.state.dueDate}
           onChange={this.handleDueDateChange} 
@@ -122,6 +126,7 @@ class ProjectForm extends React.Component{
 
           
           <SelectField 
+            style={{display: 'block'}}
             floatingLabelText='Add Admin' 
             value={this.state.adminId} 
             onChange={this.handleChange}
@@ -156,7 +161,8 @@ class ProjectForm extends React.Component{
           </ul>
         )}
         
-          <SelectField
+          <SelectField  
+            style={{display: 'block'}}
             floatingLabelText='Add User' 
             value={this.state.userId} 
             onChange={this.handleChange}
