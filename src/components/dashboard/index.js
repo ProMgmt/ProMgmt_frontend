@@ -38,7 +38,10 @@ class Dashboard extends React.Component{
     return(
 
       <section className='devtool' style={{padding: '3.5vw'}}>
-        {/* <h1>Your Projects</h1> */}
+      <div class='dashboard' style={{backgroundColor: 'rgba(255, 255, 255, .5)', padding: '30px 30px'}}>
+        <p>Welcome to your Dashboard!</p>
+        <h2>From here you can add ORGANIZATIONS, create PROJECTS, and add TASKS to each project.</h2>
+        <h2>Click the button below to get started!</h2><br/>
         <FlatButton onClick={this.toggleAdd} style={{marginBottom: '2.4vw'}}>Add an Org</FlatButton>
 
         {this.state.add ? 
@@ -69,6 +72,7 @@ class Dashboard extends React.Component{
           />
         )
         : null}
+        </div>
       </section>
     )
   }

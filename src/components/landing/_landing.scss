@@ -16,7 +16,11 @@ body {
   font-size: 3vw;
 }
 
-.landing-paragraph {
+.landing-paragraph, .bold {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1vw;
+}
+
+.bold {
+  font-weight: bold;
 }

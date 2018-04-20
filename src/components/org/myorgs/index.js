@@ -30,8 +30,8 @@ class MyOrgs extends React.Component {
   
   render() {    
     return (
-      <div className='my-orgs' style={{padding: '3.5vw'}}>
-        <h1 className='h1-orgs'>My Orgs</h1>
+      <div className='my-orgs' style={{margin: '50px 50px 50px 50px', padding: '3.5vw', backgroundColor: 'rgba(255, 255, 255, .5)', padding: '30px 30px'}}>
+        <h1 style={{margin: '0px 0px 20px 0px'}}>My Orgs</h1>
         {(this.props.orgs.length !== 0) ? 
           this.props.orgs.map(_org =>
             <OrgPreview key={_org._id} org={_org} delete={this.props.orgDeleteRequest} update={this.props.orgUpdateRequest} />
