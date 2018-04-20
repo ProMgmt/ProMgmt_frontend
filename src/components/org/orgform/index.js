@@ -18,7 +18,7 @@ class OrgForm extends React.Component {
       desc: props.org ? props.org.desc : '',
       projects: props.org ? props.org.projects : [],
       admins: props.org ? props.org.admins : [],
-      adminNames: props.org ? props.org.adminNames : ['Nicole Weese'],
+      adminNames: props.org && props.org.adminNames ? props.org.adminNames : ['Nicole Weese'],
       users: props.org ? props.org.users : [],
       userNames: props.org ? props.org.users : ['Nicole Weese'],
       admin: '',
@@ -61,13 +61,13 @@ class OrgForm extends React.Component {
     let firstName = name[0];
     let lastName = name[name.length - 1];
     // TODO: FIX ERROR USER NOT AUTHORIZED
-    console.log('THINGS', name)
+    
 
     superagent.get(`${__API_URL__}/api/profile/${firstName}/${lastName}`)
       .set('Authorization', `Bearer ${this.props.auth}`)      
       .then(({ body: profile }) => {
-        console.log('prof', profile)
         let fullName = `${profile.firstName} ${profile.lastName}`;
+
         this.setState(prevState => {
           return {admins: [...prevState.admins, profile.userId], adminNames: [...prevState.adminNames, fullName]}
         });
