@@ -16,6 +16,9 @@ export default (state=[], action) => {
       },{});
       return newTasks;
 
+    case 'TOKEN_DELETE':
+      return null;
+
     case 'PROJECT_CREATE':
       return {...state, [payload._id]: []};
 
@@ -34,6 +37,16 @@ export default (state=[], action) => {
     case 'TASK_DELETE':
       let projTaskDelete = state[payload.projectId].filter(task => task._id !== payload._id);
       return {...state, [payload.projectId]: [...projTaskDelete]};
+
+    case 'TASK_REMOVE_ADMIN':
+      let projAdminRemove = state[payload.task.projectId].map(task => {
+        if(task._id === payload.task._id){
+          return task.admins.filter(admin => admin._id !== payload.removedUser._id);
+        } else {
+          return task;
+        }
+      });
+      return {...state, [payload.task.projectId]: [projAdminRemove]};
 
     default:
       return state;

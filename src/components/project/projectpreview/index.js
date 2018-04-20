@@ -45,6 +45,7 @@ class ProjectPreview extends React.Component {
 
 
     return (
+
       <div className='project-previews' >
         <Card key={this.props.key}>
           <CardHeader
@@ -65,6 +66,7 @@ class ProjectPreview extends React.Component {
           }
           </CardText>
         </Card>
+
       </div>
     )
   }

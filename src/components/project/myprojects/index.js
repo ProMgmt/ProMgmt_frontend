@@ -34,7 +34,7 @@ class MyProjects extends React.Component {
             <ProjectPreview project={_project} key={_project._id} delete={this.props.projectDeleteRequest} update={this.props.projectUpdateRequest} />
           )
           :
-          <p>You currently have no projects! Navigate to your MyOrgs page to add a project to a specific organization.</p>
+          <p>You currently have no projects! Navigate to the Dashboard to add a project to a specific organization.</p>
         }
       </div>
     )

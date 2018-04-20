@@ -95,7 +95,7 @@ class ProjectItem extends React.Component {
             {this.state.addTask ?
               <div className='task-form'>
                 <TaskForm
-                  buttonText='New Task'
+                  buttonText='Save Task'
                   org={org}
                   project={project}
                   onComplete={taskCreate}

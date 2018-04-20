@@ -32,8 +32,8 @@ class AuthForm extends Component {
       e.preventDefault();
       this.props.onComplete(this.state)
       .then( () => {  
-        this.props.history.push('/dashboard');                  
         this.setState({ username: '', email: '', password: ''} );
+        this.props.history.push('/dashboard');                  
       })
       .catch( error => {
         console.error(error);

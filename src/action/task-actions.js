@@ -15,6 +15,11 @@ export const taskDelete = task => ({
   payload: task,
 })
 
+export const taskRemoveAdmin = (task, removedUser) => ({
+  type: 'TASK_REMOVE_ADMIN',
+  payload: {task, removedUser}
+})
+
 export const taskCreateRequest = task => (dispatch, getState) => {
   let {auth} = getState();
   for(let key in task){

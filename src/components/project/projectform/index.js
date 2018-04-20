@@ -97,6 +97,13 @@ class ProjectForm extends React.Component{
   handleSubmit(e){
     e.preventDefault();
 
+    this.state.admins ? this.setState(prevState => {
+      return {admins: prevState.admins.map(admin => admin._id)}}) : null;
+    this.state.users ? this.setState(prevState => {
+      return {users: prevState.users.map(user => user._id)}}) : null;
+    this.state.tasks ? this.setState(prevState => {
+      return {tasks: prevState.users.map(user => user._id)}}) : null;
+
     if(this.props.canToggle) {
       this.props.toggle();
     }

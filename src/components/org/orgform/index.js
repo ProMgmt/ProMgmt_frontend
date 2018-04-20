@@ -54,6 +54,12 @@ class OrgForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
+    this.state.projects ? this.setState(prevState => {
+      return {projects: prevState.projects.map(project => project._id)}}) : null;
+    this.state.admins ? this.setState(prevState => {
+      return {admins: prevState.admins.map(admin => admin._id)}}) : null;
+    this.state.users ? this.setState(prevState => {
+      return {users: prevState.users.map(user => user._id)}}) : null;
     if(this.props.canToggle) {
       this.props.toggle();
     }

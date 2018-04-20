@@ -9,6 +9,9 @@ export default (state=[], action) => {
         return acc;
       }, {});
       return newProjects;
+      
+    case 'TOKEN_DELETE':
+      return null;
 
     case 'ORG_CREATE':
       return {...state, [payload._id]: []};
