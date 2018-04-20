@@ -64,6 +64,7 @@ class NavBar extends React.Component {
           onRequestChange={(open) => this.setState({open})}
 
         >
+          <MenuItem onClick={this.handleClose}><Link to='/dashboard'>Dashboard</Link></MenuItem>
           <MenuItem onClick={this.handleClose}><Link to='/myorgs'>My Orgs</Link></MenuItem>
           <MenuItem onClick={this.handleClose}><Link to='/myprojects'>My Projects</Link></MenuItem>
           <MenuItem onClick={this.handleClose}><Link to='/mytasks'>My Tasks</Link></MenuItem>

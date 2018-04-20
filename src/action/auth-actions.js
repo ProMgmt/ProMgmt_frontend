@@ -57,8 +57,8 @@ export const userSetRequest = () => (dispatch, getState) => {
   return superagent.get(`${__API_URL__}/api/me`)
     .set('Authorization', `Bearer ${auth}`)
     .then(res => {
-      console.log(user);
-      dispatch(userSet(user));
-      return user;
+      console.log(res);
+      dispatch(userSet(res.body));
+      return res;
     })
 }

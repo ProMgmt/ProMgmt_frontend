@@ -24,6 +24,7 @@ class ProfileMenu extends React.Component {
   }
 
   render(){
+    console.log('logged in', this.props.loggedIn);
     return(
       <div>
         <IconMenu
@@ -32,13 +33,21 @@ class ProfileMenu extends React.Component {
           anchorOrigin={{horizontal: 'left', vertical: 'top'}}
           targetOrigin={{horizontal: 'left', vertical: 'top'}}
         >
-
-          <MenuItem><Link to='/welcome/signup'>Sign Up</Link></MenuItem>
-          <MenuItem><Link to='/welcome/signin'>Sign In</Link></MenuItem>
+        {!this.props.loggedIn ?
+          <div className='signinup'>
+            <MenuItem><Link to='/welcome/signup'>Sign Up</Link></MenuItem>
+            <MenuItem><Link to='/welcome/signin'>Sign In</Link></MenuItem>
+          </div>
+        :
+        null
+        }
           <MenuItem><Link to='/myprofile'>Profile Settings</Link></MenuItem>
-
-          <MenuItem><Link to='/dashboard'>dashboard</Link></MenuItem>
+        {this.props.loggedIn ?
           <MenuItem><Link to='/' onClick={this.handleSignout}>sign out</Link></MenuItem>
+          :
+          null
+        }
+          
 
         </IconMenu>
       </div>
@@ -46,11 +55,15 @@ class ProfileMenu extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({
+  loggedIn: !!state.auth,
+})
+
 const mapDispatchToProps = dispatch => ({
   signout: user => dispatch(tokenDelete(user)),
 })
 
-export default connect(null, mapDispatchToProps)(ProfileMenu);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileMenu);
 
 {/* <nav>
 <ul>

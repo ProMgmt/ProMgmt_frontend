@@ -44,7 +44,7 @@ class ProjectPreview extends React.Component {
 
 
     return (
-      <div className='project-previews' key={project._id}>
+      <div className='project-previews' key={this.props.key}>
         <h3>{project.projectName}</h3>
         {/* TODO: hyperlink this to the ProjectItem page */}
         <p>{project.desc}</p>

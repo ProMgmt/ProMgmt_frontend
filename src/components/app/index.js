@@ -7,7 +7,6 @@ import Auth from '../auth';
 import {BrowserRouter, Route, Link} from 'react-router-dom';
 
 import {tokenSet, userSet, userSetRequest} from './../../action/auth-actions.js';
-import {tokenSet} from './../../action/auth-actions.js';
 import {userOrgEtAllSetRequest} from '../../action/org-actions.js';
 import AuthRedirect from '../auth-redirect';
 import Welcome from './../welcome';
