@@ -47,7 +47,6 @@ export const signinRequest = (user) => (dispatch) => {
       dispatch(tokenSet(token));
       dispatch(userSet({_id, profileId}));
       if(!!profileId) {
-        console.log(':::profileId', profileId);
         dispatch(profileSetRequest(profileId));
       }
       dispatch(userOrgEtAllSetRequest());
@@ -60,7 +59,6 @@ export const userSetRequest = () => (dispatch, getState) => {
   return superagent.get(`${__API_URL__}/api/me`)
     .set('Authorization', `Bearer ${auth}`)
     .then(res => {
-      console.log(res);
       dispatch(userSet(res.body));
       return res;
     })
