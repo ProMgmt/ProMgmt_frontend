@@ -5,7 +5,7 @@ import TextField from 'material-ui/TextField';
 import * as util from './../../lib/util.js';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
-import { withRouter } from 'react-router-dom'; //gives us access to everything that the router has (history, etc)
+import { withRouter } from 'react-router-dom'; 
 import GoogleOauth from '../google-oauth';
 
 class AuthForm extends Component {

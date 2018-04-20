@@ -1,16 +1,17 @@
 //global styling vars
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
 
-$primary-color: ;
-$secondary-color: ;
+$primary-color: white; //filler so linter stops yelling
+$secondary-color: black;
 $turquoise: #09BED5;
-$font: ;
+$font: 'Roboto';
 $font-lg: 4vw;
-$font-sm: 1.3vw;
+$font-sm: 1.5vw;
 $black: #000;
 $white: #fff;
 $gutter-lg: 5vw;
 $gutter-sm: $gutter-lg / 2;
-$btn-pad: 1vw 3vw;
+$btn-pad: 1.5vw 3vw;
 $input-pad: 1vw 2vw;
 $border-radius: .5vw;
 

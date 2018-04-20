@@ -1,0 +1,13 @@
+@import '../lib/_vars';
+
+h1, h2, h3, p, div, li {
+  font-family: $font, 
+}
+
+p {
+  font-size: $font-sm,
+}
+
+button {
+  padding: $btn-pad,
+}

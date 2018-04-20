@@ -64,12 +64,3 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileMenu);
-
-{/* <nav>
-<ul>
-  <li><Link to='/welcome/signup'>signup</Link></li>
-  <li><Link to='/welcome/signin'>signin</Link></li>
-  <li><Link to='/myprofile'>settings</Link></li>
-  <li><Link to='/dashboard'>dev tool</Link></li>
-</ul>
-</nav> */}
