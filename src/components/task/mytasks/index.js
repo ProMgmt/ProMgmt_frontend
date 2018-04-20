@@ -27,7 +27,7 @@ class MyTasks extends React.Component {
     }
 
     return (
-      <div className='my-tasks' style={{margin: '50px 50px 50px 50px', padding: '3.5vw', backgroundColor: 'rgba(255, 255, 255, .5)', padding: '30px 30px'}}>
+      <div className='my-tasks big-title' style={{margin: '50px 50px 50px 50px', padding: '3.5vw', backgroundColor: 'rgba(255, 255, 255, .5)', padding: '30px 30px'}}>
         <h1 style={{margin: '0px 0px 20px 0px'}}>My Tasks</h1>
         {allTasksArray.length !== 0 ?
           allTasksArray.map(_task => 

@@ -83,9 +83,7 @@ class OrgItem extends React.Component {
               null
             }
             <br/>
-            <br/>
-        <FlatButton onClick={this.toggleAddProject}>{projectButtonText}</FlatButton>
-
+        <FlatButton onClick={this.toggleAddProject} style={{marginBottom: '2.4vw', backgroundColor: 'rgba(54, 178, 232, .5)', padding: '2px 11px'}}>{projectButtonText}</FlatButton>
 
             {this.props.project !== null ?
               this.props.project[this.props.org._id].length !== 0 ?

@@ -61,7 +61,7 @@ class OrgPreview extends React.Component {
 
           {isAdmin ?
             <div className='edit-org'>
-              <FlatButton style={{top: 0}} onClick={() => {this.props.delete(org)}} icon={<Clear />}/> <FlatButton style={{float: 'right'}} onClick={() => this.toggleEdit()} icon={<Create />}/>
+              <FlatButton style={{top: 0}} onClick={() => {this.props.delete(org)}}  icon={<Clear />}/> <FlatButton style={{float: 'right'}} onClick={() => this.toggleEdit()} icon={<Create />}/>
 
               {this.state.editing ?
                 <Dialog

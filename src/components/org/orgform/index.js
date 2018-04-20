@@ -222,6 +222,7 @@ class OrgForm extends React.Component {
           : null
         }
         <FlatButton 
+          style={{marginBottom: '2.4vw', backgroundColor: 'rgba(54, 178, 232, .5)', padding: '2px 11px'}}
           className='submit-button' 
           type='submit'
           label={this.props.buttonText}

@@ -272,6 +272,7 @@ class TaskForm extends React.Component {
           }
         </SelectField>
         <FlatButton
+          style={{marginBottom: '2.4vw', backgroundColor: 'rgba(54, 178, 232, .5)', padding: '2px 11px'}}
           onClick={this.handleTaskAdd}
           icon={<Add />}
         />

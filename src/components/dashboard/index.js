@@ -35,14 +35,25 @@ class Dashboard extends React.Component{
   render(){
     let buttonText;
     this.state.add ? buttonText = 'Add an Org' : buttonText = 'Hide Add Org Form';
+
+    console.log(this.props.orgs)
     return(
 
       <section className='devtool' style={{padding: '3.5vw'}}>
       <div class='dashboard' style={{backgroundColor: 'rgba(255, 255, 255, .5)', padding: '30px 30px'}}>
-        <p>Welcome to your Dashboard!</p>
-        <h2>From here you can add ORGANIZATIONS, create PROJECTS, and add TASKS to each project.</h2>
-        <h2>Click the button below to get started!</h2><br/>
-        <FlatButton onClick={this.toggleAdd} style={{marginBottom: '2.4vw'}}>Add an Org</FlatButton>
+        <h1 className='big-title'>Welcome to your Dashboard!</h1>
+        {this.props.orgs ?
+        this.props.orgs.length !== 0 ?
+          <div>
+            <h2>From here you can add ORGANIZATIONS, create PROJECTS, and add TASKS to each project.</h2>
+            <h2>Click the button below to begin!</h2><br/>
+          </div>
+          :
+          null
+          :
+          null
+        }
+        <FlatButton onClick={this.toggleAdd} style={{marginBottom: '2.4vw', backgroundColor: 'rgba(54, 178, 232, .5)', padding: '2px 11px'}}>Add an Org</FlatButton>
 
         {this.state.add ? 
           <OrgForm
