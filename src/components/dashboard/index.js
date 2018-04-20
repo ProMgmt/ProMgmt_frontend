@@ -7,6 +7,7 @@ import { projectCreateRequest, projectUpdateRequest } from '../../action/project
 import { userTaskCreateRequest, userTaskUpdateRequest } from '../../action/task-actions.js';
 import FlatButton from 'material-ui/FlatButton';
 import './_dashboard.scss';
+import Divider from 'material-ui/Divider';
 
 class Dashboard extends React.Component{
   constructor(props){
@@ -35,8 +36,11 @@ class Dashboard extends React.Component{
     let buttonText;
     this.state.add ? buttonText = 'Add an Org' : buttonText = 'Hide Add Org Form';
     return(
-      <section className='devtool'>
-        <FlatButton onClick={this.toggleAdd}>Add an Org</FlatButton>
+
+      <section className='devtool' style={{padding: '3.5vw'}}>
+        {/* <h1>Your Projects</h1> */}
+        <FlatButton onClick={this.toggleAdd} style={{marginBottom: '2.4vw'}}>Add an Org</FlatButton>
+
         {this.state.add ? 
           <OrgForm
             onComplete={this.props.orgCreate}
@@ -48,7 +52,10 @@ class Dashboard extends React.Component{
           null
         }
         {this.props.orgs.length !== 0 ?
-          <h3>Your Organizations:</h3>
+          <div style={{marginBottom: '2vw'}}>
+            <h3 style={{marginBottom: '.5vw'}}>Your Organizations:</h3>
+            <Divider />
+          </div>
           :
           <p>You currently are not a member of any organizations, click above to get started!</p>
         }

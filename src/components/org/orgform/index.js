@@ -7,6 +7,8 @@ import FlatButton from 'material-ui/FlatButton';
 import Add from 'material-ui/svg-icons/content/add';
 import Clear from 'material-ui/svg-icons/content/clear';
 import './_org-form.scss';
+import {List, ListItem} from 'material-ui/List';
+import SubHeader from 'material-ui/Subheader';
 
 class OrgForm extends React.Component {
   constructor(props) {
@@ -142,7 +144,7 @@ class OrgForm extends React.Component {
           floatingLabelText='Description of Organization'
           onChange={this.handleChange} 
           required /> 
-        <h3>Add Admins</h3>
+        <div style={{display: 'inline-block'}}>
         <TextField 
           style={{display: 'block'}}
           className='org-field'
@@ -156,32 +158,44 @@ class OrgForm extends React.Component {
           type='submit'
           icon={<Add />}
           onClick={this.handleAdminSubmit}
+          style={{float: 'right'}}
         />
+        </div>
         {util.renderIf(this.state.adminError, 
           <p className='error'>{this.state.adminError}</p>
         )}
         {(this.state.adminNames !== undefined) ?
-          <ul>
+          <List>
+            <SubHeader>Admins</SubHeader>
             {this.state.adminNames.map((admin, i) => 
-              <li key={i}>{admin}</li>
+              <ListItem 
+                key={i}
+                primaryText={admin}
+              />
             )}
-          </ul>
+
+              {/* TODO: add remove admin functionality */}
+          </List>
+
           : null
         }
-        <h3>Add Members</h3>
-        <TextField 
-          style={{display: 'block'}}
-          className='org-field'
-          name='user'
-          type='text'
-          floatingLabelText='Add a Member' 
-          onChange={this.handleChange}/>
-        <FlatButton 
-          className='tiny-plus'
-          type='submit'
-          onClick={this.handleUserSubmit}
-          icon={<Add />}
-        />
+        
+        <div  style={{display: 'inline-block'}}>
+          <TextField 
+            style={{display: 'block'}}
+            className='org-field'
+            name='user'
+            type='text'
+            floatingLabelText='Add a Member' 
+            onChange={this.handleChange}/>
+          <FlatButton 
+            className='tiny-plus'
+            type='submit'
+            onClick={this.handleUserSubmit}
+            icon={<Add />}
+            style={{float: 'right'}}
+          />
+        </div>
         {util.renderIf(this.state.userError, 
           <p className='error'>{this.state.userError}</p>
         )}
