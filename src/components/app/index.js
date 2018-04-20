@@ -54,7 +54,7 @@ class App extends Component{
   }
 
   componentDidMount() {
-    let token = util.readCookie('X-ProMgmt-Token');
+    let token = util.readCookie('X-ProMgmt-Token') || localStorage.token;
     if(token) {
       this.props.tokenSet(token);
 

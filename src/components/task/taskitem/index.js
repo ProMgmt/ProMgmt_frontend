@@ -8,6 +8,8 @@ import * as util from '../../../lib/util.js';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import Subheader from 'material-ui/Subheader';
 import {List, ListItem} from 'material-ui/List';
+import Create from 'material-ui/svg-icons/content/create';
+import Clear from 'material-ui/svg-icons/content/clear';
 
 class TaskItem extends React.Component {
   constructor(props) {
@@ -90,8 +92,15 @@ class TaskItem extends React.Component {
 
             {isAdmin ?
               <div className='admin-buttons'>
-                <FlatButton onClick={() => taskDelete(task)}>X</FlatButton>
-                <FlatButton onClick={this.toggleEdit}>{editTaskButtonText}</FlatButton>
+                <FlatButton 
+                  onClick={this.toggleEdit}
+                  icon={<Create style={{width: '14px'}}/>}
+                />
+                <FlatButton 
+                  onClick={() => taskDelete(task)}
+                  style={{color: 'red'}}
+                  icon={<Clear style={{width: '14px'}}/>}
+                />
               </div>
             : null
             }
