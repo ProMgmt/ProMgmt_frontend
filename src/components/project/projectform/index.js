@@ -237,7 +237,7 @@ class ProjectForm extends React.Component{
             icon={<Add />}
           />
         
-        <FlatButton type='submit'>{this.props.buttonText}</FlatButton>
+        <FlatButton type='submit' style={{marginBottom: '2.4vw', backgroundColor: 'rgba(54, 178, 232, .5)', padding: '2px 11px'}}>{this.props.buttonText}</FlatButton>
       </form>
     )
   }

@@ -92,9 +92,20 @@ class ProjectItem extends React.Component {
             }
 
 
+
+            {this.props.task[this.props.project._id] !== 0 ?
+              <div style={{marginTop: '5vw'}}>
+                <h3 style={{marginBottom: '.5vw'}}>{`Tasks belonging to ${this.props.project.projectName}`}</h3>
+                <Divider />
+              </div>
+              :
+              <p>You currently have no tasks for this project.</p>
+            }
+            <FlatButton onClick={this.toggleAddTask} style={{marginBottom: '2.4vw', backgroundColor: 'rgba(54, 178, 232, .5)', padding: '2px 11px'}}>{addTaskButtonText}</FlatButton>
             {this.state.addTask ?
               <div className='task-form'>
                 <TaskForm
+                  style={{marginBottom: '2.4vw', backgroundColor: 'rgba(54, 178, 232, .5)', padding: '2px 11px'}}
                   buttonText='Save Task'
                   org={org}
                   project={project}
@@ -106,15 +117,7 @@ class ProjectItem extends React.Component {
               :
               null
             }
-            {this.props.task[this.props.project._id] !== 0 ?
-              <div style={{marginTop: '5vw'}}>
-                <h3 style={{marginBottom: '.5vw'}}>{`Tasks belonging to ${this.props.project.projectName}`}</h3>
-                <Divider />
-              </div>
-              :
-              <p>You currently have no tasks for this project.</p>
-            }
-            <FlatButton onClick={this.toggleAddTask}>{addTaskButtonText}</FlatButton>
+            
             {this.props.task[this.props.project._id].map(item =>
               <TaskItem
                 key={item._id}
