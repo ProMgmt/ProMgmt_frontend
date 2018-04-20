@@ -45,7 +45,6 @@ class OrgItem extends React.Component {
     this.state.addProject ? projectButtonText = 'Hide' : projectButtonText = 'Add a Project';
 
     let { org, orgDelete, orgUpdate, projectCreate } = this.props;
-    console.log('THIS PROPS PROJECT', this.props.project);
     return (
       <section className='org-item'>
         <Card className='content' style={{backgroundColor: '#afceff'}}>
