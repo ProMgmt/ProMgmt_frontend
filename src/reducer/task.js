@@ -35,6 +35,9 @@ export default (state=[], action) => {
       let projTaskDelete = state[payload.projectId].filter(task => task._id !== payload._id);
       return {...state, [payload.projectId]: [...projTaskDelete]};
 
+    case 'TOKEN_DELETE':
+      return null;
+
     case 'TASK_REMOVE_ADMIN':
       let projAdminRemove = state[payload.task.projectId].map(task => {
         if(task._id === payload.task._id){

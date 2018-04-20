@@ -63,14 +63,15 @@ class TaskForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    delete this.state.adminId;
-    delete this.state.taskDAdd;
     this.state.admins ? this.setState(prevState => {
       return {admins: prevState.admins.map(admin => admin._id)}}) : null;
     this.state.dependentTasks ? this.setState(prevState => {
       return {dependentTasks: prevState.dependentTasks.map(task => task._id)}}) : null;
     console.log('this.state @ taskform submit', this.state);
-    this.props.onComplete({ ...this.state });
+    let stateObj = {...this.state};
+    delete stateObj.adminId;
+    delete stateObj.taskDAdd;
+    this.props.onComplete({ ...stateObj });
 
     if (this.props.canToggle) {
       this.props.toggle();

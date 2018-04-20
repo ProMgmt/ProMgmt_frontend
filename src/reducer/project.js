@@ -28,7 +28,21 @@ export default (state=[], action) => {
     case 'PROJECT_DELETE':
       let orgProjectDelete = state[payload.orgId].filter(proj => proj._id !== payload._id);
       return {...state, [payload.orgId]: [...orgProjectDelete]};
-      
+
+    case 'TOKEN_DELETE':
+      return null;
+
+    case 'TASK_CREATE':
+      let projTasks = [...state[payload.orgId].map(project => {
+        if(project._id === payload.projectId){
+          project.tasks.push(payload);
+          return project;
+        } else {
+          return project;
+        }
+      })];
+      return {...state, [payload.orgId]: [...projTasks]};
+
     default:
       return state;
   }

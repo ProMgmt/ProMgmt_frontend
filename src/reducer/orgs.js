@@ -14,6 +14,9 @@ export default (state=[], action) => {
 
     case 'ORG_UPDATE':
       return state.map(item => item._id === payload._id ? payload : item);
+
+    case 'TOKEN_DELETE':
+      return null;
       
     default:
       return state;

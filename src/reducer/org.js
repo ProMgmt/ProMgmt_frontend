@@ -15,6 +15,9 @@ export default (state=[], action) => {
 
     case 'ORG_DELETE':
       return state.filter(org => org._id !== payload._id)
+
+    case 'TOKEN_DELETE':
+        return null;
       
     default:
       return state;
