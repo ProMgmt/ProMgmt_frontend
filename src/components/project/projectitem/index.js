@@ -77,7 +77,7 @@ class ProjectItem extends React.Component {
                   project={project}
                   onComplete={projectUpdate}
                   canToggle={true}
-                  toggle={toggleEditProject}
+                  toggle={this.toggleEditProject}
                 />
               </div>
               :
@@ -92,7 +92,7 @@ class ProjectItem extends React.Component {
                   project={project}
                   onComplete={taskCreate}
                   canToggle={true}
-                  toggle={this.addTask}
+                  toggle={this.toggleAddTask}
                 />
               </div>
               :
