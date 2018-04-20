@@ -1,6 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import * as util from './../../../lib/util.js';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
@@ -18,7 +19,6 @@ class ProfileForm extends Component {
         desc: '',
         company: '',
         avatarURI: null,
-        preview: '',
         title: '',
         userId: this.props.user._id,
       };
@@ -134,16 +134,14 @@ class ProfileForm extends Component {
         <FlatButton type='submit'>{this.props.buttonText}</FlatButton>
 
       </form>
-      
-      // TODO: implement this part
-      // <h3>Upload an Image</h3>
-      // <input
-      //   type='file'
-      //   name='avatarURI'
-      //   onChange={this.handleChange}
-      // />
     )
   }
 }
 
-export default ProfileForm;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps, null)(ProfileForm);
